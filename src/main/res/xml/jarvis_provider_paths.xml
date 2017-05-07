@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-path
+        name="download_path"
+        path="/storage/emulated/0/Download/" />
+    <external-path
+        name="current_path"
+        path="." />
+</paths>
