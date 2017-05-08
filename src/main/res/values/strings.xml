@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Jarvis</string>
     <string name="splash_version">版本名称</string>
+    <string name="home_welcome">欢迎回来，我是Jarvis，让我看看有什么可以为您效劳的！把你的手机交给我，我会将它管理的井井有条！！！</string>
+    <string name="home_title">控制台</string>
+    <string name="splash_app_icon">J.A.R.V.I.S</string>
 </resources>
