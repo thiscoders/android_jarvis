@@ -10,9 +10,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -27,10 +31,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.List;
 
 import ye.droid.jarvis.BuildConfig;
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.utils.DialogFactory;
+import ye.droid.jarvis.utils.DisplayUtils;
 import ye.droid.jarvis.utils.JHttpUtils;
 
 public class SplashActivity extends AppCompatActivity {
@@ -49,6 +55,9 @@ public class SplashActivity extends AppCompatActivity {
     private long endTime;
     private long dua;
 
+
+    private int REQUEST_PERMISSION_CODE = 10;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +72,16 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void test(View view) {
-        Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+        String disInfo = "";
+        int flag = 0;
+        List<String> list = DisplayUtils.getDisInfo(this);
+        for (String info : list) {
+            disInfo += info;
+            flag++;
+            if (flag != 6)
+                disInfo += "---";
+        }
+        Toast.makeText(this, "屏幕信息：\r\n" + disInfo, Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -76,7 +94,8 @@ public class SplashActivity extends AppCompatActivity {
         tv_splash_version_name.setText("当前版本:" + versionName);
 
         tv_server_message = (TextView) findViewById(R.id.tv_server_message);
-
+        //1.5 检查APP权限
+        checkPermission();
         //2. 检查软件更新
         checkUpdate();
     }
@@ -111,6 +130,24 @@ public class SplashActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    /**
+     * 检查并申请权限
+     */
+    private void checkPermission() {
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            //请求权限
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE);
+        } else {
+            Log.i(TAG, "读SD卡权限已经授予！");
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.i(TAG, "权限已经获取..." + requestCode);
     }
 
     /**
@@ -172,7 +209,20 @@ public class SplashActivity extends AppCompatActivity {
 
                                                 @Override
                                                 public void onFailure(HttpException e, String s) {
-                                                    Log.i(TAG, "onFailure");
+                                                    Log.i(TAG, "onFailure... 下载失败，进入主界面！");
+                                                    endTime = System.currentTimeMillis();
+                                                    dua = endTime - startTime;
+                                                    if (dua < splash_dau) {
+                                                        enterHome(splash_dau - dua);
+                                                    } else {
+                                                        enterHome(splash_dau);
+                                                    }
+                                                    runOnUiThread(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            Toast.makeText(getApplicationContext(), "下载更新包失败，请稍后重试！", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
                                                 }
 
                                                 @Override
@@ -272,4 +322,5 @@ public class SplashActivity extends AppCompatActivity {
         if (requestCode == 100)
             enterHome(1000);
     }
+
 }

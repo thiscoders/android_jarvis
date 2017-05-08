@@ -4,9 +4,30 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/tv_home_title"
+        style="@style/JTitleStyle"
+        android:text="@string/home_title" />
+
+    <TextView
+        android:id="@+id/tv_marquee_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="这是最高的测试版本"
-        android:textSize="30dp" />
+        android:layout_below="@id/tv_home_title"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:padding="7dp"
+        android:singleLine="true"
+        android:text="@string/home_welcome"
+        android:textSize="15dp" />
+
+    <GridView
+        android:id="@+id/gv_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_marquee_title"
+        android:numColumns="3"
+        android:paddingTop="5dp"
+        android:verticalSpacing="50dp"></GridView>
 </RelativeLayout>
