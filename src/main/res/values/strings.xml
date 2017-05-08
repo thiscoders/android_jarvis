@@ -4,4 +4,14 @@
     <string name="home_welcome">欢迎回来，我是Jarvis，让我看看有什么可以为您效劳的！把你的手机交给我，我会将它管理的井井有条！！！</string>
     <string name="home_title">控制台</string>
     <string name="splash_app_icon">J.A.R.V.I.S</string>
+    <string name="setting_title">设置中心</string>
+    <string name="common_item_title">条目标题</string>
+    <string name="common_item_content">这个条目将会起一些作用</string>
+
+    <string name="update_title" translatable="true">自动更新</string>
+    <string name="update_subtitle_positive">自动更新已经开启</string>
+    <string name="update_subtitle_negative">自动更新已经关闭</string>
+
+    <string name="aboutapp_title">关于软件</string>
+    <string name="aboutapp_subtitle">自动更新已经开启</string>
 </resources>

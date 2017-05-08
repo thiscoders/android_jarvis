@@ -1,12 +1,15 @@
 package ye.droid.jarvis.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -19,6 +22,8 @@ import ye.droid.jarvis.R;
  */
 
 public class HomeActivity extends AppCompatActivity {
+    private final String TAG = HomeActivity.class.getSimpleName();
+
     private GridView gv_home;
 
     private String[] mMenuItems = new String[]{"手机防盗", "通信卫士", "软件管理",
@@ -32,13 +37,42 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         initUI();
     }
 
     private void initUI() {
         gv_home = (GridView) findViewById(R.id.gv_home);
         gv_home.setAdapter(new gridAdapter());
+        gv_home.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            Intent funcIntent = null;
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        funcIntent = new Intent(HomeActivity.this, SettingActivity.class);
+                        startActivity(funcIntent);
+                        break;
+                }
+            }
+        });
+
     }
 
     private class gridAdapter extends BaseAdapter {
