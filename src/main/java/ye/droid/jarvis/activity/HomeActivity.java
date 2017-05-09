@@ -1,26 +1,35 @@
 package ye.droid.jarvis.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.utils.DisplayUtils;
 
 /**
  * Created by ye on 2017/5/7.
  */
 
 public class HomeActivity extends AppCompatActivity {
-    private GridView gv_home;
+    private final String TAG = HomeActivity.class.getSimpleName();
 
+    private GridView gv_home;
+    private TextView tv_showinfo;
+    private boolean tv_showinfo_show = false; //false的时候tv_showinfo显示为null
     private String[] mMenuItems = new String[]{"手机防盗", "通信卫士", "软件管理",
             "进程管理", "流量统计", "手机杀毒",
             "缓存清理", "高级工具", "设置中心"};
@@ -28,18 +37,71 @@ public class HomeActivity extends AppCompatActivity {
             R.drawable.home_thread_manager, R.drawable.home_flow_statistic, R.drawable.home_anti_virus,
             R.drawable.home_cache_clean, R.drawable.home_advance_tool, R.drawable.home_setting};
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         initUI();
     }
 
     private void initUI() {
+        tv_showinfo = (TextView) findViewById(R.id.tv_showinfo);
         gv_home = (GridView) findViewById(R.id.gv_home);
         gv_home.setAdapter(new gridAdapter());
+        gv_home.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            Intent funcIntent = null;
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        funcIntent = new Intent(HomeActivity.this, SettingActivity.class);
+                        startActivity(funcIntent);
+                        break;
+                }
+            }
+        });
+
     }
+
+    public void showInfo(View view) {
+        if (!tv_showinfo_show) {
+            String disInfo = "";
+            int flag = 0;
+            List<String> list = DisplayUtils.getDisInfo(this);
+            for (String info : list) {
+                disInfo += info;
+                flag++;
+                if (flag != 6)
+                    disInfo += "---";
+            }
+            tv_showinfo.setVisibility(View.VISIBLE);
+            tv_showinfo.setText(disInfo);
+            tv_showinfo_show = !tv_showinfo_show;
+            tv_showinfo_show = true;
+        } else {
+            tv_showinfo.setText(this.getString(R.string.home_odd_egg));
+            tv_showinfo_show = false;
+        }
+    }
+
 
     private class gridAdapter extends BaseAdapter {
         private ImageView iv_menu_icon;

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/JTitleStyle"
+        android:text="@string/setting_title" />
+
+    <ye.droid.jarvis.cvs.SettingItem
+        android:id="@+id/st_auto_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="setAutoUpdate"
+        app:subtitle_negative_content="自动更新已关闭"
+        app:subtitle_positive_content="自动更新已开启"
+        app:title_content="自动更新" />
+
+    <ye.droid.jarvis.cvs.SettingItem
+        android:id="@+id/st_about_app"
+        android:onClick="showAppInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:subtitle_negative_content="点击查看软件详细信息"
+        app:subtitle_positive_content="点击查看软件详细信息"
+        app:title_content="关于软件" />
+
+</LinearLayout>

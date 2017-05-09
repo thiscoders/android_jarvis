@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SettingItem">
+        <attr name="title_content" format="string" localization="suggested"/>
+        <attr name="subtitle_positive_content" format="string" localization="suggested"/>
+        <attr name="subtitle_negative_content" format="string" localization="suggested"/>
+    </declare-styleable>
+</resources>
