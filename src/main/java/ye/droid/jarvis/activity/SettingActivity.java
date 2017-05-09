@@ -3,17 +3,60 @@ package ye.droid.jarvis.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Toast;
 
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.cvs.SettingItem;
+import ye.droid.jarvis.utils.ConstantValues;
+import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 /**
  * Created by ye on 2017/5/9.
  */
 
 public class SettingActivity extends AppCompatActivity {
+    private SettingItem st_auto_update;
+    private SettingItem st_about_app;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        initUI();
+        initData();
     }
+
+    private void initUI() {
+        st_auto_update = (SettingItem) findViewById(R.id.st_auto_update);
+        st_about_app = (SettingItem) findViewById(R.id.st_about_app);
+    }
+
+    private void initData() {
+        //1.还原自动更新状态
+        boolean isUpdate = SharedPreferencesUtils.getBoolean(this, ConstantValues.AUTO_UPDATE, true);
+        st_auto_update.setCheck(isUpdate);
+        //2.隐藏关于软件的switch
+        st_about_app.setSwitchVisible(false);
+    }
+
+    /**
+     * 自动更新触发事件
+     *
+     * @param view
+     */
+    public void setAutoUpdate(View view) {
+        boolean isUpdate = SharedPreferencesUtils.getBoolean(this, ConstantValues.AUTO_UPDATE, true);
+        st_auto_update.setCheck(!isUpdate);
+    }
+
+    /**
+     * 软件的详细信息
+     *
+     * @param view
+     */
+    public void showAppInfo(View view) {
+        Toast.makeText(this, "关于软件的详细信息！", Toast.LENGTH_SHORT).show();
+    }
+
 }

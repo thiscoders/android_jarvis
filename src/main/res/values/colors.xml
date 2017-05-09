@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#22b14c</color>
     <color name="colorSplashText">#fff200</color>
+    <color name="colorServerMessage">#ffaec9</color>
     <color name="colorTitle">#00a2e8</color>
     <color name="colorSplashBack">#00a2e8</color>
     <color name="colorCommon">#000000</color>

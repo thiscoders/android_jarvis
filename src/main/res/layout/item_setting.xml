@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_setting_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -23,12 +24,21 @@
         android:text="@string/common_item_content"
         android:textSize="15dp" />
 
-    <CheckBox
-        android:id="@+id/tv_item_check"
+    <!--
+    android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false
+        让switch不响应点击事件
+    -->
+    <Switch
+        android:id="@+id/sw_item_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:paddingRight="18dp" />
 
     <View

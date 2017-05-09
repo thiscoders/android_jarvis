@@ -15,7 +15,10 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.utils.DisplayUtils;
 
 /**
  * Created by ye on 2017/5/7.
@@ -25,13 +28,15 @@ public class HomeActivity extends AppCompatActivity {
     private final String TAG = HomeActivity.class.getSimpleName();
 
     private GridView gv_home;
-
+    private TextView tv_showinfo;
+    private boolean tv_showinfo_show = false; //false的时候tv_showinfo显示为null
     private String[] mMenuItems = new String[]{"手机防盗", "通信卫士", "软件管理",
             "进程管理", "流量统计", "手机杀毒",
             "缓存清理", "高级工具", "设置中心"};
     private int[] mMenuIcons = new int[]{R.drawable.home_against_burglars, R.drawable.home_comm_guard, R.drawable.home_soft_manager,
             R.drawable.home_thread_manager, R.drawable.home_flow_statistic, R.drawable.home_anti_virus,
             R.drawable.home_cache_clean, R.drawable.home_advance_tool, R.drawable.home_setting};
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +46,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initUI() {
+        tv_showinfo = (TextView) findViewById(R.id.tv_showinfo);
         gv_home = (GridView) findViewById(R.id.gv_home);
         gv_home.setAdapter(new gridAdapter());
         gv_home.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -74,6 +80,28 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+
+    public void showInfo(View view) {
+        if (!tv_showinfo_show) {
+            String disInfo = "";
+            int flag = 0;
+            List<String> list = DisplayUtils.getDisInfo(this);
+            for (String info : list) {
+                disInfo += info;
+                flag++;
+                if (flag != 6)
+                    disInfo += "---";
+            }
+            tv_showinfo.setVisibility(View.VISIBLE);
+            tv_showinfo.setText(disInfo);
+            tv_showinfo_show = !tv_showinfo_show;
+            tv_showinfo_show = true;
+        } else {
+            tv_showinfo.setText(this.getString(R.string.home_odd_egg));
+            tv_showinfo_show = false;
+        }
+    }
+
 
     private class gridAdapter extends BaseAdapter {
         private ImageView iv_menu_icon;
