@@ -9,4 +9,6 @@
     <color name="colorSplashBack">#00a2e8</color>
     <color name="colorCommon">#000000</color>
     <color name="colorSetting">#00a2e8</color>
+    <color name="colorDialog">#a349a4</color>
+    <color name="colorBurglarsTitle">#c8bfe7</color>
 </resources>

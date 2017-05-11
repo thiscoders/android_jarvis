@@ -17,7 +17,13 @@
         </activity>
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.BurglarsActivity" />
+        <activity android:name=".activity.BurglarsSetup1Activity" />
 
+
+        <activity android:name=".activity.TestActivity" />
+
+        <!--Android N 申请访问存储空间-->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="ye.droid.jarvis.fileProvider"

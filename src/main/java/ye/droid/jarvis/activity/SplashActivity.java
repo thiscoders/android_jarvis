@@ -80,8 +80,8 @@ public class SplashActivity extends AppCompatActivity {
             tv_server_message.setText("正在检测更新...");
             checkUpdate();
         } else {//自动更新关闭，直接进入主界面
-            tv_server_message.setText("自动更新关闭，3s后进入主界面...");
-            enterHome(3000);
+            tv_server_message.setText("自动更新关闭，即将后进入主界面...");
+            enterHome(500);
         }
     }
 

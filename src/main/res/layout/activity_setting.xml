@@ -7,6 +7,8 @@
 
     <TextView
         style="@style/JTitleStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/setting_title" />
 
     <ye.droid.jarvis.cvs.SettingItem
@@ -20,9 +22,9 @@
 
     <ye.droid.jarvis.cvs.SettingItem
         android:id="@+id/st_about_app"
-        android:onClick="showAppInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="showAppInfo"
         app:subtitle_negative_content="点击查看软件详细信息"
         app:subtitle_positive_content="点击查看软件详细信息"
         app:title_content="关于软件" />
