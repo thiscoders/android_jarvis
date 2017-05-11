@@ -19,7 +19,22 @@
 
     <!--手机防盗-->
     <string name="burglars_title">手机防盗</string>
-    <string name="burglars_setup1_title">设置手机防盗</string>
+    <string name="burglars_setup1_title">1.设置手机防盗</string>
+    <string name="burglars_setup1_subtitle">设置手机防盗参数：</string>
+    <string name="burglars_setup1_parameter1">SIM卡变更报警</string>
+    <string name="burglars_setup1_parameter2">GPS追踪</string>
+    <string name="burglars_setup1_parameter3">远程数据销毁</string>
+    <string name="burglars_setup1_parameter4">远程锁屏</string>
+    <string name="burglars_btn_setup_before">上一步</string>
+    <string name="burglars_btn_setup_next">下一步</string>
+    <string name="burglars_btn_setup_cancel">取消</string>
+    <string name="burglars_setup2_title">2.手机SIM卡绑定</string>
+    <string name="burglars_setup2_subtitle">绑定手机SIM卡：</string>
+    <string name="burglars_setup2_content">下次重启手机如果发现SIM卡变化就会发送报警短信</string>
+    <string name="burglars_setup2_sim_title">点击绑定SIM卡</string>
+    <string name="burglars_setup2_sim_subtitle_yes">SIM卡已经绑定</string>
+    <string name="burglars_setup2_sim_subtitle_no">SIM卡未绑定</string>
+
 
     <!--设置中心-->
     <string name="setting_title">设置中心</string>

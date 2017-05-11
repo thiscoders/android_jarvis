@@ -41,7 +41,7 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     /**
-     * 自动更新触发事件
+     * 点击事件自动更新触发事件
      *
      * @param view
      */

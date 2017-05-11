@@ -91,7 +91,7 @@ public class SettingItem extends RelativeLayout {
     }
 
     /**
-     * 这只switch是否可见
+     * 设置switch是否可见
      * @param visible
      */
     public void setSwitchVisible(boolean visible) {

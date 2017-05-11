@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--每个Activity的主Title-->
     <style name="JTitleStyle">
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:background">@color/colorTitle</item>
@@ -16,5 +17,27 @@
         <item name="android:textSize">20dp</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <!--防盗页面的副标题-->
+    <style name="JBurglarsSetupSubtitle">
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">8dp</item>
+    </style>
+    <!--防盗页面的每一个功能选项的标题-->
+    <style name="JBurglarsSetupFunction">
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawableLeft">@drawable/burglars_setup_func_icon6</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
 
+    <!--防盗设置页面下一步按钮-->
+    <style name="JBurglarsSetupButtonNext">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:background">@drawable/button_next_selector</item>
+    </style>
 </resources>
