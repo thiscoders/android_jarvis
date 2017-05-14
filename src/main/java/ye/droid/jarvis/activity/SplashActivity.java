@@ -1,5 +1,6 @@
 package ye.droid.jarvis.activity;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -63,6 +64,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private int REQUEST_PERMISSION_CODE = 10;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +83,7 @@ public class SplashActivity extends AppCompatActivity {
             checkUpdate();
         } else {//自动更新关闭，直接进入主界面
             tv_server_message.setText("自动更新关闭，即将后进入主界面...");
-            enterHome(500);
+            enterHome(300);
         }
     }
 
@@ -107,18 +109,20 @@ public class SplashActivity extends AppCompatActivity {
      * 检查并申请权限
      */
     private void checkPermission() {
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        //读写SD卡权限
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             //请求权限
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE);
+            Log.i(TAG, "请求授予权限！");
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_PHONE_STATE,
+                            Manifest.permission.READ_CONTACTS},
+                    REQUEST_PERMISSION_CODE);
         } else {
-            Log.i(TAG, "读SD卡权限已经授予！");
+            Log.i(TAG, "所有权限已经授予！");
         }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.i(TAG, "权限已经获取..." + requestCode);
     }
 
     /**

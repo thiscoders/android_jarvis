@@ -9,4 +9,11 @@
         android:layout_height="wrap_content"
         android:text="@string/burglars_title" />
 
+    <TextView
+        android:onClick="resetBurglars"
+        style="@style/JBurglarsSetupFunction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/burglars_setup1_parameter2" />
 </RelativeLayout>

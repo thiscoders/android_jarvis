@@ -31,5 +31,10 @@ public class ConstantValues {
     /**
      * 防盗页面设置信息
      */
-    public static final String BURGLARS_SET_OVER = "";
+    public final static String BURGLARS_SET_OVER = "burglars_set_over";
+
+    /**
+     * sim卡编号
+     */
+    public final static String SIM_NUMBER = "sim_number";
 }

@@ -30,4 +30,5 @@ public class BurglarsSetup1Activity extends AppCompatActivity {
     public void returnBeforePage(View view) {
         finish();
     }
+
 }

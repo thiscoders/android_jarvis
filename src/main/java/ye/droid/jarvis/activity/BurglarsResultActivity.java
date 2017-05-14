@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Toast;
 
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.utils.ConstantValues;
@@ -27,5 +29,10 @@ public class BurglarsResultActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+    }
+
+    public void resetBurglars(View view) {
+        SharedPreferencesUtils.putBoolean(this, ConstantValues.BURGLARS_SET_OVER, false);
+        Toast.makeText(this, "重置成功！", Toast.LENGTH_SHORT).show();
     }
 }

@@ -69,4 +69,16 @@ public class SharedPreferencesUtils {
             sharedPreferences = context.getSharedPreferences(context.getString(R.string.SharedPreferences_File1), Context.MODE_PRIVATE);
         return sharedPreferences.getString(key, defValue);
     }
+
+
+    /**
+     * 移除节点
+     * @param context   上下文对象
+     * @param key   键
+     */
+    public static void removeAttr(Context context, String key) {
+        if (sharedPreferences == null)
+            sharedPreferences = context.getSharedPreferences(context.getString(R.string.SharedPreferences_File1), Context.MODE_PRIVATE);
+        sharedPreferences.edit().remove(key).commit();
+    }
 }

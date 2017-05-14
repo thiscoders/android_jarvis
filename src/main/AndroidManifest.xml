@@ -20,6 +20,9 @@
         <activity android:name=".activity.BurglarsResultActivity" />
         <activity android:name=".activity.BurglarsSetup1Activity" />
         <activity android:name=".activity.BurglarsSetup2Activity" />
+        <activity android:name=".activity.BurglarsSetup3Activity" />
+        <activity android:name=".activity.ContactListActivity" />
+        <activity android:name=".activity.BurglarsSetup4Activity" />
 
 
         <activity android:name=".activity.TestActivity" />
@@ -39,4 +42,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
 </manifest>
