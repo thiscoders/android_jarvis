@@ -107,6 +107,9 @@ public class SplashActivity extends AppCompatActivity {
 
     /**
      * 检查并申请权限
+     * 1.读取外部存储设备
+     * 2.读取电话状态
+     * 3. 读取联系人
      */
     private void checkPermission() {
         //读写SD卡权限
@@ -119,6 +122,7 @@ public class SplashActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_PHONE_STATE,
                             Manifest.permission.READ_CONTACTS},
+
                     REQUEST_PERMISSION_CODE);
         } else {
             Log.i(TAG, "所有权限已经授予！");
