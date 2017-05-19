@@ -1,20 +1,20 @@
 package ye.droid.jarvis.activity;
 
-import android.app.Dialog;
+import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -29,7 +29,6 @@ import java.util.List;
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.utils.CommonUtils;
 import ye.droid.jarvis.utils.ConstantValues;
-import ye.droid.jarvis.utils.DialogFactory;
 import ye.droid.jarvis.utils.DisplayUtils;
 import ye.droid.jarvis.utils.MD5Utils;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
@@ -44,7 +43,6 @@ public class HomeActivity extends AppCompatActivity {
     private GridView gv_home;
     private TextView tv_showinfo;
 
-
     private boolean tv_showinfo_show = false; //false的时候tv_showinfo显示为null
     private String[] mMenuItems = new String[]{"手机防盗", "通信卫士", "软件管理",
             "进程管理", "流量统计", "手机杀毒",
@@ -53,12 +51,12 @@ public class HomeActivity extends AppCompatActivity {
             R.drawable.home_thread_manager, R.drawable.home_flow_statistic, R.drawable.home_anti_virus,
             R.drawable.home_cache_clean, R.drawable.home_advance_tool, R.drawable.home_setting};
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         initUI();
+        checkAllPermission();
     }
 
     private void initUI() {
@@ -72,7 +70,9 @@ public class HomeActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        showPwdDialog();
+                        // TODO: 2017/5/11 为了开发方便，暂时取消输入密码的步骤
+                        //showPwdDialog();
+                        startActivity(new Intent(HomeActivity.this, BurglarsResultActivity.class));
                         break;
                     case 1:
                         break;
@@ -159,7 +159,7 @@ public class HomeActivity extends AppCompatActivity {
                             break;
                         case ConstantValues.STRING_MATCH:
                             SharedPreferencesUtils.putString(HomeActivity.this, ConstantValues.STORE_PWD, MD5Utils.encodeMD5(second));
-                            Intent intent = new Intent(HomeActivity.this, BurglarsActivity.class);
+                            Intent intent = new Intent(HomeActivity.this, BurglarsResultActivity.class);
                             startActivity(intent);
                             dialog.dismiss();
                             break;
@@ -199,7 +199,7 @@ public class HomeActivity extends AppCompatActivity {
                             Toast.makeText(HomeActivity.this, "密码错误...", Toast.LENGTH_SHORT).show();
                             break;
                         case ConstantValues.STRING_MATCH:
-                            Intent intent = new Intent(HomeActivity.this, BurglarsActivity.class);
+                            Intent intent = new Intent(HomeActivity.this, BurglarsResultActivity.class);
                             startActivity(intent);
                             dialog.dismiss();
                             break;
@@ -273,4 +273,21 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 检查并申请权限
+     * 1.读取外部存储设备
+     * 2.读取电话状态
+     * 3. 读取联系人
+     */
+    private void checkAllPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_PHONE_STATE,
+                            Manifest.permission.READ_CONTACTS},
+                    ConstantValues.HOME_ACTIVITY_REQUEST_ALL_PERMISSION_CODE);
+        } else {
+            Log.i(TAG, "所有所需权限已经授予！");
+        }
+    }
 }

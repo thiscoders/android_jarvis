@@ -34,9 +34,9 @@ public class SettingActivity extends AppCompatActivity {
 
     private void initData() {
         //1.还原自动更新状态
-        boolean isUpdate = SharedPreferencesUtils.getBoolean(this, ConstantValues.AUTO_UPDATE, true);
+        boolean isUpdate = SharedPreferencesUtils.getBoolean(this, ConstantValues.AUTO_UPDATE, true);//自动更新默认开启
         st_auto_update.setCheck(isUpdate);
-        //2.隐藏关于软件的switch
+        //2.隐藏关于软件控件的switch
         st_about_app.setSwitchVisible(false);
     }
 
@@ -46,7 +46,8 @@ public class SettingActivity extends AppCompatActivity {
      * @param view
      */
     public void setAutoUpdate(View view) {
-        boolean isUpdate = SharedPreferencesUtils.getBoolean(this, ConstantValues.AUTO_UPDATE, true);
+        boolean isUpdate = SharedPreferencesUtils.getBoolean(this, ConstantValues.AUTO_UPDATE, true); //自动更新默认开启
+        SharedPreferencesUtils.putBoolean(this, ConstantValues.AUTO_UPDATE, !isUpdate);
         st_auto_update.setCheck(!isUpdate);
     }
 

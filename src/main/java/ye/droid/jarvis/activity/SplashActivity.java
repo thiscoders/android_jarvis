@@ -1,5 +1,6 @@
 package ye.droid.jarvis.activity;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -46,7 +47,7 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
 public class SplashActivity extends AppCompatActivity {
     private final String TAG = SplashActivity.class.getSimpleName();
 
-    private String mUpdateAddress = "http://192.168.191.2:8080/jarvis/jarvis.json";
+    private String mUpdateAddress = ConstantValues.UPDATE_ADDRESS;
 
     private RelativeLayout rl_up_screen;
     private TextView tv_splash_version_name;
@@ -54,14 +55,12 @@ public class SplashActivity extends AppCompatActivity {
 
     private int mLocalVersionCode; //本地版本号
 
-    private Handler handler;
+    private Handler handler; //为延时进入主界面进行设置
 
     private long splash_dau = 3000;
     private long startTime;
     private long endTime;
     private long dua;
-
-    private int REQUEST_PERMISSION_CODE = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,10 +80,9 @@ public class SplashActivity extends AppCompatActivity {
             checkUpdate();
         } else {//自动更新关闭，直接进入主界面
             tv_server_message.setText("自动更新关闭，即将后进入主界面...");
-            enterHome(500);
+            enterHome(300);
         }
     }
-
 
     /**
      * 初始化UI，寻找控件
@@ -105,20 +103,15 @@ public class SplashActivity extends AppCompatActivity {
 
     /**
      * 检查并申请权限
+     * 1.读取外部存储设备
      */
     private void checkPermission() {
+        //读写SD卡权限
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            //请求权限
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, ConstantValues.SPLASH_ACTIVITY_REQUEST_WRITE_EXTERNAL_STORAGE_CODE);
         } else {
-            Log.i(TAG, "读SD卡权限已经授予！");
+            Log.i(TAG, "所有权限已经授予！");
         }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.i(TAG, "权限已经获取..." + requestCode);
     }
 
     /**

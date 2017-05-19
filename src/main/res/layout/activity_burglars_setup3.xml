@@ -8,42 +8,55 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!--标题栏-->
         <TextView
             style="@style/JTitleStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/burglars_setup1_title" />
+            android:text="@string/burglars_setup3_title" />
 
+        <!--副标题-->
         <TextView
             style="@style/JBurglarsSetupSubtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/burglars_setup1_subtitle" />
+            android:text="@string/burglars_setup3_subtitle" />
 
-        <!--functions-->
-        <TextView
-            style="@style/JBurglarsSetupFunction"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <EditText
+            android:id="@+id/et_phone_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/burglars_setup1_parameter1" />
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:hint="@string/burglars_setup3_et_hint_contact" />
 
-        <TextView
-            style="@style/JBurglarsSetupFunction"
+        <Button
+            android:id="@+id/btn_select_contact"
+            style="@style/JBurglarsSetupButtonNext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/burglars_setup1_parameter2" />
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:onClick="selectContacts"
+            android:text="@string/burglars_setup3_btn_contact" />
 
-        <TextView
-            style="@style/JBurglarsSetupFunction"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+
+        <Button
+            android:id="@+id/btn_reset_contact"
+            style="@style/JBurglarsSetupButtonNext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/burglars_setup1_parameter3" />
-
-        <TextView
-            style="@style/JBurglarsSetupFunction"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/burglars_setup1_parameter4" />
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:onClick="resetContacts"
+            android:text="@string/burglars_setup3_btn_reset_contact" />
 
 
         <RelativeLayout
@@ -55,7 +68,8 @@
                 android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="100dp"
-                android:src="@drawable/burglars_setup1_image" />
+                android:src="@drawable/burglars_setup3_image" />
+
         </RelativeLayout>
     </LinearLayout>
 
@@ -65,7 +79,7 @@
         android:layout_alignParentBottom="true">
 
         <LinearLayout
-            android:id="@+id/ll_setup1_page_flag"
+            android:id="@+id/ll_setup3_page_flag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -74,17 +88,18 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:drawable/presence_invisible" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/presence_invisible" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@android:drawable/presence_online" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/presence_invisible" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/presence_invisible" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -98,22 +113,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@id/ll_setup1_page_flag"
+            android:layout_below="@id/ll_setup3_page_flag"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:onClick="returnBeforePage"
-            android:text="@string/burglars_btn_setup_cancel" />
+            android:text="@string/burglars_btn_setup_before" />
 
         <Button
             style="@style/JBurglarsSetupButtonNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/ll_setup1_page_flag"
+            android:layout_below="@id/ll_setup3_page_flag"
             android:layout_marginBottom="8dp"
             android:layout_marginRight="8dp"
             android:onClick="startNextPage"
             android:text="@string/burglars_btn_setup_next" />
     </RelativeLayout>
-
 </RelativeLayout>

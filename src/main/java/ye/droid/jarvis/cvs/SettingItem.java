@@ -60,7 +60,7 @@ public class SettingItem extends RelativeLayout {
     }
 
     private void setUIText() {
-        Log.i(TAG, "..." + title_content + "---" + subtitle_positive_content + "---" + subtitle_negative_content);
+    //    Log.i(TAG, "..." + title_content + "---" + subtitle_positive_content + "---" + subtitle_negative_content);
         tv_item_title.setText(title_content);
         tv_item_subtitle.setText(subtitle_positive_content);
     }
@@ -80,18 +80,17 @@ public class SettingItem extends RelativeLayout {
      * @param checked
      */
     public void setCheck(boolean checked) {
-        sw_item_check.setChecked(checked);
-        if (checked) {
-            SharedPreferencesUtils.putBoolean(SettingItem.this.getContext(), ConstantValues.AUTO_UPDATE, true);
+        sw_item_check.setChecked(checked);//改变switch
+        //改变副标题的值
+        if (checked)
             tv_item_subtitle.setText(subtitle_positive_content);
-        } else {//ture的时候开启自动更新
-            SharedPreferencesUtils.putBoolean(SettingItem.this.getContext(), ConstantValues.AUTO_UPDATE, false);
+        else
             tv_item_subtitle.setText(subtitle_negative_content);
-        }
     }
 
     /**
-     * 这只switch是否可见
+     * 设置switch是否可见
+     *
      * @param visible
      */
     public void setSwitchVisible(boolean visible) {
