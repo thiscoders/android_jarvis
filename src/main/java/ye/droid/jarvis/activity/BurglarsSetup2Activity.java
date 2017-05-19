@@ -29,7 +29,6 @@ public class BurglarsSetup2Activity extends AppCompatActivity {
     private final String TAG = BurglarsSetup2Activity.class.getSimpleName();
     private SettingItem st_bind_sim;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +56,18 @@ public class BurglarsSetup2Activity extends AppCompatActivity {
         }
         Intent intent = new Intent(this, BurglarsSetup3Activity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
     }
 
     public void returnBeforePage(View view) {
         finish();
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 
     /**

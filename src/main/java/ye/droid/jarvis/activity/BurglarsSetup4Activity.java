@@ -27,21 +27,44 @@ public class BurglarsSetup4Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_burglars_setup4);
 
-        st_open_burglars = (SettingItem) findViewById(R.id.st_open_burglars);
+        initUI();
+        initData();
+    }
 
-        boolean res = SharedPreferencesUtils.getBoolean(this, ConstantValues.BURGLARS_SET_OVER, false);
-        st_open_burglars.setCheck(res);
+    private void initUI() {
+        st_open_burglars = (SettingItem) findViewById(R.id.st_open_burglars);
+    }
+
+
+    private void initData() {
+        boolean isopen = SharedPreferencesUtils.getBoolean(this, ConstantValues.OPEN_SECURE_FLAG, false);
+        st_open_burglars.setCheck(isopen);
     }
 
     public void startNextPage(View view) {
+        //开启防盗保护才能前往下一页
+        boolean isopen = SharedPreferencesUtils.getBoolean(this, ConstantValues.OPEN_SECURE_FLAG, false);
+        if (!isopen) {
+            Toast.makeText(this, "请开启防盗保护！", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         SharedPreferencesUtils.putBoolean(this, ConstantValues.BURGLARS_SET_OVER, true);
         Intent intent = new Intent(this, BurglarsResultActivity.class);
         startActivity(intent);
         finish();
+        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
     }
 
     public void returnBeforePage(View view) {
         finish();
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 
     /**
@@ -50,6 +73,12 @@ public class BurglarsSetup4Activity extends AppCompatActivity {
      * @param view
      */
     public void openBurglars(View view) {
-        Toast.makeText(this, "手机防盗", Toast.LENGTH_SHORT).show();
+        boolean ischeck = st_open_burglars.isCheck();
+        st_open_burglars.setCheck(!ischeck);
+        if (ischeck) {
+            SharedPreferencesUtils.putBoolean(this, ConstantValues.OPEN_SECURE_FLAG, false);
+        } else {
+            SharedPreferencesUtils.putBoolean(this, ConstantValues.OPEN_SECURE_FLAG, true);
+        }
     }
 }

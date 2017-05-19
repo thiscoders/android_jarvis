@@ -41,8 +41,23 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:onClick="selectContact"
+            android:onClick="selectContacts"
             android:text="@string/burglars_setup3_btn_contact" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+
+        <Button
+            android:id="@+id/btn_reset_contact"
+            style="@style/JBurglarsSetupButtonNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:onClick="resetContacts"
+            android:text="@string/burglars_setup3_btn_reset_contact" />
+
 
         <RelativeLayout
             android:layout_width="match_parent"

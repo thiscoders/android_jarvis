@@ -43,9 +43,6 @@ public class HomeActivity extends AppCompatActivity {
     private GridView gv_home;
     private TextView tv_showinfo;
 
-    private int REQUEST_READ_PHONE_STATE_PERMISSION_CODE = 20;
-    private int REQUEST_READ_CONTACTS_PERMISSION_CODE = 30;
-
     private boolean tv_showinfo_show = false; //false的时候tv_showinfo显示为null
     private String[] mMenuItems = new String[]{"手机防盗", "通信卫士", "软件管理",
             "进程管理", "流量统计", "手机杀毒",
@@ -54,13 +51,12 @@ public class HomeActivity extends AppCompatActivity {
             R.drawable.home_thread_manager, R.drawable.home_flow_statistic, R.drawable.home_anti_virus,
             R.drawable.home_cache_clean, R.drawable.home_advance_tool, R.drawable.home_setting};
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         initUI();
-        checkHomePermission();
+        checkAllPermission();
     }
 
     private void initUI() {
@@ -76,8 +72,7 @@ public class HomeActivity extends AppCompatActivity {
                     case 0:
                         // TODO: 2017/5/11 为了开发方便，暂时取消输入密码的步骤
                         //showPwdDialog();
-                        Intent intent = new Intent(HomeActivity.this, BurglarsResultActivity.class);
-                        startActivity(intent);
+                        startActivity(new Intent(HomeActivity.this, BurglarsResultActivity.class));
                         break;
                     case 1:
                         break;
@@ -278,22 +273,21 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-
-    private void checkHomePermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            //请求权限
-            Log.i(TAG, "请求授予读取电话状态权限！");
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE_PERMISSION_CODE);
+    /**
+     * 检查并申请权限
+     * 1.读取外部存储设备
+     * 2.读取电话状态
+     * 3. 读取联系人
+     */
+    private void checkAllPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_PHONE_STATE,
+                            Manifest.permission.READ_CONTACTS},
+                    ConstantValues.HOME_ACTIVITY_REQUEST_ALL_PERMISSION_CODE);
         } else {
-            Log.i(TAG, "读取电话状态权限已经授予。");
-        }
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            //请求权限
-            Log.i(TAG, "请求授予读取联系人权限！");
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_CONTACTS}, REQUEST_READ_CONTACTS_PERMISSION_CODE);
-        } else {
-            Log.i(TAG, "读取联系人权限已经授予！");
+            Log.i(TAG, "所有所需权限已经授予！");
         }
     }
 }

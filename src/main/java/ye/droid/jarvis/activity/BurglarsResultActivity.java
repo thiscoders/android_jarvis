@@ -21,6 +21,7 @@ public class BurglarsResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         boolean BURGLARS_SET_OVER = SharedPreferencesUtils.getBoolean(this, ConstantValues.BURGLARS_SET_OVER, false);
         if (BURGLARS_SET_OVER) { //手机防盗参数设置完成，直接显示防盗参数
             setContentView(R.layout.activity_burglars_result);
@@ -32,7 +33,13 @@ public class BurglarsResultActivity extends AppCompatActivity {
     }
 
     public void resetBurglars(View view) {
-        SharedPreferencesUtils.putBoolean(this, ConstantValues.BURGLARS_SET_OVER, false);
+        SharedPreferencesUtils.removeAttr(this, ConstantValues.BURGLARS_SET_OVER);
         Toast.makeText(this, "重置成功！", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 }

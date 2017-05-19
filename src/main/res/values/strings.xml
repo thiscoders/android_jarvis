@@ -36,7 +36,8 @@
     <string name="burglars_setup3_title">3.设置安全号码</string>
     <string name="burglars_setup3_subtitle">SIM卡变更后报警短信会发送给安全号码</string>
     <string name="burglars_setup3_btn_contact">选择联系人</string>
-    <string name="burglars_setup3_et_hint_contact">输入联系人号码</string>
+    <string name="burglars_setup3_btn_reset_contact">重置联系人</string>
+    <string name="burglars_setup3_et_hint_contact">点击下方按钮选择联系人</string>
 
     <!--选择联系人界面-->
     <string name="burglars_setup3_contact_list">选择联系人</string>

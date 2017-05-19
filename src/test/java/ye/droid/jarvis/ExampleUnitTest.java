@@ -33,4 +33,15 @@ public class ExampleUnitTest {
         System.out.println(MD5Utils.encodeMD5("123") + "..." + MD5Utils.encodeMD5("123").length());
         System.out.println(MD5Utils.encodeMD5("123") + "..." + MD5Utils.encodeMD5("123").length());
     }
+
+    @Test
+    public void testJsonString() {
+        //, "contactName":"+contactName+", "contactPhoto":"+contactPhoto+", "contactNote":"+contactNote+", "contactNickname":"+contactNickname+", "contactMisc":"+contactMisc+", "contactGroupMembership":"+contactGroupMembership+", "contactPhone_v2":"+contactPhone_v2+"}}"
+        int num = 100;
+        String contactPhone="13689295501";
+        String jsonStr = "{\"ContactBean\":{\"contactID\":" + num + ",\"contactPhone\":\""+contactPhone+"\",\"contactName\":\""+contactPhone+"\"}}";
+        System.out.println(jsonStr);
+    }
+
+
 }

@@ -119,4 +119,10 @@ public class ContactBean {
                 ", contactPhone_v2='" + contactPhone_v2 + '\'' +
                 '}';
     }
+
+    public String bean2Json() {
+        //return "{\"ContactBean\":{\"contactID\":" + contactID + ", \"contactPhone\":\"" + contactPhone + "\", \"contactName\":\"" + contactName + "\", \"contactPhoto\":\"" + contactPhoto + "\", \"contactNote\":\"" + contactNote + "\", \"contactNickname\":\"" + contactNickname + "\", \"contactMisc\":\"" + contactMisc +\
+        //"\", \"contactGroupMembership\":\"" + contactGroupMembership + "\", \"contactPhone_v2\":\"" + contactPhone_v2 + "\"}}";
+        return "";
+    }
 }

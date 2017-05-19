@@ -47,7 +47,7 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
 public class SplashActivity extends AppCompatActivity {
     private final String TAG = SplashActivity.class.getSimpleName();
 
-    private String mUpdateAddress = "http://192.168.191.2:8080/jarvis/jarvis.json";
+    private String mUpdateAddress = ConstantValues.UPDATE_ADDRESS;
 
     private RelativeLayout rl_up_screen;
     private TextView tv_splash_version_name;
@@ -55,15 +55,12 @@ public class SplashActivity extends AppCompatActivity {
 
     private int mLocalVersionCode; //本地版本号
 
-    private Handler handler;
+    private Handler handler; //为延时进入主界面进行设置
 
     private long splash_dau = 3000;
     private long startTime;
     private long endTime;
     private long dua;
-
-    private int REQUEST_PERMISSION_CODE = 10;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +84,6 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-
     /**
      * 初始化UI，寻找控件
      */
@@ -108,22 +104,11 @@ public class SplashActivity extends AppCompatActivity {
     /**
      * 检查并申请权限
      * 1.读取外部存储设备
-     * 2.读取电话状态
-     * 3. 读取联系人
      */
     private void checkPermission() {
         //读写SD卡权限
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            //请求权限
-            Log.i(TAG, "请求授予权限！");
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.READ_PHONE_STATE,
-                            Manifest.permission.READ_CONTACTS},
-
-                    REQUEST_PERMISSION_CODE);
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, ConstantValues.SPLASH_ACTIVITY_REQUEST_WRITE_EXTERNAL_STORAGE_CODE);
         } else {
             Log.i(TAG, "所有权限已经授予！");
         }
