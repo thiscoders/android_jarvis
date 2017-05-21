@@ -9,7 +9,7 @@ public class ConstantValues {
      * app设置相关
      */
     //开启APP自动更新标识
-    public final static String UPDATE_ADDRESS = "http://192.168.191.2:8080/jarvis/jarvis.json";
+    public final static String UPDATE_ADDRESS = "http://192.168.191.3:8080/jarvis/jarvis.json";
 
     //SettingActivity：自动更新KAY
     public final static String AUTO_UPDATE = "auto_update";
