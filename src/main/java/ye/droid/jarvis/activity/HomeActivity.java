@@ -47,7 +47,8 @@ public class HomeActivity extends AppCompatActivity {
     private String[] mMenuItems = new String[]{"手机防盗", "通信卫士", "软件管理",
             "进程管理", "流量统计", "手机杀毒",
             "缓存清理", "高级工具", "设置中心"};
-    private int[] mMenuIcons = new int[]{R.drawable.home_against_burglars, R.drawable.home_comm_guard, R.drawable.home_soft_manager,
+    private int[] mMenuIcons = new int[]{
+            R.drawable.home_against_burglars, R.drawable.home_comm_guard, R.drawable.home_soft_manager,
             R.drawable.home_thread_manager, R.drawable.home_flow_statistic, R.drawable.home_anti_virus,
             R.drawable.home_cache_clean, R.drawable.home_advance_tool, R.drawable.home_setting};
 
@@ -73,6 +74,7 @@ public class HomeActivity extends AppCompatActivity {
                         // TODO: 2017/5/11 为了开发方便，暂时取消输入密码的步骤
                         //showPwdDialog();
                         startActivity(new Intent(HomeActivity.this, BurglarsResultActivity.class));
+                        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
                         break;
                     case 1:
                         break;
@@ -85,6 +87,8 @@ public class HomeActivity extends AppCompatActivity {
                     case 5:
                         break;
                     case 6:
+                        startActivity(new Intent(HomeActivity.this, CacheClearActivity.class));
+                        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
                         break;
                     case 7:
                         break;

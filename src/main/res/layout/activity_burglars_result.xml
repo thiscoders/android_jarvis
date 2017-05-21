@@ -3,17 +3,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        style="@style/JTitleStyle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/burglars_title" />
+        android:orientation="vertical">
 
-    <TextView
-        android:onClick="resetBurglars"
-        style="@style/JBurglarsSetupFunction"
+        <TextView
+            style="@style/JTitleStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/burglars_title" />
+
+        <TextView
+            android:id="@+id/tv_safe_phonenum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/burglars_result_safe_phonenum"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/tv_safe_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/burglars_result_safe_status"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBurglarsResultFuncBrief"
+            android:padding="5dp"
+            android:text="@string/burglars_result_func_brief"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        <!--functions-->
+        <TextView
+            style="@style/JBurglarsSetupFunction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/burglars_setup1_parameter1" />
+
+        <TextView
+            style="@style/JBurglarsSetupFunction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/burglars_setup1_parameter2" />
+
+        <TextView
+            style="@style/JBurglarsSetupFunction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/burglars_setup1_parameter3" />
+
+        <TextView
+            style="@style/JBurglarsSetupFunction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/burglars_setup1_parameter4" />
+    </LinearLayout>
+
+    <Button
+        style="@style/JBurglarsSetupButtonNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/burglars_setup1_parameter2" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="resetBurglars"
+        android:text="@string/burglars_result_reset_burglars" />
 </RelativeLayout>

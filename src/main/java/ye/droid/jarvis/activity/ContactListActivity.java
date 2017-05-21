@@ -159,7 +159,7 @@ public class ContactListActivity extends AppCompatActivity {
                                 is_phonev2 = false;
                                 continue;
                             }
-                            data1 = data1.replace(" ", "").trim();//去掉空格
+                            data1 = data1.replace(" ", "").replace("-", "").trim();//去掉空格
                             Log.i(TAG, "\t\t\t>>>phone_v2=" + data1);
                             contactBean.setContactPhone_v2(data1);
                             is_phonev2 = true;

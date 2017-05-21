@@ -52,19 +52,24 @@ public class BurglarsSetup4Activity extends AppCompatActivity {
         SharedPreferencesUtils.putBoolean(this, ConstantValues.BURGLARS_SET_OVER, true);
         Intent intent = new Intent(this, BurglarsResultActivity.class);
         startActivity(intent);
-        finish();
         overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
+        finish();
     }
 
     public void returnBeforePage(View view) {
-        finish();
+        backPre();
+    }
+
+    private void backPre() {
+        Intent intent = new Intent(this, BurglarsSetup3Activity.class);
+        startActivity(intent);
         overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+        finish();
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+        backPre();
     }
 
     /**

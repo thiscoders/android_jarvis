@@ -24,7 +24,8 @@
         <activity android:name=".activity.ContactListActivity" />
         <activity android:name=".activity.BurglarsSetup4Activity" />
 
-
+        <!--配置缓存清理页面-->
+        <activity android:name=".activity.CacheClearActivity" />
         <activity android:name=".activity.TestActivity" />
 
         <!--Android N 申请访问存储空间-->
@@ -43,6 +44,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
 </manifest>
