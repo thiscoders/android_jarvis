@@ -15,19 +15,28 @@ public class DialogFactory {
     /**
      * 生成对话框
      *
-     * @param context       上下文对象
-     * @param icon          弹框图标
-     * @param title         弹框标题
-     * @param message       弹框内容
-     * @param view          弹框显示控件(可选)
-     * @param positiveValue 确定按钮上的值
-     * @param negativeValue 取消按钮上的值(可选)
-     * @param positive      确定按钮触发的事件
-     * @param negative      取消按钮触发的事件(可选)
+     * @param context        上下文对象
+     * @param icon           弹框图标
+     * @param title          弹框标题
+     * @param message        弹框内容
+     * @param view           弹框显示控件(可选)
+     * @param positiveValue  确定按钮上的值
+     * @param negativeValue  取消按钮上的值(可选)
+     * @param positive       确定按钮触发的事件
+     * @param negative       取消按钮触发的事件(可选)
      * @param cancelListener 取消对话框
      * @return 设置完成的对话框，待返回
      */
-    public static AlertDialog generateDialog(Context context, int icon, String title, String message, View view, String positiveValue, String negativeValue, DialogInterface.OnClickListener positive, DialogInterface.OnClickListener negative, DialogInterface.OnCancelListener cancelListener) {
+    public static AlertDialog generateDialog(Context context,
+                                             int icon, //可选
+                                             String title,
+                                             String message, //可选
+                                             View view,  //可选
+                                             String positiveValue,
+                                             String negativeValue,
+                                             DialogInterface.OnClickListener positive,
+                                             DialogInterface.OnClickListener negative, //可选
+                                             DialogInterface.OnCancelListener cancelListener) {//可选
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
         if (message != null)

@@ -6,7 +6,7 @@
 
     <!--home-->
     <string name="home_title">控制台</string>
-    <string name="splash_app_icon">J.A.R.V.I.S</string>
+    <string name="about_icon_title">J.A.R.V.I.S</string>
     <string name="home_odd_egg">ODD EGG</string>
     <!--home:dialog-->
     <string name="dialog_initialize_pwd">请填写密码</string>
@@ -18,7 +18,7 @@
     <string name="dialog_negative_button">取消</string>
 
     <!--手机防盗-->
-    <string name="burglars_title">手机防盗</string>
+    <string name="burglars_title">防盗</string>
     <string name="burglars_setup1_title">1.设置手机防盗</string>
     <string name="burglars_setup1_subtitle">设置手机防盗参数：</string>
     <string name="burglars_setup1_parameter1">SIM卡变更报警</string>
@@ -39,12 +39,18 @@
     <string name="burglars_setup3_btn_reset_contact">重置联系人</string>
     <string name="burglars_setup3_et_hint_contact">点击下方按钮选择联系人</string>
 
-    <!--选择联系人界面-->
-    <string name="burglars_setup3_contact_list">选择联系人</string>
-
     <string name="burglars_setup4_title">4.设置完成</string>
     <string name="burglars_setup4_subtitle">SIM卡变更后报警短信会发送给安全号码</string>
     <string name="burglars_setup4_et_hint_contact">输入联系人号码</string>
+
+    <string name="burglars_result_safe_phonenum">安全号码</string>
+    <string name="burglars_result_safe_status">手机防盗状态</string>
+    <string name="burglars_result_func_brief">功能简介</string>
+    <string name="burglars_result_reset_burglars">重新进入设置导航</string>
+
+
+    <!--选择联系人界面-->
+    <string name="burglars_setup3_contact_list">选择联系人</string>
 
     <string name="burglars_btn_setup_before">上一步</string>
     <string name="burglars_btn_setup_next">下一步</string>
@@ -64,6 +70,9 @@
     <string name="aboutapp_title">关于软件</string>
     <string name="aboutapp_subtitle">点击查看软件详细信息</string>
 
+    <!--关于软件-->
+    <string name="app_github_address">https://github.com/thiscoders/Android_Jarvis</string>
+    <string name="app_update_btn">检查更新</string>
 
     <!--共享参数文件-->
     <string name="SharedPreferences_File1">commonfile</string>

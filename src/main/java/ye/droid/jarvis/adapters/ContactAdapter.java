@@ -14,6 +14,7 @@ import ye.droid.jarvis.R;
 import ye.droid.jarvis.beans.ContactBean;
 
 /**
+ * 联系人条目适配器
  * Created by ye on 2017/5/18.
  */
 

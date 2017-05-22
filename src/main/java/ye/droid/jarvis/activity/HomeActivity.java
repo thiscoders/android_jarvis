@@ -1,13 +1,19 @@
 package ye.droid.jarvis.activity;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -24,11 +30,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.List;
 
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.beans.UpDateBean;
+import ye.droid.jarvis.utils.AppUpdateUtils;
 import ye.droid.jarvis.utils.CommonUtils;
 import ye.droid.jarvis.utils.ConstantValues;
+import ye.droid.jarvis.utils.DialogFactory;
 import ye.droid.jarvis.utils.DisplayUtils;
 import ye.droid.jarvis.utils.MD5Utils;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
@@ -43,11 +53,15 @@ public class HomeActivity extends AppCompatActivity {
     private GridView gv_home;
     private TextView tv_showinfo;
 
+    private Handler handler;
+    private int delayMillis = 3000;
+
     private boolean tv_showinfo_show = false; //false的时候tv_showinfo显示为null
     private String[] mMenuItems = new String[]{"手机防盗", "通信卫士", "软件管理",
             "进程管理", "流量统计", "手机杀毒",
             "缓存清理", "高级工具", "设置中心"};
-    private int[] mMenuIcons = new int[]{R.drawable.home_against_burglars, R.drawable.home_comm_guard, R.drawable.home_soft_manager,
+    private int[] mMenuIcons = new int[]{
+            R.drawable.home_against_burglars, R.drawable.home_comm_guard, R.drawable.home_soft_manager,
             R.drawable.home_thread_manager, R.drawable.home_flow_statistic, R.drawable.home_anti_virus,
             R.drawable.home_cache_clean, R.drawable.home_advance_tool, R.drawable.home_setting};
 
@@ -56,12 +70,30 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         initUI();
+        initData();
         checkAllPermission();
+        boolean auto_update = SharedPreferencesUtils.getBoolean(this, ConstantValues.AUTO_UPDATE, true); //获取自动更新设置，默认自动更新
+        if (auto_update) { //自动更新开启
+            tv_showinfo.setText("正在检测更新...");
+            checkAppUpdate();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ConstantValues.CANCEL_INSTALL_UPDATE) {
+            Toast.makeText(this, "取消安装新版本！", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void initUI() {
         tv_showinfo = (TextView) findViewById(R.id.tv_showinfo);
         gv_home = (GridView) findViewById(R.id.gv_home);
+    }
+
+    private void initData() {
+        handler = new Handler();
         gv_home.setAdapter(new gridAdapter());
         gv_home.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             Intent funcIntent = null;
@@ -71,9 +103,10 @@ public class HomeActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         // TODO: 2017/5/11 为了开发方便，暂时取消输入密码的步骤
-                        //showPwdDialog();
-                        startActivity(new Intent(HomeActivity.this, BurglarsResultActivity.class));
-                        break;
+                        showPwdDialog();
+                        //startActivity(new Intent(HomeActivity.this, BurglarsResultActivity.class));
+                        //overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
+                        return;
                     case 1:
                         break;
                     case 2:
@@ -85,6 +118,8 @@ public class HomeActivity extends AppCompatActivity {
                     case 5:
                         break;
                     case 6:
+                        funcIntent = new Intent(HomeActivity.this, CacheClearActivity.class);
+                        startActivity(funcIntent);
                         break;
                     case 7:
                         break;
@@ -93,6 +128,7 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(funcIntent);
                         break;
                 }
+                overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
             }
         });
     }
@@ -161,6 +197,7 @@ public class HomeActivity extends AppCompatActivity {
                             SharedPreferencesUtils.putString(HomeActivity.this, ConstantValues.STORE_PWD, MD5Utils.encodeMD5(second));
                             Intent intent = new Intent(HomeActivity.this, BurglarsResultActivity.class);
                             startActivity(intent);
+                            overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
                             dialog.dismiss();
                             break;
                     }
@@ -201,6 +238,7 @@ public class HomeActivity extends AppCompatActivity {
                         case ConstantValues.STRING_MATCH:
                             Intent intent = new Intent(HomeActivity.this, BurglarsResultActivity.class);
                             startActivity(intent);
+                            overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
                             dialog.dismiss();
                             break;
                     }
@@ -209,7 +247,11 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * 显示彩蛋信息
+     *
+     * @param view
+     */
     public void showInfo(View view) {
         if (!tv_showinfo_show) {
             String disInfo = "";
@@ -256,7 +298,7 @@ public class HomeActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = null;
+            View view;
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) HomeActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 view = inflater.inflate(R.layout.item_home_menu, null);
@@ -280,14 +322,123 @@ public class HomeActivity extends AppCompatActivity {
      * 3. 读取联系人
      */
     private void checkAllPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_PHONE_STATE,
+                    new String[]{
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_PHONE_STATE,
                             Manifest.permission.READ_CONTACTS},
                     ConstantValues.HOME_ACTIVITY_REQUEST_ALL_PERMISSION_CODE);
         } else {
             Log.i(TAG, "所有所需权限已经授予！");
         }
+    }
+
+    /**
+     * 检查App更新
+     */
+    private void checkAppUpdate() {
+        new Thread() {
+            @Override
+            public void run() {
+                final UpDateBean upDateBean = AppUpdateUtils.haveNewVersion(HomeActivity.this);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        switch (upDateBean.getVersionInfo()) {
+                            case ConstantValues.HAVE_UPDATE:
+                                //弹出对话框，用户选择是否更新
+                                Dialog dialog = DialogFactory.generateDialog(HomeActivity.this,
+                                        R.drawable.app_update,
+                                        upDateBean.getVersionInfo(),
+                                        upDateBean.getVersionDesc(),
+                                        null,
+                                        "更新",
+                                        "忽略",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                new Thread() {
+                                                    @Override
+                                                    public void run() {
+                                                        //APK
+                                                        File apk = AppUpdateUtils.downNewVersionApp(upDateBean);
+                                                        if (apk == null) {
+                                                            runOnUiThread(new Runnable() {
+                                                                @Override
+                                                                public void run() {
+                                                                    Toast.makeText(getApplicationContext(), ConstantValues.ERROR_UPDATE, Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            });
+                                                            return;
+                                                        }
+                                                        installApk(apk);
+                                                    }
+                                                }.start();
+                                            }
+                                        }, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Toast.makeText(getApplicationContext(), "忽略更新...", Toast.LENGTH_SHORT).show();
+                                                tv_showinfo.setText("忽略更新！");
+                                                resetInfo();
+                                            }
+                                        }, new DialogInterface.OnCancelListener() {
+                                            @Override
+                                            public void onCancel(DialogInterface dialog) {
+                                                dialog.dismiss();
+                                                Toast.makeText(getApplicationContext(), "取消更新...", Toast.LENGTH_SHORT).show();
+                                                tv_showinfo.setText("取消更新！");
+                                                resetInfo();
+                                            }
+                                        });
+                                dialog.show();
+                                break;
+                            case ConstantValues.NOT_UPDATE:
+                                //软件已经是最新版本
+                                Toast.makeText(HomeActivity.this, upDateBean.getVersionInfo(), Toast.LENGTH_SHORT).show();
+                                tv_showinfo.setText(upDateBean.getVersionInfo());
+                                break;
+                            case ConstantValues.ERROR_UPDATE:
+                                //服务器异常
+                                Toast.makeText(HomeActivity.this, upDateBean.getVersionInfo(), Toast.LENGTH_SHORT).show();
+                                tv_showinfo.setText(upDateBean.getVersionInfo());
+                                break;
+                        }
+                        resetInfo();
+                    }
+                });
+            }
+        }.start();
+    }
+
+    /**
+     * 安装APK
+     *
+     * @param file 待安装软件
+     */
+    private void installApk(File file) {
+        Intent intent = new Intent(Intent.ACTION_VIEW); //开启安装软件界面
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { //android n 及其以上需要独立设置意图过滤器
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), "ye.droid.jarvis.fileProvider", file);
+            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+        } else { // android n 一下不需要单独设置意图过滤器
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+        }
+        //开启安装app界面
+        startActivityForResult(intent, ConstantValues.CANCEL_INSTALL_UPDATE);
+    }
+
+    private void resetInfo() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                tv_showinfo.setText(getString(R.string.home_odd_egg));
+            }
+        }, delayMillis);
     }
 }

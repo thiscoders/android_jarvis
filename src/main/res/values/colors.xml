@@ -15,4 +15,5 @@
     <color name="colorButtonPressed">#99CCFF</color>
     <color name="colorTransparent">#FFFFFF</color>
     <color name="colorButtonStroke">#CCFF99</color>
+    <color name="colorBurglarsResultFuncBrief">#66c8f2</color>
 </resources>

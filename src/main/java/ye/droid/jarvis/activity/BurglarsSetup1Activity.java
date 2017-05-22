@@ -26,10 +26,21 @@ public class BurglarsSetup1Activity extends AppCompatActivity {
         Intent intent = new Intent(this, BurglarsSetup2Activity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
-    }
-
-    public void returnBeforePage(View view) {
+        //立刻关闭前一个
         finish();
     }
 
+    public void returnBeforePage(View view) {
+        backPre();
+    }
+
+    private void backPre() {
+        finish();
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+    }
+
+    @Override
+    public void onBackPressed() {
+        backPre();
+    }
 }

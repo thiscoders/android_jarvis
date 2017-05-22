@@ -38,10 +38,16 @@ public class ExampleUnitTest {
     public void testJsonString() {
         //, "contactName":"+contactName+", "contactPhoto":"+contactPhoto+", "contactNote":"+contactNote+", "contactNickname":"+contactNickname+", "contactMisc":"+contactMisc+", "contactGroupMembership":"+contactGroupMembership+", "contactPhone_v2":"+contactPhone_v2+"}}"
         int num = 100;
-        String contactPhone="13689295501";
-        String jsonStr = "{\"ContactBean\":{\"contactID\":" + num + ",\"contactPhone\":\""+contactPhone+"\",\"contactName\":\""+contactPhone+"\"}}";
+        String contactPhone = "13689295501";
+        String jsonStr = "{\"ContactBean\":{\"contactID\":" + num + ",\"contactPhone\":\"" + contactPhone + "\",\"contactName\":\"" + contactPhone + "\"}}";
         System.out.println(jsonStr);
     }
 
+
+    @Test
+    public void testDownFile() {
+        String urlPath="";
+        String localPath=".";
+    }
 
 }

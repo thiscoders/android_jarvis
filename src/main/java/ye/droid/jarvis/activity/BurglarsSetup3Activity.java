@@ -82,17 +82,23 @@ public class BurglarsSetup3Activity extends AppCompatActivity {
         Intent intent = new Intent(this, BurglarsSetup4Activity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
+        finish();
     }
 
     public void returnBeforePage(View view) {
-        finish();
+        backPre();
+    }
+
+    private void backPre() {
+        Intent intent = new Intent(this, BurglarsSetup2Activity.class);
+        startActivity(intent);
         overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+        finish();
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+        backPre();
     }
 
     @Override

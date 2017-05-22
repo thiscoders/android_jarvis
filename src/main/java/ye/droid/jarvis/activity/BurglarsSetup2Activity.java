@@ -13,6 +13,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import ye.droid.jarvis.R;
@@ -29,21 +30,29 @@ public class BurglarsSetup2Activity extends AppCompatActivity {
     private final String TAG = BurglarsSetup2Activity.class.getSimpleName();
     private SettingItem st_bind_sim;
 
+    private TextView tv_sim_number;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_burglars_setup2);
         initUI();
+        initData();
     }
 
     private void initUI() {
         st_bind_sim = (SettingItem) findViewById(R.id.st_bind_sim);
+        tv_sim_number = (TextView) findViewById(R.id.tv_sim_number);
+    }
+
+    private void initData() {
         //回显数据
         String sim_number = SharedPreferencesUtils.getString(this, ConstantValues.SIM_NUMBER, "");
         if (TextUtils.isEmpty(sim_number)) { //Sim序列号未null，SIM卡未绑定
             st_bind_sim.setCheck(false);
         } else {
             st_bind_sim.setCheck(true);
+            tv_sim_number.setText("你的SIM卡序列号是：" + sim_number);
         }
     }
 
@@ -57,17 +66,23 @@ public class BurglarsSetup2Activity extends AppCompatActivity {
         Intent intent = new Intent(this, BurglarsSetup3Activity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
+        finish();
     }
 
     public void returnBeforePage(View view) {
-        finish();
+        backPre();
+    }
+
+    private void backPre() {
+        Intent intent = new Intent(this, BurglarsSetup1Activity.class);
+        startActivity(intent);
         overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+        finish();
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+        backPre();
     }
 
     /**
@@ -85,10 +100,12 @@ public class BurglarsSetup2Activity extends AppCompatActivity {
             //保存SIM序列号
             SharedPreferencesUtils.putString(this, ConstantValues.SIM_NUMBER, simSerialNumber);
             st_bind_sim.setCheck(true);
+            tv_sim_number.setText("你的SIM卡序列号是：" + simSerialNumber);
         } else {
             //删除SIM卡序列号
             SharedPreferencesUtils.removeAttr(this, ConstantValues.SIM_NUMBER);
             st_bind_sim.setCheck(false);
+            tv_sim_number.setText("");
         }
 
     }

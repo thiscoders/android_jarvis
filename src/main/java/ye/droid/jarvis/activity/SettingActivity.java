@@ -1,5 +1,6 @@
 package ye.droid.jarvis.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -56,8 +57,10 @@ public class SettingActivity extends AppCompatActivity {
      *
      * @param view
      */
-    public void showAppInfo(View view) {
-        Toast.makeText(this, "关于软件的详细信息！", Toast.LENGTH_SHORT).show();
+    public void showAboutInfo(View view) {
+        Intent intent = new Intent(this, AboutActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
     }
 
 }
