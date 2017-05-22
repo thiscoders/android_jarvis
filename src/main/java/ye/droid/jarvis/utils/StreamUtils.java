@@ -34,22 +34,20 @@ public class StreamUtils {
     }
 
     /**
-     * 将inputstream保存到文件中
+     * 将inputstream转换成文件
      *
      * @param inputStream 流对象
      * @param destFile    本地保存文件
      */
-    public static void stream2File(InputStream inputStream, File destFile) {
+    public static File stream2File(InputStream inputStream, File destFile) {
         FileOutputStream outputStream = null;
         try {
             outputStream = new FileOutputStream(destFile);
-
             int len;
             byte[] bytes = new byte[1024 * 1024];
             while ((len = inputStream.read(bytes)) != -1) {
                 outputStream.write(bytes, 0, len);
             }
-            Log.i(TAG, "StreamUtils文件保存完成！");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -62,5 +60,6 @@ public class StreamUtils {
                 e.printStackTrace();
             }
         }
+        return destFile;
     }
 }

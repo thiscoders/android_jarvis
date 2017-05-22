@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.SplashActivity" />
+
         <activity android:name=".activity.HomeActivity"><!--将主界面设置为HOME，去掉Splash页面-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
         <activity android:name=".activity.BurglarsSetup3Activity" />
         <activity android:name=".activity.ContactListActivity" />
         <activity android:name=".activity.BurglarsSetup4Activity" />
-
+        <activity android:name=".activity.AboutActivity" /> <!--关于软件界面-->
         <!--配置缓存清理页面-->
         <activity android:name=".activity.CacheClearActivity" />
         <activity android:name=".activity.TestActivity" />

@@ -1,18 +1,21 @@
 package ye.droid.jarvis.utils;
 
 /**
+ * 已经使用的数字 0-10(自动更新),20(请求权限码),100-110(开启Activity使用)
+ * <p>
  * Created by ye on 2017/5/9.
  */
-
 public class ConstantValues {
     /**
      * app设置相关
      */
     //开启APP自动更新标识
-    public final static String UPDATE_ADDRESS = "http://192.168.191.3:8080/jarvis/jarvis.json";
+    public final static String UPDATE_ADDRESS = "http://192.168.191.2:8080/jarvis/jarvis.json";
 
     //SettingActivity：自动更新KAY
     public final static String AUTO_UPDATE = "auto_update";
+    //取消安装更新包的请求码
+    public final static int CANCEL_INSTALL_UPDATE = 200;
 
     //HomeActivity：手机防盗密码
     public final static String STORE_PWD = "store_pwd";
@@ -34,8 +37,6 @@ public class ConstantValues {
     /**
      * 开启activity的各种请求码，响应码等
      */
-    //splashactivity请求读取设备存储的权限
-    public final static int SPLASH_ACTIVITY_REQUEST_WRITE_EXTERNAL_STORAGE_CODE = 10;
     //  homeActivity请求所有APP所需权限的请求码
     public final static int HOME_ACTIVITY_REQUEST_ALL_PERMISSION_CODE = 20;
 
@@ -61,4 +62,13 @@ public class ConstantValues {
     public final static int STRING_DIFF = 1;
     //两个字符串相同
     public final static int STRING_MATCH = 2;
+
+    /**
+     * 自动更新APP相关
+     */
+    public final static String HAVE_UPDATE = "有新的软件版本";
+    public final static String NOT_UPDATE = "已经是最新版本";
+    public final static String ERROR_UPDATE = "服务器飞到火星上去了";
+
+
 }

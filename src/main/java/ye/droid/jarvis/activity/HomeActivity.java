@@ -5,12 +5,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -31,24 +29,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.util.List;
 
-import ye.droid.jarvis.BuildConfig;
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.beans.UpDateBean;
+import ye.droid.jarvis.utils.AppUpdateUtils;
 import ye.droid.jarvis.utils.CommonUtils;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.DialogFactory;
 import ye.droid.jarvis.utils.DisplayUtils;
-import ye.droid.jarvis.utils.JHttpUtils;
 import ye.droid.jarvis.utils.MD5Utils;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
@@ -61,10 +51,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private GridView gv_home;
     private TextView tv_showinfo;
-
-    //更新相关
-    private String mUpdateAddress = ConstantValues.UPDATE_ADDRESS;
-    private int mLocalVersionCode; //本地版本号
 
     private boolean tv_showinfo_show = false; //false的时候tv_showinfo显示为null
     private String[] mMenuItems = new String[]{"手机防盗", "通信卫士", "软件管理",
@@ -91,7 +77,9 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Toast.makeText(this, "取消安装新版本！", Toast.LENGTH_SHORT).show();
+        if (requestCode == ConstantValues.CANCEL_INSTALL_UPDATE) {
+            Toast.makeText(this, "取消安装新版本！", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void initUI() {
@@ -109,7 +97,7 @@ public class HomeActivity extends AppCompatActivity {
                         showPwdDialog();
                         //startActivity(new Intent(HomeActivity.this, BurglarsResultActivity.class));
                         //overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
-                        break;
+                        return;
                     case 1:
                         break;
                     case 2:
@@ -122,7 +110,6 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case 6:
                         startActivity(new Intent(HomeActivity.this, CacheClearActivity.class));
-                        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
                         break;
                     case 7:
                         break;
@@ -131,6 +118,7 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(funcIntent);
                         break;
                 }
+                overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
             }
         });
     }
@@ -199,6 +187,7 @@ public class HomeActivity extends AppCompatActivity {
                             SharedPreferencesUtils.putString(HomeActivity.this, ConstantValues.STORE_PWD, MD5Utils.encodeMD5(second));
                             Intent intent = new Intent(HomeActivity.this, BurglarsResultActivity.class);
                             startActivity(intent);
+                            overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
                             dialog.dismiss();
                             break;
                     }
@@ -239,6 +228,7 @@ public class HomeActivity extends AppCompatActivity {
                         case ConstantValues.STRING_MATCH:
                             Intent intent = new Intent(HomeActivity.this, BurglarsResultActivity.class);
                             startActivity(intent);
+                            overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
                             dialog.dismiss();
                             break;
                     }
@@ -247,7 +237,11 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * 显示彩蛋信息
+     *
+     * @param view
+     */
     public void showInfo(View view) {
         if (!tv_showinfo_show) {
             String disInfo = "";
@@ -332,156 +326,75 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 检查App更新
+     */
     private void checkAppUpdate() {
         new Thread() {
             @Override
             public void run() {
-                //服务器获取的Json字符串
-                String jsonzContent = JHttpUtils.getHttpStream(HomeActivity.this, mUpdateAddress);
-                //1. 获取更新信息失败
-                if (jsonzContent == null) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(HomeActivity.this, "更新失败！服务器跑到火星上去了！！！", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    return;
-                }
-                try {
-                    //解析服务器返回的Json字符串
-                    JSONObject jsonObject = new JSONObject(jsonzContent);
-                    final String versionName = jsonObject.getString("versionName"); //获取新版本名称
-                    String versionCode = jsonObject.getString("versionCode"); //获取新版本编号
-                    final String versionDesc = jsonObject.getString("versionDesc"); //获取新版本描述
-                    final String downloadURL = jsonObject.getString("downloadURL");//获取新版本下载的地址
-
-                    mLocalVersionCode = getVersionCode(); //获取本地软件的版本号
-                    if (mLocalVersionCode < Integer.parseInt(versionCode)) //如果本地版本小于远程版本，那么久说明有了新的版本，需要下载更新
-                        //UI线程显示更新对话框
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                //新建TextView显示更新信息
-                                TextView tv_version_desc = new TextView(HomeActivity.this);
-                                tv_version_desc.setPadding(60, tv_version_desc.getPaddingTop(), tv_version_desc.getPaddingRight(), tv_version_desc.getPaddingBottom());
-                                tv_version_desc.setTextSize(18);
-                                tv_version_desc.setText(versionDesc);
-
-                                //获取更新软件提示对话框
-                                Dialog updateDialog = DialogFactory.generateDialog(
-                                        HomeActivity.this,  //上下文
-                                        R.drawable.app_update, // 图标
-                                        "更新", //对话框标题
-                                        "检测到可用的更新！新版本名称：" + versionName, //对话框内容
-                                        tv_version_desc, //显示新版本的textview控件
-                                        "更新", //更新按钮 positive
-                                        "忽略", //忽略按钮 negative
-                                        new DialogInterface.OnClickListener() { //积极按钮点击事件，开始下载更新包
-                                            //开始更新点击事件
+                final UpDateBean upDateBean = AppUpdateUtils.haveNewVersion(HomeActivity.this);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        switch (upDateBean.getVersionInfo()) {
+                            case ConstantValues.HAVE_UPDATE:
+                                //弹出对话框，用户选择是否更新
+                                Dialog dialog = DialogFactory.generateDialog(HomeActivity.this,
+                                        0,
+                                        upDateBean.getVersionInfo(),
+                                        upDateBean.getVersionDesc(),
+                                        null,
+                                        "更新",
+                                        "忽略",
+                                        new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                //使用xutils框架下载软件安装包，并进行安装
-                                                //1. 判断sd卡是否挂载可用
-                                                if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                                                    //2. 获取下载路径
-                                                    String path = Environment.getExternalStorageDirectory() + File.separator + "Download" + File.separator + "jarvis.apk";
-                                                    HttpUtils httpUtils = new HttpUtils(); //定义HttpUtils下载工具类
-
-                                                    httpUtils.download(downloadURL, path, new RequestCallBack<File>() {
-                                                        @Override
-                                                        public void onSuccess(ResponseInfo<File> responseInfo) { //下载成功，安装APP
-                                                            File apkFile = responseInfo.result;
-                                                            Log.i(TAG, "XUtils下载更新包成功！>>>" + apkFile.getAbsolutePath() + "..." + apkFile.length() + "..." + Environment.getExternalStorageDirectory() + "..." + BuildConfig.APPLICATION_ID);
-                                                            Toast.makeText(getApplicationContext(), "下载更新包成功，正在开启安装界面...", Toast.LENGTH_SHORT).show();
-                                                            installApk(apkFile);
+                                                new Thread() {
+                                                    @Override
+                                                    public void run() {
+                                                        //APK
+                                                        File apk = AppUpdateUtils.downNewVersionApp(upDateBean);
+                                                        if (apk == null) {
+                                                            runOnUiThread(new Runnable() {
+                                                                @Override
+                                                                public void run() {
+                                                                    Toast.makeText(getApplicationContext(), ConstantValues.ERROR_UPDATE, Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            });
+                                                            return;
                                                         }
-
-                                                        @Override
-                                                        public void onFailure(HttpException e, String s) { //下载失败，进入主界面
-                                                            Log.i(TAG, "XUtils下载更新包失败！");
-                                                            Toast.makeText(getApplicationContext(), "下载更新包失败，请稍后重试！", Toast.LENGTH_SHORT).show();
-                                                        }
-
-                                                        @Override
-                                                        public void onStart() { //开始下载
-                                                            super.onStart();
-                                                            Log.i(TAG, "XUtils开始下载更新包！");
-                                                        }
-
-                                                        @Override
-                                                        public void onLoading(long total, long current, boolean isUploading) { //下载过程中的数据更新
-                                                            super.onLoading(total, current, isUploading);
-                                                            Log.i(TAG, total + "XUtils正在下载更新包...onLoading..." + current);
-                                                        }
-                                                    });
-                                                }
+                                                        installApk(apk);
+                                                    }
+                                                }.start();
                                             }
-                                        },
-                                        new DialogInterface.OnClickListener() { //消极按钮点击事件，取消下载更新，进入主界面
-                                            //3. 忽略更新点击事件,3s后延时进入主界面
+                                        }, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Toast.makeText(getApplicationContext(), "忽略更新...", Toast.LENGTH_SHORT).show();
                                             }
-                                        },
-                                        new DialogInterface.OnCancelListener() { //点击对话框外的区域触发的事件，关闭更新对话框，进入主界面
+                                        }, new DialogInterface.OnCancelListener() {
                                             @Override
                                             public void onCancel(DialogInterface dialog) {
                                                 dialog.dismiss();
                                                 Toast.makeText(getApplicationContext(), "取消更新...", Toast.LENGTH_SHORT).show();
                                             }
                                         });
-                                //获取对话框并且显示
-                                updateDialog.show();
-                            }
-                        });
-                    else { //软件没发布更新
-                        //2. 已经是最新版本了，3s后直接延时进入主界面
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(HomeActivity.this, "已经是最新版本了，不用更新！", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                                dialog.show();
+                                break;
+                            case ConstantValues.NOT_UPDATE:
+                                //软件已经是最新版本
+                                Toast.makeText(HomeActivity.this, upDateBean.getVersionInfo(), Toast.LENGTH_SHORT).show();
+                                break;
+                            case ConstantValues.ERROR_UPDATE:
+                                //服务器异常
+                                Toast.makeText(HomeActivity.this, upDateBean.getVersionInfo(), Toast.LENGTH_SHORT).show();
+                                break;
+                        }
                     }
-                } catch (JSONException e) { //更新软件异常
-                    e.printStackTrace();
-                }
+                });
             }
         }.start();
-    }
-
-    /**
-     * 获取当前软件版本名称
-     *
-     * @return
-     */
-    private String getVersionName() {
-        PackageManager packageManager = getPackageManager();
-        try {
-            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
-            return packageInfo.versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    /**
-     * 获取本机App版本号
-     *
-     * @return 返回0获取失败，否则就获取成功
-     */
-    private int getVersionCode() {
-        PackageManager packageManager = getPackageManager();
-        try {
-            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
-            return packageInfo.versionCode;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return 0;
     }
 
     /**
@@ -490,15 +403,17 @@ public class HomeActivity extends AppCompatActivity {
      * @param file 待安装软件
      */
     private void installApk(File file) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Intent intent = new Intent(Intent.ACTION_VIEW); //开启安装软件界面
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { //android n 及其以上需要独立设置意图过滤器
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), "ye.droid.jarvis.fileProvider", file);
             intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
-        } else {
+        } else { // android n 一下不需要单独设置意图过滤器
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
         }
-        startActivityForResult(intent, 100);
+        //开启安装app界面
+        startActivityForResult(intent, ConstantValues.CANCEL_INSTALL_UPDATE);
     }
+
 }
