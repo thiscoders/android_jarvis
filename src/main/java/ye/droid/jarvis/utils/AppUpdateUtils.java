@@ -80,7 +80,7 @@ public class AppUpdateUtils {
      * @param context
      * @return
      */
-    private static String getVersionName(Context context) {
+    public static String getVersionName(Context context) {
         PackageManager packageManager = context.getPackageManager();
         try {
             PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
@@ -96,7 +96,7 @@ public class AppUpdateUtils {
      *
      * @return 返回0获取失败，否则就获取成功
      */
-    private static int getVersionCode(Context context) {
+    public static int getVersionCode(Context context) {
         PackageManager packageManager = context.getPackageManager();
         try {
             PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
@@ -106,6 +106,4 @@ public class AppUpdateUtils {
         }
         return 0;
     }
-
-
 }

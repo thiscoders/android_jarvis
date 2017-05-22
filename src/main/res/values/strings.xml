@@ -6,7 +6,7 @@
 
     <!--home-->
     <string name="home_title">控制台</string>
-    <string name="splash_app_icon">J.A.R.V.I.S</string>
+    <string name="about_icon_title">J.A.R.V.I.S</string>
     <string name="home_odd_egg">ODD EGG</string>
     <!--home:dialog-->
     <string name="dialog_initialize_pwd">请填写密码</string>
@@ -70,6 +70,9 @@
     <string name="aboutapp_title">关于软件</string>
     <string name="aboutapp_subtitle">点击查看软件详细信息</string>
 
+    <!--关于软件-->
+    <string name="app_github_address">https://github.com/thiscoders/Android_Jarvis</string>
+    <string name="app_update_btn">检查更新</string>
 
     <!--共享参数文件-->
     <string name="SharedPreferences_File1">commonfile</string>

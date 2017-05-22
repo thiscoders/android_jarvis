@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -52,6 +53,9 @@ public class HomeActivity extends AppCompatActivity {
     private GridView gv_home;
     private TextView tv_showinfo;
 
+    private Handler handler;
+    private int delayMillis = 3000;
+
     private boolean tv_showinfo_show = false; //false的时候tv_showinfo显示为null
     private String[] mMenuItems = new String[]{"手机防盗", "通信卫士", "软件管理",
             "进程管理", "流量统计", "手机杀毒",
@@ -66,6 +70,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         initUI();
+        initData();
         checkAllPermission();
         boolean auto_update = SharedPreferencesUtils.getBoolean(this, ConstantValues.AUTO_UPDATE, true); //获取自动更新设置，默认自动更新
         if (auto_update) { //自动更新开启
@@ -85,6 +90,10 @@ public class HomeActivity extends AppCompatActivity {
     private void initUI() {
         tv_showinfo = (TextView) findViewById(R.id.tv_showinfo);
         gv_home = (GridView) findViewById(R.id.gv_home);
+    }
+
+    private void initData() {
+        handler = new Handler();
         gv_home.setAdapter(new gridAdapter());
         gv_home.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             Intent funcIntent = null;
@@ -109,7 +118,8 @@ public class HomeActivity extends AppCompatActivity {
                     case 5:
                         break;
                     case 6:
-                        startActivity(new Intent(HomeActivity.this, CacheClearActivity.class));
+                        funcIntent = new Intent(HomeActivity.this, CacheClearActivity.class);
+                        startActivity(funcIntent);
                         break;
                     case 7:
                         break;
@@ -341,7 +351,7 @@ public class HomeActivity extends AppCompatActivity {
                             case ConstantValues.HAVE_UPDATE:
                                 //弹出对话框，用户选择是否更新
                                 Dialog dialog = DialogFactory.generateDialog(HomeActivity.this,
-                                        0,
+                                        R.drawable.app_update,
                                         upDateBean.getVersionInfo(),
                                         upDateBean.getVersionDesc(),
                                         null,
@@ -372,12 +382,16 @@ public class HomeActivity extends AppCompatActivity {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Toast.makeText(getApplicationContext(), "忽略更新...", Toast.LENGTH_SHORT).show();
+                                                tv_showinfo.setText("忽略更新！");
+                                                resetInfo();
                                             }
                                         }, new DialogInterface.OnCancelListener() {
                                             @Override
                                             public void onCancel(DialogInterface dialog) {
                                                 dialog.dismiss();
                                                 Toast.makeText(getApplicationContext(), "取消更新...", Toast.LENGTH_SHORT).show();
+                                                tv_showinfo.setText("取消更新！");
+                                                resetInfo();
                                             }
                                         });
                                 dialog.show();
@@ -385,12 +399,15 @@ public class HomeActivity extends AppCompatActivity {
                             case ConstantValues.NOT_UPDATE:
                                 //软件已经是最新版本
                                 Toast.makeText(HomeActivity.this, upDateBean.getVersionInfo(), Toast.LENGTH_SHORT).show();
+                                tv_showinfo.setText(upDateBean.getVersionInfo());
                                 break;
                             case ConstantValues.ERROR_UPDATE:
                                 //服务器异常
                                 Toast.makeText(HomeActivity.this, upDateBean.getVersionInfo(), Toast.LENGTH_SHORT).show();
+                                tv_showinfo.setText(upDateBean.getVersionInfo());
                                 break;
                         }
+                        resetInfo();
                     }
                 });
             }
@@ -416,4 +433,12 @@ public class HomeActivity extends AppCompatActivity {
         startActivityForResult(intent, ConstantValues.CANCEL_INSTALL_UPDATE);
     }
 
+    private void resetInfo() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                tv_showinfo.setText(getString(R.string.home_odd_egg));
+            }
+        }, delayMillis);
+    }
 }
