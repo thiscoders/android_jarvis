@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
+import java.util.regex.Pattern;
 
 import ye.droid.jarvis.utils.MD5Utils;
 
@@ -46,8 +47,22 @@ public class ExampleUnitTest {
 
     @Test
     public void testDownFile() {
-        String urlPath="";
-        String localPath=".";
+        String urlPath = "";
+        String localPath = ".";
+    }
+
+    /**
+     * 校验以下格式字符串
+     * ##**alarmo**##
+     */
+    @Test
+    public void testRegex() {
+        String regex1 = "\\#\\#\\*\\*.+\\*\\*\\#\\#";
+        String regex2 = "^\\#{2}\\*{2}[A-Z]+\\*{2}\\#{2}";
+        String content = "##**Hello**##";
+        String content2 = "##**AAAEDUI**##";
+        boolean ismatch = Pattern.matches(regex2, content2);
+        System.out.println(ismatch);
     }
 
 }

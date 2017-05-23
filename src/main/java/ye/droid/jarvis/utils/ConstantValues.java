@@ -71,4 +71,8 @@ public class ConstantValues {
     public final static String ERROR_UPDATE = "服务器飞到火星上去了";
 
 
+    public static String SAFE_MESSAGE_ALARM = "##**ALARM**##";
+    public static String SAFE_MESSAGE_LOCATION = "##**LOCATION**##";
+    public static String SAFE_MESSAGE_WIPEDATA = "##**WIPEDATA**##";
+    public static String SAFE_MESSAGE_LOCKSCREEN = "##**LOCKSCREEN**##";
 }

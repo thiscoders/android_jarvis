@@ -9,7 +9,11 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.regex.Pattern;
+
 import ye.droid.jarvis.beans.SmsBean;
+import ye.droid.jarvis.utils.ConstantValues;
+import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 /**
  * Created by ye on 2017/5/23.
@@ -21,7 +25,7 @@ public class SmsObserver extends ContentObserver {
     private ContentResolver resolver;
     private SmsHandler handler;
 
-    private String last_uri="";
+    private String last_id = "";
 
     public SmsObserver(Context context, ContentResolver resolver, SmsHandler handler) {
         super(handler);
@@ -42,15 +46,7 @@ public class SmsObserver extends ContentObserver {
     public void onChange(boolean selfChange, Uri uri) {
         super.onChange(selfChange);
         String uri_string = uri.toString();
-        Log.i(TAG, uri_string + "..." + last_uri);
-
-        if (last_uri.equals(uri_string)) {
-            Log.i(TAG, "重复了！");
-            return;
-        }
-
-        last_uri = uri_string;
-
+        Log.i(TAG, uri_string);
         // 第一次回调 不是我们想要的 直接返回
         if (uri.toString().equals("content://sms/raw")) {
             return;
@@ -91,10 +87,22 @@ public class SmsObserver extends ContentObserver {
                 if (readIndex != -1) {
                     smsBean.setRead(cursor.getString(readIndex));
                 }
-                Log.i(TAG, "Jarvis..." + smsBean.toString());
-                Message message = Message.obtain();
-                message.obj = smsBean;
-                this.handler.handleMessage(message);
+                //获取安全号码
+                String phonev2 = SharedPreferencesUtils.getString(this.context, ConstantValues.CONTACT_PHONEV2, "");
+                //安全短信匹配正则表达式
+                String regex2 = "^\\#{2}\\*{2}[A-Z]+\\*{2}\\#{2}";
+                boolean ismatch = Pattern.matches(regex2, smsBean.getSmsBody());//短信内容是否匹配安全短信正则
+                if (smsBean.getSmsAddress().equals(phonev2) && ismatch) { //短信来自安全号码并且短信内容匹配安全短信
+                    //进入这个判断，代表该短信一定是刚接收的最新的安全短信，安全短信一定要删除
+                    if (smsBean.get_id().equals(last_id)) {
+                        Log.i(TAG, "lala...重复了");
+                        return;
+                    }
+                    last_id = smsBean.get_id();
+                    Message message = Message.obtain();
+                    message.obj = smsBean;
+                    this.handler.handleMessage(message);
+                }
             }
         }
 
