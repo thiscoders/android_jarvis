@@ -38,14 +38,24 @@
                 android:resource="@xml/jarvis_provider_paths" />
         </provider>
         <!--监听手机重启-->
-        <receiver android:name=".broadcast.receiver.RebootReceiver" />
+        <receiver android:name=".broadcast.receiver.RebootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".broadcast.receiver.SmsReceiver"><!--短信监听-->
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <!--接受手机重启权限-->
+    <uses-permission android:name="android.permission.READ_CONTACTS" /><!--接受手机重启权限-->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 </manifest>

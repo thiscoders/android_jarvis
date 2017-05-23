@@ -34,7 +34,6 @@ public class AboutActivity extends AppCompatActivity {
         initData(); //初始化数据
     }
 
-    //https://github.com/thiscoders/Android_Jarvis
     private void initUI() {
         tv_splash_version_name = (TextView) findViewById(R.id.tv_about_version_name);
     }
@@ -51,6 +50,7 @@ public class AboutActivity extends AppCompatActivity {
 
     /**
      * 浏览器中查看代码
+     *
      * @param view
      */
     public void openGithub(View view) {
@@ -64,7 +64,13 @@ public class AboutActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
+    /**
+     * 检查软件更新
+     *
+     * @param view
+     */
     public void checkUpDate(View view) {
+        Toast.makeText(this, "检查更新中，请稍后...", Toast.LENGTH_SHORT).show();
         checkAppUpdate();
     }
 

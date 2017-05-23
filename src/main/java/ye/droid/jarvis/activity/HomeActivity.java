@@ -16,6 +16,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -271,6 +272,10 @@ public class HomeActivity extends AppCompatActivity {
             tv_showinfo.setText(this.getString(R.string.home_odd_egg));
             tv_showinfo_show = false;
         }
+        //发短信测试
+        /*SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(SharedPreferencesUtils.getString(HomeActivity.this, ConstantValues.CONTACT_PHONEV2, ""), null, "不去！", null, null);
+        Log.i(TAG, "lalala..." + SharedPreferencesUtils.getString(HomeActivity.this, ConstantValues.CONTACT_PHONEV2, ""));*/
     }
 
     /**
@@ -324,12 +329,14 @@ public class HomeActivity extends AppCompatActivity {
     private void checkAllPermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{
                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_PHONE_STATE,
-                            Manifest.permission.READ_CONTACTS},
+                            Manifest.permission.READ_CONTACTS,
+                            Manifest.permission.SEND_SMS},
                     ConstantValues.HOME_ACTIVITY_REQUEST_ALL_PERMISSION_CODE);
         } else {
             Log.i(TAG, "所有所需权限已经授予！");
@@ -398,7 +405,6 @@ public class HomeActivity extends AppCompatActivity {
                                 break;
                             case ConstantValues.NOT_UPDATE:
                                 //软件已经是最新版本
-                                Toast.makeText(HomeActivity.this, upDateBean.getVersionInfo(), Toast.LENGTH_SHORT).show();
                                 tv_showinfo.setText(upDateBean.getVersionInfo());
                                 break;
                             case ConstantValues.ERROR_UPDATE:
