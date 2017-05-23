@@ -53,6 +53,7 @@
         android:textStyle="bold" />
 
     <Button
+        android:id="@+id/btn_check_version"
         style="@style/JBurglarsSetupButtonNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,4 +61,14 @@
         android:layout_centerHorizontal="true"
         android:onClick="checkUpDate"
         android:text="@string/app_update_btn" />
+
+    <Button
+        style="@style/JBurglarsSetupButtonNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_check_version"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:onClick="testNewFunc"
+        android:text="@string/app_test_new_btn" />
 </RelativeLayout>

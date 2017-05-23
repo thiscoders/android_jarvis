@@ -36,6 +36,7 @@ import java.util.List;
 
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.beans.UpDateBean;
+import ye.droid.jarvis.service.SmsLintenerService;
 import ye.droid.jarvis.utils.AppUpdateUtils;
 import ye.droid.jarvis.utils.CommonUtils;
 import ye.droid.jarvis.utils.ConstantValues;
@@ -91,6 +92,9 @@ public class HomeActivity extends AppCompatActivity {
     private void initUI() {
         tv_showinfo = (TextView) findViewById(R.id.tv_showinfo);
         gv_home = (GridView) findViewById(R.id.gv_home);
+        // TODO: 2017/5/23 自动开启短信监听，后续需要删掉这段代码
+        Intent intent = new Intent(this, SmsLintenerService.class);
+        startService(intent);
     }
 
     private void initData() {
@@ -279,64 +283,26 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-     * GridView数据适配器
-     */
-    private class gridAdapter extends BaseAdapter {
-        private ImageView iv_menu_icon;
-        private TextView tv_menu_title;
-
-
-        @Override
-        public int getCount() {
-            return mMenuItems.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return mMenuItems[position];
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view;
-            if (convertView == null) {
-                LayoutInflater inflater = (LayoutInflater) HomeActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.item_home_menu, null);
-            } else {
-                view = convertView;
-            }
-            iv_menu_icon = (ImageView) view.findViewById(R.id.iv_menu_icon);
-            tv_menu_title = (TextView) view.findViewById(R.id.tv_menu_title);
-
-            iv_menu_icon.setBackgroundResource(mMenuIcons[position]);
-            tv_menu_title.setText(mMenuItems[position]);
-
-            return view;
-        }
-    }
-
-    /**
      * 检查并申请权限
-     * 1.读取外部存储设备
-     * 2.读取电话状态
+     * 1. 读取外部存储设备
+     * 2. 读取电话状态
      * 3. 读取联系人
+     * 4. 发送短信
+     * 5. 读取短信
      */
     private void checkAllPermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{
                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_PHONE_STATE,
                             Manifest.permission.READ_CONTACTS,
-                            Manifest.permission.SEND_SMS},
+                            Manifest.permission.SEND_SMS,
+                            Manifest.permission.READ_SMS},
                     ConstantValues.HOME_ACTIVITY_REQUEST_ALL_PERMISSION_CODE);
         } else {
             Log.i(TAG, "所有所需权限已经授予！");
@@ -439,6 +405,9 @@ public class HomeActivity extends AppCompatActivity {
         startActivityForResult(intent, ConstantValues.CANCEL_INSTALL_UPDATE);
     }
 
+    /**
+     * 重置菜单信息
+     */
     private void resetInfo() {
         handler.postDelayed(new Runnable() {
             @Override
@@ -447,4 +416,47 @@ public class HomeActivity extends AppCompatActivity {
             }
         }, delayMillis);
     }
+
+    /**
+     * GridView数据适配器
+     */
+    private class gridAdapter extends BaseAdapter {
+        private ImageView iv_menu_icon;
+        private TextView tv_menu_title;
+
+
+        @Override
+        public int getCount() {
+            return mMenuItems.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return mMenuItems[position];
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view;
+            if (convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) HomeActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                view = inflater.inflate(R.layout.item_home_menu, null);
+            } else {
+                view = convertView;
+            }
+            iv_menu_icon = (ImageView) view.findViewById(R.id.iv_menu_icon);
+            tv_menu_title = (TextView) view.findViewById(R.id.tv_menu_title);
+
+            iv_menu_icon.setBackgroundResource(mMenuIcons[position]);
+            tv_menu_title.setText(mMenuItems[position]);
+
+            return view;
+        }
+    }
+
 }

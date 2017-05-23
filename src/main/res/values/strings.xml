@@ -73,6 +73,7 @@
     <!--关于软件-->
     <string name="app_github_address">https://github.com/thiscoders/Android_Jarvis</string>
     <string name="app_update_btn">检查更新</string>
+    <string name="app_test_new_btn">短信监听</string>
 
     <!--共享参数文件-->
     <string name="SharedPreferences_File1">commonfile</string>

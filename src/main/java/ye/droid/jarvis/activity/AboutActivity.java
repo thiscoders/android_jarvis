@@ -16,6 +16,7 @@ import java.io.File;
 
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.beans.UpDateBean;
+import ye.droid.jarvis.service.SmsLintenerService;
 import ye.droid.jarvis.utils.AppUpdateUtils;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.DialogFactory;
@@ -46,6 +47,11 @@ public class AboutActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+    }
+
+    public void testNewFunc(View view) {
+        Intent intent = new Intent(this, SmsLintenerService.class);
+        startService(intent);
     }
 
     /**

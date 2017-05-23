@@ -26,7 +26,7 @@ public class RebootReceiver extends BroadcastReceiver {
             Log.i(TAG, "Jarvis...手机重启完成！");
             Toast.makeText(context, "手机重启完成了！", Toast.LENGTH_SHORT).show();
             TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            String dontSimNum = manager.getSimSerialNumber();
+            String dontSimNum = manager.getSimSerialNumber() + "a";
             String safeSimNum = SharedPreferencesUtils.getString(context, ConstantValues.SIM_NUMBER, "");
             if (!dontSimNum.equals(safeSimNum)) {
                 SmsManager smsManager = SmsManager.getDefault();

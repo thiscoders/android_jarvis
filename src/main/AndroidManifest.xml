@@ -43,11 +43,9 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".broadcast.receiver.SmsReceiver"><!--短信监听-->
-            <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-            </intent-filter>
-        </receiver>
+
+        <!--短信监听服务-->
+        <service android:name=".service.SmsLintenerService" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -56,6 +54,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" /><!--接受手机重启权限-->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <!--短信相关-->
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
 </manifest>
