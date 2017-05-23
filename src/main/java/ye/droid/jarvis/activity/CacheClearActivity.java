@@ -16,4 +16,10 @@ public class CacheClearActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cacheclear);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+    }
 }

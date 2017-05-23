@@ -65,4 +65,12 @@ public class ExampleUnitTest {
         System.out.println(ismatch);
     }
 
+    @Test
+    public void subStringTest() {
+        String phone = "13201408796";
+        if (phone.startsWith("+")) {
+            phone = phone.substring(3); //截取电话
+        }
+        System.out.println(phone);
+    }
 }

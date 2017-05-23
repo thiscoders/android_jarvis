@@ -1,0 +1,38 @@
+package ye.droid.jarvis.utils;
+
+import android.app.ActivityManager;
+import android.content.Context;
+import android.util.Log;
+
+import java.util.List;
+
+/**
+ * Created by ye on 2017/5/23.
+ */
+
+public class ServiceUtils {
+
+    private static String TAG = ServiceUtils.class.getSimpleName();
+
+    public static boolean serviceIsRunning(Context context, String className) {
+        boolean running = false;
+        //获取ActivityManager对象
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        //获取所有服务列表
+        List<ActivityManager.RunningServiceInfo> services = manager.getRunningServices(Integer.MAX_VALUE);
+
+        //判断services是否可用
+        if (services != null && services.size() > 0) {
+            //遍历services
+            for (ActivityManager.RunningServiceInfo serviceInfo : services) {
+                Log.i(TAG, "className=" + serviceInfo.service.getClassName());
+                //判断服务是否存在
+                if (className.equals(serviceInfo.service.getClassName())) {
+                    running = true;
+                }
+            }
+        }
+        return running;
+    }
+
+}

@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import ye.droid.jarvis.beans.SmsBean;
 import ye.droid.jarvis.utils.ConstantValues;
+import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 /**
  * Created by ye on 2017/5/23.
@@ -25,6 +26,13 @@ public class SmsHandler extends Handler {
     @Override
     public void handleMessage(Message msg) {
         super.handleMessage(msg);
+        boolean open_secure_flag = SharedPreferencesUtils.getBoolean(this.context, ConstantValues.OPEN_SECURE_FLAG, false);
+
+        if(!open_secure_flag){
+            Toast.makeText(this.context, "防盗保护未开启，故短信无效！", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         SmsBean smsBean = (SmsBean) msg.obj;
         String content = smsBean.getSmsBody();
         if (content.equals(ConstantValues.SAFE_MESSAGE_ALARM)) {
@@ -40,7 +48,6 @@ public class SmsHandler extends Handler {
 
         //删除安全短信
         Uri mUri = Uri.parse("content://sms/");
-        Log.i(TAG, "lala..." + smsBean.toString());
         this.context.getContentResolver().delete(mUri, "_id=?",
                 new String[]{smsBean.get_id()});
     }

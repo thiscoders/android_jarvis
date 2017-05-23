@@ -47,7 +47,10 @@
     <string name="burglars_result_safe_status">手机防盗状态</string>
     <string name="burglars_result_func_brief">功能简介</string>
     <string name="burglars_result_reset_burglars">重新进入设置导航</string>
-
+    <string name="burglars_result_parameter1">SIM卡变更报警(##**ALARM**##)</string>
+    <string name="burglars_result_parameter2">GPS追踪(##**LOCATION**##)</string>
+    <string name="burglars_result_parameter3">远程数据销毁(##**WIPEDATA**##)</string>
+    <string name="burglars_result_parameter4">远程锁屏(##**LOCKSCREEN**##）</string>
 
     <!--选择联系人界面-->
     <string name="burglars_setup3_contact_list">选择联系人</string>
@@ -73,7 +76,7 @@
     <!--关于软件-->
     <string name="app_github_address">https://github.com/thiscoders/Android_Jarvis</string>
     <string name="app_update_btn">检查更新</string>
-    <string name="app_test_new_btn">短信监听</string>
+    <string name="app_test_new_btn">检测服务</string>
 
     <!--共享参数文件-->
     <string name="SharedPreferences_File1">commonfile</string>

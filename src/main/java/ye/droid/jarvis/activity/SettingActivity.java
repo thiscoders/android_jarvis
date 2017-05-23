@@ -63,4 +63,9 @@ public class SettingActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+    }
 }

@@ -20,6 +20,7 @@ import ye.droid.jarvis.service.SmsLintenerService;
 import ye.droid.jarvis.utils.AppUpdateUtils;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.DialogFactory;
+import ye.droid.jarvis.utils.ServiceUtils;
 
 public class AboutActivity extends AppCompatActivity {
     private final String TAG = AboutActivity.class.getSimpleName();
@@ -50,8 +51,12 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     public void testNewFunc(View view) {
-        Intent intent = new Intent(this, SmsLintenerService.class);
-        startService(intent);
+        boolean isRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SmsLintenerService");
+        if(isRunning){
+            Toast.makeText(getApplicationContext(), "短信监听正在运行！", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(getApplicationContext(), "短信监听没有运行！", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**

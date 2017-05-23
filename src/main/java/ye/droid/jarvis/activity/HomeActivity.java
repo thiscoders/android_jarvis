@@ -43,6 +43,7 @@ import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.DialogFactory;
 import ye.droid.jarvis.utils.DisplayUtils;
 import ye.droid.jarvis.utils.MD5Utils;
+import ye.droid.jarvis.utils.ServiceUtils;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 /**
@@ -92,9 +93,14 @@ public class HomeActivity extends AppCompatActivity {
     private void initUI() {
         tv_showinfo = (TextView) findViewById(R.id.tv_showinfo);
         gv_home = (GridView) findViewById(R.id.gv_home);
-        // TODO: 2017/5/23 自动开启短信监听，后续需要删掉这段代码
-        Intent intent = new Intent(this, SmsLintenerService.class);
-        startService(intent);
+        // 判断Sms卡监听状态，如果监听服务未开启就开启监听服务
+        boolean isRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SmsLintenerService");
+        if (!isRunning) {
+            Intent intent = new Intent(this, SmsLintenerService.class);
+            startService(intent);
+        } else {
+            Log.i(TAG, "短信监听已经在运行中了！");
+        }
     }
 
     private void initData() {
@@ -276,7 +282,7 @@ public class HomeActivity extends AppCompatActivity {
             tv_showinfo.setText(this.getString(R.string.home_odd_egg));
             tv_showinfo_show = false;
         }
-        //发短信测试
+        //todo 发短信测试
         /*SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(SharedPreferencesUtils.getString(HomeActivity.this, ConstantValues.CONTACT_PHONEV2, ""), null, "不去！", null, null);
         Log.i(TAG, "lalala..." + SharedPreferencesUtils.getString(HomeActivity.this, ConstantValues.CONTACT_PHONEV2, ""));*/

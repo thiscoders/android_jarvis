@@ -75,7 +75,11 @@ public class SmsObserver extends ContentObserver {
 
                 int addressIndex = cursor.getColumnIndex("address");
                 if (addressIndex != -1) {
-                    smsBean.setSmsAddress(cursor.getString(addressIndex));
+                    String phone = cursor.getString(addressIndex);
+                    if (phone.startsWith("+")) { //真机一般会有地区号(+86)前缀，所以需要去掉
+                        phone = phone.substring(3); //截取电话号码的后11位
+                    }
+                    smsBean.setSmsAddress(phone);
                 }
 
                 int bodyIndex = cursor.getColumnIndex("body");
@@ -91,9 +95,11 @@ public class SmsObserver extends ContentObserver {
                 String phonev2 = SharedPreferencesUtils.getString(this.context, ConstantValues.CONTACT_PHONEV2, "");
                 //安全短信匹配正则表达式
                 String regex2 = "^\\#{2}\\*{2}[A-Z]+\\*{2}\\#{2}";
+                Log.i(TAG, "lala..." + phonev2 + "...尴尬了！" + smsBean.toString());
                 boolean ismatch = Pattern.matches(regex2, smsBean.getSmsBody());//短信内容是否匹配安全短信正则
                 if (smsBean.getSmsAddress().equals(phonev2) && ismatch) { //短信来自安全号码并且短信内容匹配安全短信
                     //进入这个判断，代表该短信一定是刚接收的最新的安全短信，安全短信一定要删除
+                    Log.i(TAG, "lala...安全短信到达！" + smsBean.getSmsBody());
                     if (smsBean.get_id().equals(last_id)) {
                         Log.i(TAG, "lala...重复了");
                         return;

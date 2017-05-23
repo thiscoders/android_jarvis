@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.utils.ConstantValues;
@@ -55,7 +54,7 @@ public class BurglarsResultActivity extends AppCompatActivity {
             return;
         }
         if (!open_secure_flag) {
-            Log.i(TAG, "手机防盗为开启！");
+            Log.i(TAG, "手机防盗未开启！");
             return;
         }
         tv_safe_phonenum.setText("安全联系人：" + contact_name + "(" + contact_phonev2 + ")");
@@ -84,6 +83,7 @@ public class BurglarsResultActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        //返回上一页动画
         overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 }
