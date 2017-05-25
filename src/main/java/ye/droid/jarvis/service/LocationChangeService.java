@@ -17,6 +17,12 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+
 import ye.droid.jarvis.beans.LocationBean;
 import ye.droid.jarvis.utils.BurglarsSmsUtils;
 import ye.droid.jarvis.utils.ConstantValues;
@@ -42,7 +48,25 @@ public class LocationChangeService extends Service {
         Criteria criteria = new Criteria();
         criteria.setCostAllowed(true);
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
-        String best = locationManager.getBestProvider(criteria, true);
+        final String best = locationManager.getBestProvider(criteria, true);
+
+        // TODO: 2017/5/26 将位置信息保存到sdcard的日志中
+        final File locLog = new File("/sdcard/Jarvis/Log/location.log");
+        File dir = new File("/sdcard/Jarvis/Log");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        if (!locLog.exists()) {
+            try {
+                locLog.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //yyyy-MM-dd HH:mm:ss E 年月日 时分秒 星期
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
 
         //神奇的代码
         // TODO: 2017/5/26 弄懂这个注解
@@ -55,15 +79,32 @@ public class LocationChangeService extends Service {
                 double latitude = location.getLatitude();//纬度
                 double altitude = location.getAltitude();//海拔
 
-                LocationBean bean = new LocationBean();
-                bean.setLongitude(longitude);
-                bean.setLatitude(latitude);
-                bean.setAltitude(altitude);
+                LocationBean locationBean = new LocationBean();
+                locationBean.setLongitude(longitude);
+                locationBean.setLatitude(latitude);
+                locationBean.setAltitude(altitude);
 
-                Log.i(TAG, "location is ..." + bean.toString());
+                //记录位置信息
+                BufferedWriter writer = null;
+                try {
+                    writer = new BufferedWriter(new FileWriter(locLog, true));
+                    writer.write(dateFormat.format(System.currentTimeMillis()) + "\t\t" + locationBean.toString()+"\r\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (writer != null) {
+                        try {
+                            writer.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                Log.i(TAG, "location is ..." + locationBean.toString());
                 String safePhone = SharedPreferencesUtils.getString(getApplicationContext(), ConstantValues.CONTACT_PHONEV2, "");//获取安全联系人的电话号码
-                BurglarsSmsUtils.sendSms(safePhone, bean.toString());
-                Toast.makeText(getApplicationContext(), "location is ..." + bean.toString(), Toast.LENGTH_SHORT).show();
+                BurglarsSmsUtils.sendSms(safePhone, locationBean.toString());
+                Toast.makeText(getApplicationContext(), "location is ..." + locationBean.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
