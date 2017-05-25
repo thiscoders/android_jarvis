@@ -37,14 +37,14 @@ public class ServiceUtils {
                 if (className.equals(serviceInfo.service.getClassName())) {
                     running = true;
                     if (debug)
-                        Toast.makeText(context, className.substring(className.lastIndexOf(".")) + "正在运行...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, className.substring(className.lastIndexOf(".") + 1) + "正在运行...", Toast.LENGTH_SHORT).show();
                 }
             }
         }
 
         if (debug) {
             if (!running)
-                Toast.makeText(context, className.substring(className.lastIndexOf(".")) + "没有运行...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, className.substring(className.lastIndexOf(".") + 1) + "没有运行...", Toast.LENGTH_SHORT).show();
         }
         return running;
     }

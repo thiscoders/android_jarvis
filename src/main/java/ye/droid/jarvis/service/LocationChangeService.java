@@ -35,6 +35,8 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
 public class LocationChangeService extends Service {
     private String TAG = LocationChangeService.class.getSimpleName();
 
+    private LocationBean lastLocation = new LocationBean(0, 0, 0);
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -100,12 +102,23 @@ public class LocationChangeService extends Service {
                         }
                     }
                 }
-
-
+                Toast.makeText(getApplicationContext(), "location is ..." + locationBean.toString(), Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "location is ..." + locationBean.toString());
+
+                //精确度大概是20m（0.0005的经纬度），否则每一次微小的运动都会发送位置短信,有任何一个返回false就发送短信
+                boolean isLongitude = (Math.abs(location.getLongitude() - lastLocation.getLongitude()) < 0.0005);
+                boolean isLatitude = (Math.abs(location.getLatitude() - lastLocation.getLatitude()) < 0.0005);
+
+                //判断位移距离是否足够，任何一个返回false就发送短信
+                if (isLatitude && isLongitude) {
+                    Log.i(TAG, "位移不足，不发短信！");
+                    return;
+                }
+
+                lastLocation = locationBean;
+
                 String safePhone = SharedPreferencesUtils.getString(getApplicationContext(), ConstantValues.CONTACT_PHONEV2, "");//获取安全联系人的电话号码
                 BurglarsSmsUtils.sendSms(safePhone, locationBean.toString());
-                Toast.makeText(getApplicationContext(), "location is ..." + locationBean.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override

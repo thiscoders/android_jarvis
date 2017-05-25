@@ -262,7 +262,7 @@ public class HomeActivity extends AppCompatActivity {
      * @param view
      */
     public void showInfo(View view) {
-        tv_showinfo.setText("我是一个彩蛋！");
+        tv_showinfo.setText("我只是一个彩蛋！");
         resetInfo();
         // TODO: 2017/5/24 屏幕像素测试
         /* if (!tv_showinfo_show) {

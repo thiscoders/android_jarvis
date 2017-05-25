@@ -10,6 +10,15 @@ public class LocationBean {
     private double latitude;
     public double altitude;
 
+    public LocationBean() {
+    }
+
+    public LocationBean(double longitude, double latitude, double altitude) {
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.altitude = altitude;
+    }
+
     public double getLongitude() {
         return longitude;
     }
