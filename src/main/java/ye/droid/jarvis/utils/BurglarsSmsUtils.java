@@ -40,7 +40,7 @@ public class BurglarsSmsUtils {
      *
      * @param context
      */
-    public static void sendLocation(final Context context) {
+    public static void sendLocation(Context context) {
         boolean isRunning = ServiceUtils.serviceIsRunning(context, "ye.droid.jarvis.service.LocationChangeService", false);
         //返回false代表服务没有运行，那么开启服务
         if (!isRunning) {

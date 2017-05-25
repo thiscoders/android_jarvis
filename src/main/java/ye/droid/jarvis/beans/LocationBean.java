@@ -8,6 +8,7 @@ public class LocationBean {
 
     private double longitude;
     private double latitude;
+    public double altitude;
 
     public double getLongitude() {
         return longitude;
@@ -25,11 +26,20 @@ public class LocationBean {
         this.latitude = latitude;
     }
 
+    public double getAltitude() {
+        return altitude;
+    }
+
+    public void setAltitude(double altitude) {
+        this.altitude = altitude;
+    }
+
     @Override
     public String toString() {
         return "LocationBean{" +
                 "longitude=" + longitude +
                 ", latitude=" + latitude +
+                ", altitude=" + altitude +
                 '}';
     }
 }

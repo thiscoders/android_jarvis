@@ -53,10 +53,12 @@ public class LocationChangeService extends Service {
             public void onLocationChanged(Location location) {
                 double longitude = location.getLongitude();//经度
                 double latitude = location.getLatitude();//纬度
+                double altitude = location.getAltitude();//海拔
 
                 LocationBean bean = new LocationBean();
                 bean.setLongitude(longitude);
                 bean.setLatitude(latitude);
+                bean.setAltitude(altitude);
 
                 Log.i(TAG, "location is ..." + bean.toString());
                 String safePhone = SharedPreferencesUtils.getString(getApplicationContext(), ConstantValues.CONTACT_PHONEV2, "");//获取安全联系人的电话号码
