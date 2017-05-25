@@ -16,7 +16,6 @@ import java.io.File;
 
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.beans.UpDateBean;
-import ye.droid.jarvis.service.SmsLintenerService;
 import ye.droid.jarvis.utils.AppUpdateUtils;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.DialogFactory;
@@ -51,12 +50,8 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     public void testNewFunc(View view) {
-        boolean isRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SmsLintenerService");
-        if(isRunning){
-            Toast.makeText(getApplicationContext(), "短信监听正在运行！", Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(getApplicationContext(), "短信监听没有运行！", Toast.LENGTH_SHORT).show();
-        }
+        ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SmsListenerService", true);
+        ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.LocationChangeService", true);
     }
 
     /**

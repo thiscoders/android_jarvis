@@ -45,9 +45,12 @@
         </receiver>
 
         <!--短信监听服务-->
-        <service android:name=".service.SmsLintenerService" />
+        <service android:name=".service.SmsListenerService" />
+        <!--位置变化监听服务-->
+        <service android:name=".service.LocationChangeService" />
     </application>
 
+    <!--使用网络权限-->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -57,4 +60,8 @@
     <!--短信相关-->
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
+
+    <!--定位相关权限-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 </manifest>

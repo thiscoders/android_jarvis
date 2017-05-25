@@ -13,8 +13,8 @@ import android.widget.Toast;
  * Created by ye on 2017/5/23.
  */
 
-public class SmsLintenerService extends Service {
-    private String TAG = SmsLintenerService.class.getSimpleName();
+public class SmsListenerService extends Service {
+    private String TAG = SmsListenerService.class.getSimpleName();
     private SmsObserver smsObserver;
 
     @Nullable

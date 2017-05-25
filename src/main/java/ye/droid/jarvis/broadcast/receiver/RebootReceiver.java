@@ -8,8 +8,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import ye.droid.jarvis.activity.HomeActivity;
-import ye.droid.jarvis.service.SmsLintenerService;
+import ye.droid.jarvis.service.SmsListenerService;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
@@ -25,7 +24,7 @@ public class RebootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         //开启短信监听
-        Intent smsListener = new Intent(context, SmsLintenerService.class);
+        Intent smsListener = new Intent(context, SmsListenerService.class);
         context.startService(smsListener);
         Toast.makeText(context, "安全短信监听开启！", Toast.LENGTH_SHORT).show();
 

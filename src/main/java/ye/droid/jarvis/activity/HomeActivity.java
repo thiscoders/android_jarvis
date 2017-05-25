@@ -16,7 +16,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,16 +31,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.util.List;
 
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.beans.UpDateBean;
-import ye.droid.jarvis.service.SmsLintenerService;
+import ye.droid.jarvis.service.LocationChangeService;
+import ye.droid.jarvis.service.SmsListenerService;
 import ye.droid.jarvis.utils.AppUpdateUtils;
 import ye.droid.jarvis.utils.CommonUtils;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.DialogFactory;
-import ye.droid.jarvis.utils.DisplayUtils;
 import ye.droid.jarvis.utils.MD5Utils;
 import ye.droid.jarvis.utils.ServiceUtils;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
@@ -94,9 +92,9 @@ public class HomeActivity extends AppCompatActivity {
         tv_showinfo = (TextView) findViewById(R.id.tv_showinfo);
         gv_home = (GridView) findViewById(R.id.gv_home);
         // 判断Sms卡监听状态，如果监听服务未开启就开启监听服务
-        boolean isRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SmsLintenerService");
+        boolean isRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SmsListenerService", false);
         if (!isRunning) {
-            Intent intent = new Intent(this, SmsLintenerService.class);
+            Intent intent = new Intent(this, SmsListenerService.class);
             startService(intent);
         } else {
             Log.i(TAG, "短信监听已经在运行中了！");
@@ -264,7 +262,8 @@ public class HomeActivity extends AppCompatActivity {
      * @param view
      */
     public void showInfo(View view) {
-        if (!tv_showinfo_show) {
+        // TODO: 2017/5/24 屏幕像素测试
+       /* if (!tv_showinfo_show) {
             String disInfo = "";
             int flag = 0;
             List<String> list = DisplayUtils.getDisInfo(this);
@@ -281,11 +280,22 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             tv_showinfo.setText(this.getString(R.string.home_odd_egg));
             tv_showinfo_show = false;
-        }
+        }*/
         //todo 发短信测试
         /*SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(SharedPreferencesUtils.getString(HomeActivity.this, ConstantValues.CONTACT_PHONEV2, ""), null, "不去！", null, null);
         Log.i(TAG, "lalala..." + SharedPreferencesUtils.getString(HomeActivity.this, ConstantValues.CONTACT_PHONEV2, ""));*/
+        // TODO: 2017/5/24 位置变更测试
+        boolean isRunning = ServiceUtils.serviceIsRunning(HomeActivity.this, "ye.droid.jarvis.service.LocationChangeService", false);
+        //返回false代表服务没有运行，那么开启服务
+        if (!isRunning) {
+            Intent intent = new Intent(this, LocationChangeService.class);
+            startService(intent);
+            Toast.makeText(getApplicationContext(), "位置监听初始化...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Toast.makeText(getApplicationContext(), "位置监听已经运行，无需开启...", Toast.LENGTH_SHORT).show();
+        tv_showinfo.setText("位置监听运行中...");
     }
 
     /**
@@ -301,6 +311,8 @@ public class HomeActivity extends AppCompatActivity {
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{
@@ -308,7 +320,9 @@ public class HomeActivity extends AppCompatActivity {
                             Manifest.permission.READ_PHONE_STATE,
                             Manifest.permission.READ_CONTACTS,
                             Manifest.permission.SEND_SMS,
-                            Manifest.permission.READ_SMS},
+                            Manifest.permission.READ_SMS,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION},
                     ConstantValues.HOME_ACTIVITY_REQUEST_ALL_PERMISSION_CODE);
         } else {
             Log.i(TAG, "所有所需权限已经授予！");
