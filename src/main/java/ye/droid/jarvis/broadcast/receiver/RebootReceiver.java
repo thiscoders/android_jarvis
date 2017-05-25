@@ -13,7 +13,7 @@ import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 /**
- * 完成SIM卡变更报警
+ * SIM卡变更报警
  * Created by ye on 2017/5/22.
  */
 

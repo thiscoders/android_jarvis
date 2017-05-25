@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/ll_burglars_result_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -61,9 +62,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/burglars_result_parameter4" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:paddingRight="20dp"
+            android:paddingTop="15dp"
+            android:textSize="16dp"
+            android:textStyle="italic" />
     </LinearLayout>
 
+
     <Button
+        android:id="@+id/btn_reset_burglars"
         style="@style/JBurglarsSetupButtonNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,4 +83,56 @@
         android:layout_centerHorizontal="true"
         android:onClick="resetBurglars"
         android:text="@string/burglars_result_reset_burglars" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_burglars_result_up"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBurglarsResultFuncBrief"
+            android:gravity="left"
+            android:padding="5dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/burglars_result_service_status"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_alarm_status"
+            style="@style/JBurglarsServiceStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="openAlarm"
+            android:text="@string/burglars_result_parameter1_negated" />
+
+        <TextView
+            android:id="@+id/tv_location_status"
+            style="@style/JBurglarsServiceStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="openLocation"
+            android:text="@string/burglars_result_parameter2_negated" />
+
+        <TextView
+            android:id="@+id/tv_wipedata_status"
+            style="@style/JBurglarsServiceStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="openWipedata"
+            android:text="@string/burglars_result_parameter3_negated" />
+
+        <TextView
+            android:id="@+id/tv_lockscreen_status"
+            style="@style/JBurglarsServiceStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="openLockScreen"
+            android:text="@string/burglars_result_parameter4_negated" />
+    </LinearLayout>
 </RelativeLayout>

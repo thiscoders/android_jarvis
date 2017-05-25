@@ -262,8 +262,10 @@ public class HomeActivity extends AppCompatActivity {
      * @param view
      */
     public void showInfo(View view) {
+        tv_showinfo.setText("我是一个彩蛋！");
+        resetInfo();
         // TODO: 2017/5/24 屏幕像素测试
-       /* if (!tv_showinfo_show) {
+        /* if (!tv_showinfo_show) {
             String disInfo = "";
             int flag = 0;
             List<String> list = DisplayUtils.getDisInfo(this);
@@ -286,7 +288,7 @@ public class HomeActivity extends AppCompatActivity {
         smsManager.sendTextMessage(SharedPreferencesUtils.getString(HomeActivity.this, ConstantValues.CONTACT_PHONEV2, ""), null, "不去！", null, null);
         Log.i(TAG, "lalala..." + SharedPreferencesUtils.getString(HomeActivity.this, ConstantValues.CONTACT_PHONEV2, ""));*/
         // TODO: 2017/5/24 位置变更测试
-        boolean isRunning = ServiceUtils.serviceIsRunning(HomeActivity.this, "ye.droid.jarvis.service.LocationChangeService", false);
+      /*  boolean isRunning = ServiceUtils.serviceIsRunning(HomeActivity.this, "ye.droid.jarvis.service.LocationChangeService", false);
         //返回false代表服务没有运行，那么开启服务
         if (!isRunning) {
             Intent intent = new Intent(this, LocationChangeService.class);
@@ -295,7 +297,7 @@ public class HomeActivity extends AppCompatActivity {
             return;
         }
         Toast.makeText(getApplicationContext(), "位置监听已经运行，无需开启...", Toast.LENGTH_SHORT).show();
-        tv_showinfo.setText("位置监听运行中...");
+        tv_showinfo.setText("位置监听运行中...");*/
     }
 
     /**

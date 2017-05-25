@@ -34,6 +34,16 @@
         <item name="android:layout_marginLeft">10dp</item>
     </style>
 
+    <!--防盗页面服务运行结果显示-->
+    <style name="JBurglarsServiceStatus">
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawableLeft">@drawable/burglars_setup_func_icon1</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+
     <!--防盗设置页面下一步按钮-->
     <style name="JBurglarsSetupButtonNext">
         <item name="android:textStyle">bold</item>

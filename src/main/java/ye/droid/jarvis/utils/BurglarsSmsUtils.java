@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.telephony.SmsManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.service.LocationChangeService;

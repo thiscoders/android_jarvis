@@ -88,7 +88,7 @@ public class LocationChangeService extends Service {
                 BufferedWriter writer = null;
                 try {
                     writer = new BufferedWriter(new FileWriter(locLog, true));
-                    writer.write(dateFormat.format(System.currentTimeMillis()) + "\t\t" + locationBean.toString()+"\r\n");
+                    writer.write(dateFormat.format(System.currentTimeMillis()) + "\t\t" + locationBean.toString() + "\r\n");
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
@@ -100,6 +100,7 @@ public class LocationChangeService extends Service {
                         }
                     }
                 }
+
 
                 Log.i(TAG, "location is ..." + locationBean.toString());
                 String safePhone = SharedPreferencesUtils.getString(getApplicationContext(), ConstantValues.CONTACT_PHONEV2, "");//获取安全联系人的电话号码
