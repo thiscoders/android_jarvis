@@ -11,7 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.service.LocationChangeService;
+import ye.droid.jarvis.service.SmsListenerService;
 import ye.droid.jarvis.utils.ConstantValues;
+import ye.droid.jarvis.utils.ServiceUtils;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 /**
@@ -23,6 +26,11 @@ public class BurglarsResultActivity extends AppCompatActivity {
     private final String TAG = BurglarsResultActivity.class.getSimpleName();
     private TextView tv_safe_phonenum;
     private TextView tv_safe_status;
+
+    private TextView tv_alarm_status;
+    private TextView tv_location_status;
+    private TextView tv_wipedata_status;
+    private TextView tv_lockscreen_status;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +51,11 @@ public class BurglarsResultActivity extends AppCompatActivity {
     private void initUI() {
         tv_safe_phonenum = (TextView) findViewById(R.id.tv_safe_phonenum);
         tv_safe_status = (TextView) findViewById(R.id.tv_safe_status);
+
+        tv_alarm_status = (TextView) findViewById(R.id.tv_alarm_status);
+        tv_location_status = (TextView) findViewById(R.id.tv_location_status);
+        tv_wipedata_status = (TextView) findViewById(R.id.tv_wipedata_status);
+        tv_lockscreen_status = (TextView) findViewById(R.id.tv_lockscreen_status);
     }
 
     private void initData() {
@@ -55,11 +68,27 @@ public class BurglarsResultActivity extends AppCompatActivity {
             return;
         }
         if (!open_secure_flag) {
-            Log.i(TAG, "手机防盗为开启！");
+            Log.i(TAG, "手机防盗未开启！");
             return;
         }
         tv_safe_phonenum.setText("安全联系人：" + contact_name + "(" + contact_phonev2 + ")");
         tv_safe_status.setText("防盗保护状态：已开启");
+
+        //判断对应服务的状态并且进行赋值
+        boolean smsListenerServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SmsListenerService", false);
+        boolean locationChangeServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.LocationChangeService", false);
+
+        if (smsListenerServiceRunning) {
+            tv_alarm_status.setText(getString(R.string.burglars_result_parameter1_negated) + "已开启");
+        } else {
+            tv_alarm_status.setText(getString(R.string.burglars_result_parameter1_negated) + "未开启(点击开启)");
+        }
+        if (locationChangeServiceRunning) {
+            tv_location_status.setText(getString(R.string.burglars_result_parameter2_negated) + "已开启");
+        } else {
+            tv_location_status.setText(getString(R.string.burglars_result_parameter2_negated) + "未开启(点击开启)");
+        }
+
     }
 
     //重新进入导航界面
@@ -84,6 +113,64 @@ public class BurglarsResultActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        //返回上一页动画
         overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+    }
+
+    /*
+     *开启各项服务
+     */
+
+    /**
+     * 启动报警铃声
+     *
+     * @param view
+     */
+    public void openAlarm(View view) {
+        //判断对应服务的状态并且进行赋值
+        boolean smsListenerServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SmsListenerService", false);
+
+        if (!smsListenerServiceRunning) {
+            Intent intent = new Intent(this, SmsListenerService.class);
+            startService(intent);
+            tv_alarm_status.setText(getString(R.string.burglars_result_parameter1_negated) + "已开启");
+        } else {
+            Toast.makeText(this, getString(R.string.burglars_result_parameter1_negated) + "已启动，无需再启动！", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    /**
+     * 启动位置监听
+     *
+     * @param view
+     */
+    public void openLocation(View view) {
+        boolean locationChangeServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.LocationChangeService", false);
+        if (!locationChangeServiceRunning) {
+            Intent intent = new Intent(this, LocationChangeService.class);
+            startService(intent);
+            tv_location_status.setText(getString(R.string.burglars_result_parameter2_negated) + "已开启");
+        } else {
+            Toast.makeText(this, getString(R.string.burglars_result_parameter2_negated) + "已启动，无需再启动！", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * 启动远程销毁数据
+     *
+     * @param view
+     */
+    public void openWipedata(View view) {
+        Toast.makeText(this, getString(R.string.burglars_result_parameter3_negated), Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 启动远程锁屏
+     *
+     * @param view
+     */
+    public void openLockScreen(View view) {
+        Toast.makeText(this, getString(R.string.burglars_result_parameter4_negated), Toast.LENGTH_SHORT).show();
     }
 }

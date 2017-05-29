@@ -19,6 +19,7 @@ import ye.droid.jarvis.beans.UpDateBean;
 import ye.droid.jarvis.utils.AppUpdateUtils;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.DialogFactory;
+import ye.droid.jarvis.utils.ServiceUtils;
 
 public class AboutActivity extends AppCompatActivity {
     private final String TAG = AboutActivity.class.getSimpleName();
@@ -34,7 +35,6 @@ public class AboutActivity extends AppCompatActivity {
         initData(); //初始化数据
     }
 
-    //https://github.com/thiscoders/Android_Jarvis
     private void initUI() {
         tv_splash_version_name = (TextView) findViewById(R.id.tv_about_version_name);
     }
@@ -49,8 +49,14 @@ public class AboutActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 
+    public void testNewFunc(View view) {
+        ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SmsListenerService", true);
+        ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.LocationChangeService", true);
+    }
+
     /**
      * 浏览器中查看代码
+     *
      * @param view
      */
     public void openGithub(View view) {
@@ -64,7 +70,13 @@ public class AboutActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
+    /**
+     * 检查软件更新
+     *
+     * @param view
+     */
     public void checkUpDate(View view) {
+        Toast.makeText(this, "检查更新中，请稍后...", Toast.LENGTH_SHORT).show();
         checkAppUpdate();
     }
 

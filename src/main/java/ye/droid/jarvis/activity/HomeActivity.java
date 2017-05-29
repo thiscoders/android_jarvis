@@ -31,16 +31,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.util.List;
 
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.beans.UpDateBean;
+import ye.droid.jarvis.service.LocationChangeService;
+import ye.droid.jarvis.service.SmsListenerService;
 import ye.droid.jarvis.utils.AppUpdateUtils;
 import ye.droid.jarvis.utils.CommonUtils;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.DialogFactory;
-import ye.droid.jarvis.utils.DisplayUtils;
 import ye.droid.jarvis.utils.MD5Utils;
+import ye.droid.jarvis.utils.ServiceUtils;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 /**
@@ -56,7 +57,6 @@ public class HomeActivity extends AppCompatActivity {
     private Handler handler;
     private int delayMillis = 3000;
 
-    private boolean tv_showinfo_show = false; //false的时候tv_showinfo显示为null
     private String[] mMenuItems = new String[]{"手机防盗", "通信卫士", "软件管理",
             "进程管理", "流量统计", "手机杀毒",
             "缓存清理", "高级工具", "设置中心"};
@@ -90,6 +90,14 @@ public class HomeActivity extends AppCompatActivity {
     private void initUI() {
         tv_showinfo = (TextView) findViewById(R.id.tv_showinfo);
         gv_home = (GridView) findViewById(R.id.gv_home);
+        // 判断Sms卡监听状态，如果监听服务未开启就开启监听服务
+        boolean isRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SmsListenerService", false);
+        if (!isRunning) {
+            Intent intent = new Intent(this, SmsListenerService.class);
+            startService(intent);
+        } else {
+            Log.i(TAG, "短信监听已经在运行中了！");
+        }
     }
 
     private void initData() {
@@ -102,10 +110,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        // TODO: 2017/5/11 为了开发方便，暂时取消输入密码的步骤
                         showPwdDialog();
-                        //startActivity(new Intent(HomeActivity.this, BurglarsResultActivity.class));
-                        //overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
                         return;
                     case 1:
                         break;
@@ -248,12 +253,15 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-     * 显示彩蛋信息
+     * 显示彩蛋
      *
      * @param view
      */
     public void showInfo(View view) {
-        if (!tv_showinfo_show) {
+        tv_showinfo.setText("我只是一个彩蛋！");
+        resetInfo();
+        // TODO: 2017/5/24 屏幕像素测试
+        /* if (!tv_showinfo_show) {
             String disInfo = "";
             int flag = 0;
             List<String> list = DisplayUtils.getDisInfo(this);
@@ -270,66 +278,49 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             tv_showinfo.setText(this.getString(R.string.home_odd_egg));
             tv_showinfo_show = false;
+        }*/
+        //todo 发短信测试
+        /*SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(SharedPreferencesUtils.getString(HomeActivity.this, ConstantValues.CONTACT_PHONEV2, ""), null, "不去！", null, null);
+        Log.i(TAG, "lalala..." + SharedPreferencesUtils.getString(HomeActivity.this, ConstantValues.CONTACT_PHONEV2, ""));*/
+        // TODO: 2017/5/24 位置变更测试
+      /*  boolean isRunning = ServiceUtils.serviceIsRunning(HomeActivity.this, "ye.droid.jarvis.service.LocationChangeService", false);
+        //返回false代表服务没有运行，那么开启服务
+        if (!isRunning) {
+            Intent intent = new Intent(this, LocationChangeService.class);
+            startService(intent);
+            Toast.makeText(getApplicationContext(), "位置监听初始化...", Toast.LENGTH_SHORT).show();
+            return;
         }
-    }
-
-    /**
-     * GridView数据适配器
-     */
-    private class gridAdapter extends BaseAdapter {
-        private ImageView iv_menu_icon;
-        private TextView tv_menu_title;
-
-
-        @Override
-        public int getCount() {
-            return mMenuItems.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return mMenuItems[position];
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view;
-            if (convertView == null) {
-                LayoutInflater inflater = (LayoutInflater) HomeActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.item_home_menu, null);
-            } else {
-                view = convertView;
-            }
-            iv_menu_icon = (ImageView) view.findViewById(R.id.iv_menu_icon);
-            tv_menu_title = (TextView) view.findViewById(R.id.tv_menu_title);
-
-            iv_menu_icon.setBackgroundResource(mMenuIcons[position]);
-            tv_menu_title.setText(mMenuItems[position]);
-
-            return view;
-        }
+        Toast.makeText(getApplicationContext(), "位置监听已经运行，无需开启...", Toast.LENGTH_SHORT).show();
+        tv_showinfo.setText("位置监听运行中...");*/
     }
 
     /**
      * 检查并申请权限
-     * 1.读取外部存储设备
-     * 2.读取电话状态
+     * 1. 读取外部存储设备
+     * 2. 读取电话状态
      * 3. 读取联系人
+     * 4. 发送短信
+     * 5. 读取短信
      */
     private void checkAllPermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{
                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_PHONE_STATE,
-                            Manifest.permission.READ_CONTACTS},
+                            Manifest.permission.READ_CONTACTS,
+                            Manifest.permission.SEND_SMS,
+                            Manifest.permission.READ_SMS,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION},
                     ConstantValues.HOME_ACTIVITY_REQUEST_ALL_PERMISSION_CODE);
         } else {
             Log.i(TAG, "所有所需权限已经授予！");
@@ -398,7 +389,6 @@ public class HomeActivity extends AppCompatActivity {
                                 break;
                             case ConstantValues.NOT_UPDATE:
                                 //软件已经是最新版本
-                                Toast.makeText(HomeActivity.this, upDateBean.getVersionInfo(), Toast.LENGTH_SHORT).show();
                                 tv_showinfo.setText(upDateBean.getVersionInfo());
                                 break;
                             case ConstantValues.ERROR_UPDATE:
@@ -433,6 +423,9 @@ public class HomeActivity extends AppCompatActivity {
         startActivityForResult(intent, ConstantValues.CANCEL_INSTALL_UPDATE);
     }
 
+    /**
+     * 重置菜单信息
+     */
     private void resetInfo() {
         handler.postDelayed(new Runnable() {
             @Override
@@ -441,4 +434,47 @@ public class HomeActivity extends AppCompatActivity {
             }
         }, delayMillis);
     }
+
+    /**
+     * GridView数据适配器
+     */
+    private class gridAdapter extends BaseAdapter {
+        private ImageView iv_menu_icon;
+        private TextView tv_menu_title;
+
+
+        @Override
+        public int getCount() {
+            return mMenuItems.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return mMenuItems[position];
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view;
+            if (convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) HomeActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                view = inflater.inflate(R.layout.item_home_menu, null);
+            } else {
+                view = convertView;
+            }
+            iv_menu_icon = (ImageView) view.findViewById(R.id.iv_menu_icon);
+            tv_menu_title = (TextView) view.findViewById(R.id.tv_menu_title);
+
+            iv_menu_icon.setBackgroundResource(mMenuIcons[position]);
+            tv_menu_title.setText(mMenuItems[position]);
+
+            return view;
+        }
+    }
+
 }

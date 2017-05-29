@@ -39,6 +39,7 @@ public class ConstantValues {
      */
     //  homeActivity请求所有APP所需权限的请求码
     public final static int HOME_ACTIVITY_REQUEST_ALL_PERMISSION_CODE = 20;
+    public final static int BURGLARS4_DEVICE_ADMIN_REQUEST_CODE = 30;
 
     /**
      * 各种activity返回的时候所对应的键
@@ -71,4 +72,13 @@ public class ConstantValues {
     public final static String ERROR_UPDATE = "服务器飞到火星上去了";
 
 
+    public static String SAFE_MESSAGE_ALARM = "##**ALARM**##";
+    public static String SAFE_MESSAGE_LOCATION = "##**LOCATION**##";
+    public static String SAFE_MESSAGE_WIPEDATA = "##**WIPEDATA**##";
+    public static String SAFE_MESSAGE_LOCKSCREEN = "##**LOCKSCREEN**##";
+
+    /**
+     * 广播接受者相关
+     */
+    public static String JEXTRA_ADD_EXPLANATION = "jextra_add_explanation";
 }
