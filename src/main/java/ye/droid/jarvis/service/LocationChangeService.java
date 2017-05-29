@@ -118,7 +118,9 @@ public class LocationChangeService extends Service {
                 lastLocation = locationBean;
 
                 String safePhone = SharedPreferencesUtils.getString(getApplicationContext(), ConstantValues.CONTACT_PHONEV2, "");//获取安全联系人的电话号码
-                BurglarsSmsUtils.sendSms(safePhone, locationBean.toString());
+
+                // TODO: 2017/5/29 为了开发方便，暂时注释发短信功能，项目完成后再开启这个注释
+                //BurglarsSmsUtils.sendSms(safePhone, locationBean.toString());
             }
 
             @Override

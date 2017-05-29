@@ -57,7 +57,6 @@ public class HomeActivity extends AppCompatActivity {
     private Handler handler;
     private int delayMillis = 3000;
 
-    private boolean tv_showinfo_show = false; //false的时候tv_showinfo显示为null
     private String[] mMenuItems = new String[]{"手机防盗", "通信卫士", "软件管理",
             "进程管理", "流量统计", "手机杀毒",
             "缓存清理", "高级工具", "设置中心"};
@@ -111,10 +110,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        // TODO: 2017/5/11 为了开发方便，暂时取消输入密码的步骤
                         showPwdDialog();
-                        //startActivity(new Intent(HomeActivity.this, BurglarsResultActivity.class));
-                        //overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
                         return;
                     case 1:
                         break;
@@ -257,7 +253,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-     * 显示彩蛋信息
+     * 显示彩蛋
      *
      * @param view
      */

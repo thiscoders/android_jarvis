@@ -1,5 +1,8 @@
 package ye.droid.jarvis.activity;
 
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.broadcast.receiver.JDeviceAdminReceiver;
 import ye.droid.jarvis.cvs.SettingItem;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
@@ -19,8 +23,13 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
  */
 
 public class BurglarsSetup4Activity extends AppCompatActivity {
-    private SettingItem st_open_burglars;
     private final String TAG = BurglarsSetup4Activity.class.getSimpleName();
+
+    private SettingItem st_open_burglars;
+    private SettingItem st_device_admin;
+
+    private ComponentName mDeviceAdminSample;
+    private DevicePolicyManager mDevicePolicyManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,19 +42,28 @@ public class BurglarsSetup4Activity extends AppCompatActivity {
 
     private void initUI() {
         st_open_burglars = (SettingItem) findViewById(R.id.st_open_burglars);
+        st_device_admin = (SettingItem) findViewById(R.id.st_device_admin);
     }
-
 
     private void initData() {
         boolean isopen = SharedPreferencesUtils.getBoolean(this, ConstantValues.OPEN_SECURE_FLAG, false);
         st_open_burglars.setCheck(isopen);
+        mDeviceAdminSample = new ComponentName(this, JDeviceAdminReceiver.class);
+        mDevicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+        if (mDevicePolicyManager.isAdminActive(mDeviceAdminSample)) {
+            st_device_admin.setCheck(true);
+        } else {
+            st_device_admin.setCheck(false);
+        }
     }
 
     public void startNextPage(View view) {
         //开启防盗保护才能前往下一页
         boolean isopen = SharedPreferencesUtils.getBoolean(this, ConstantValues.OPEN_SECURE_FLAG, false);
-        if (!isopen) {
-            Toast.makeText(this, "请开启防盗保护！", Toast.LENGTH_SHORT).show();
+        boolean isAdmin = mDevicePolicyManager.isAdminActive(mDeviceAdminSample);
+        //有任何一个是false都不行
+        if (!(isopen && isAdmin)) {
+            Toast.makeText(this, "请开启上述两个选项！", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -84,6 +102,34 @@ public class BurglarsSetup4Activity extends AppCompatActivity {
             SharedPreferencesUtils.putBoolean(this, ConstantValues.OPEN_SECURE_FLAG, false);
         } else {
             SharedPreferencesUtils.putBoolean(this, ConstantValues.OPEN_SECURE_FLAG, true);
+        }
+    }
+
+
+    /**
+     * 激活设备管理器
+     * @param view
+     */
+    public void openDeviceAdmin(View view) {
+        if (mDevicePolicyManager.isAdminActive(mDeviceAdminSample)) {
+            Toast.makeText(this, "管理员权限已经授予！", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mDeviceAdminSample);
+            intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, ConstantValues.JEXTRA_ADD_EXPLANATION);
+            startActivityForResult(intent, ConstantValues.BURGLARS4_DEVICE_ADMIN_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ConstantValues.BURGLARS4_DEVICE_ADMIN_REQUEST_CODE) {
+            if (mDevicePolicyManager.isAdminActive(mDeviceAdminSample)) {
+                st_device_admin.setCheck(true);
+            } else {
+                st_device_admin.setCheck(false);
+            }
         }
     }
 }

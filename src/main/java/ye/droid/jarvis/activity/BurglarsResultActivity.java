@@ -81,12 +81,12 @@ public class BurglarsResultActivity extends AppCompatActivity {
         if (smsListenerServiceRunning) {
             tv_alarm_status.setText(getString(R.string.burglars_result_parameter1_negated) + "已开启");
         } else {
-            tv_alarm_status.setText(getString(R.string.burglars_result_parameter1_negated) + "未开启");
+            tv_alarm_status.setText(getString(R.string.burglars_result_parameter1_negated) + "未开启(点击开启)");
         }
         if (locationChangeServiceRunning) {
             tv_location_status.setText(getString(R.string.burglars_result_parameter2_negated) + "已开启");
         } else {
-            tv_location_status.setText(getString(R.string.burglars_result_parameter2_negated) + "未开启");
+            tv_location_status.setText(getString(R.string.burglars_result_parameter2_negated) + "未开启(点击开启)");
         }
 
     }
@@ -162,7 +162,7 @@ public class BurglarsResultActivity extends AppCompatActivity {
      * @param view
      */
     public void openWipedata(View view) {
-        Toast.makeText(this, getString(R.string.burglars_result_parameter3_negated) + "?", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.burglars_result_parameter3_negated), Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -171,6 +171,6 @@ public class BurglarsResultActivity extends AppCompatActivity {
      * @param view
      */
     public void openLockScreen(View view) {
-        Toast.makeText(this, getString(R.string.burglars_result_parameter4_negated) + "?", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.burglars_result_parameter4_negated), Toast.LENGTH_SHORT).show();
     }
 }

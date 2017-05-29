@@ -41,9 +41,11 @@ public class SmsHandler extends Handler {
         } else if (content.equals(ConstantValues.SAFE_MESSAGE_LOCATION)) {
             BurglarsSmsUtils.sendLocation(this.context); //发送手机位置位置
         } else if (content.equals(ConstantValues.SAFE_MESSAGE_WIPEDATA)) {
-            Toast.makeText(this.context, "清空数据", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.context, "清除数据", Toast.LENGTH_SHORT).show();
+            BurglarsSmsUtils.wipeLocData(this.context);
         } else if (content.equals(ConstantValues.SAFE_MESSAGE_LOCKSCREEN)) {
             Toast.makeText(this.context, "手机锁屏", Toast.LENGTH_SHORT).show();
+            BurglarsSmsUtils.lockDevice(this.context, "abc");
         }
 
         //删除安全短信

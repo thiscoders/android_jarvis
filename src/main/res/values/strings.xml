@@ -53,8 +53,8 @@
     <string name="burglars_result_parameter4">远程锁屏(##**LOCKSCREEN**##）</string>
     <string name="burglars_result_parameter1_negated">SIM卡变更报警：</string>
     <string name="burglars_result_parameter2_negated">GPS追踪：</string>
-    <string name="burglars_result_parameter3_negated">远程数据销毁：</string>
-    <string name="burglars_result_parameter4_negated">远程锁屏：</string>
+    <string name="burglars_result_parameter3_negated">远程数据销毁：已开启</string>
+    <string name="burglars_result_parameter4_negated">远程锁屏：已开启</string>
     <string name="burglars_result_hint">点击上面条目开启相应服务</string>
     <string name="burglars_result_service_status">服务运行状态：</string>
 
@@ -86,4 +86,7 @@
 
     <!--共享参数文件-->
     <string name="SharedPreferences_File1">commonfile</string>
+
+    <string name="sample_device_admin">Jarvis Device Admin</string>
+    <string name="sample_device_admin_description">一键锁屏,销毁数据</string>
 </resources>
