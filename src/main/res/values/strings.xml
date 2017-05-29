@@ -66,6 +66,17 @@
     <string name="burglars_btn_setup_cancel">取消</string>
     <string name="burglars_btn_setup_complete">完成</string>
 
+    <!--缓存清理-->
+    <string name="cache_title">缓存清理</string>
+
+    <!--高级工具-->
+    <string name="advance_title">高级工具</string>
+    <string name="attribution_lookup">归属地查询</string>
+    <string name="backup_sms">短信备份</string>
+    <string name="phonenum_lookup">常用号码查询</string>
+    <string name="app_lock">程序锁</string>
+    <string name="cpu_info">CPU信息</string>
+    <string name="net_speed">网络测速</string>
 
     <!--设置中心-->
     <string name="setting_title">设置中心</string>

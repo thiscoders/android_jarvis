@@ -13,14 +13,14 @@
             style="@style/JTitleStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="缓存清理" />
+            android:text="@string/cache_title" />
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="啦啦啦啦啦啦"
+        android:text="缓存清理界面"
         android:textSize="30dp"
         android:textStyle="bold" />
 

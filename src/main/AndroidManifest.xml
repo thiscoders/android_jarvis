@@ -22,9 +22,14 @@
         <activity android:name=".activity.BurglarsSetup3Activity" />
         <activity android:name=".activity.ContactListActivity" />
         <activity android:name=".activity.BurglarsSetup4Activity" />
-        <activity android:name=".activity.AboutActivity" /> <!--关于软件界面-->
+
         <!--配置缓存清理页面-->
         <activity android:name=".activity.CacheClearActivity" />
+
+        <!--高级工具-->
+        <activity android:name=".activity.AdvanceToolsActivity"/>
+        <!--关于软件界面-->
+        <activity android:name=".activity.AboutActivity" />
         <activity android:name=".activity.TestActivity" />
 
         <!--Android N 申请访问存储空间-->

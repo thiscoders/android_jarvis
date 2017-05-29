@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--标题栏-->
+    <TextView
+        style="@style/JTitleStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/advance_title" />
+
+    <TextView
+        style="@style/JAdvanceToolsItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="cpuinfo"
+        android:text="@string/attribution_lookup" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent" />
+
+    <TextView
+        style="@style/JAdvanceToolsItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="cpuinfo"
+        android:text="@string/backup_sms" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent" />
+
+    <TextView
+        style="@style/JAdvanceToolsItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="cpuinfo"
+        android:text="@string/phonenum_lookup" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent" />
+
+    <TextView
+        style="@style/JAdvanceToolsItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="cpuinfo"
+        android:text="@string/app_lock" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent" />
+
+    <TextView
+        style="@style/JAdvanceToolsItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="cpuinfo"
+        android:text="@string/cpu_info" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent" />
+
+    <TextView
+        style="@style/JAdvanceToolsItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="cpuinfo"
+        android:text="@string/net_speed" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent" />
+
+</LinearLayout>

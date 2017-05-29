@@ -50,4 +50,16 @@
         <item name="android:textSize">15dp</item>
         <item name="android:background">@drawable/button_next_selector</item>
     </style>
+
+    <!--高级工具条目-->
+    <style name="JAdvanceToolsItem">
+        <item name="android:drawableLeft">@drawable/advance_tools_item_icon</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:drawablePadding">15dp</item>
+        <item name="android:background">@drawable/advance_tools_item_selector</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingTop">13dp</item>
+        <item name="android:paddingBottom">13dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
 </resources>

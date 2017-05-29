@@ -110,7 +110,10 @@ public class HomeActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        showPwdDialog();
+                        // showPwdDialog();
+                        // TODO: 2017/5/11 为了开发方便，暂时取消输入密码的步骤
+                        startActivity(new Intent(HomeActivity.this, BurglarsResultActivity.class));
+                        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
                         return;
                     case 1:
                         break;
@@ -127,6 +130,7 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(funcIntent);
                         break;
                     case 7:
+                        startActivity(new Intent(HomeActivity.this, AdvanceToolsActivity.class));
                         break;
                     case 8:
                         funcIntent = new Intent(HomeActivity.this, SettingActivity.class);
