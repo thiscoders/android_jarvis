@@ -48,6 +48,8 @@ public class ConstantValues {
     public final static int BURGLARSSETUP3_ACTIVITY_SELECT_CONTACTS_REQUEST_CODE = 100;
     //CONTACTLIST_ACTIVITY返回BURGLARSSETUP3_ACTIVITY的意图结果码
     public final static int CONTACTLIST_ACTIVITY_SELECT_CONTACTS_RESULT_CODE = 101;
+    //归属地查询界面打开本地联系人
+    public final static int ATTRLOOKUP_ACTIVITY_SELECT_CONTACTS_REQUEST_CODE = 102;
     //CONTACTLIST_ACTIVITY返回BURGLARSSETUP3_ACTIVITY的联系人姓名KEY
     public final static String CONTACTLIST_ACTIVITY_CONTACTS_NAME_FLAG = "contactlist_activity_select_contacts_name_result_flag";
     //CONTACTLIST_ACTIVITY返回BURGLARSSETUP3_ACTIVITY的联系人手机号码KEY
