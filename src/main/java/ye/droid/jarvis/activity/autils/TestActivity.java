@@ -1,4 +1,4 @@
-package ye.droid.jarvis.activity;
+package ye.droid.jarvis.activity.autils;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import ye.droid.jarvis.R;
-import ye.droid.jarvis.activity.ContactListActivity;
+import ye.droid.jarvis.activity.autils.ContactListActivity;
 import ye.droid.jarvis.dbdao.PhoneNumAddressDao;
 import ye.droid.jarvis.utils.ConstantValues;
 

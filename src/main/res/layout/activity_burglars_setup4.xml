@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <ye.droid.jarvis.cvs.SettingItem
+        <ye.droid.jarvis.cvs.ChangeItem
             android:id="@+id/st_open_burglars"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
             app:subtitle_positive_content="手机防盗已开启"
             app:title_content="防盗开启状态" />
 
-        <ye.droid.jarvis.cvs.SettingItem
+        <ye.droid.jarvis.cvs.ChangeItem
             android:id="@+id/st_device_admin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

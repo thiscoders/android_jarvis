@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import ye.droid.jarvis.R;
-import ye.droid.jarvis.activity.ContactListActivity;
+import ye.droid.jarvis.activity.autils.ContactListActivity;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 

@@ -3,22 +3,19 @@ package ye.droid.jarvis.cvs;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import ye.droid.jarvis.R;
-import ye.droid.jarvis.utils.ConstantValues;
-import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 /**
  * Created by ye on 2017/5/9.
  */
 
-public class SettingItem extends RelativeLayout {
-    private final String TAG = SettingItem.class.getSimpleName();
+public class ChangeItem extends RelativeLayout {
+    private final String TAG = ChangeItem.class.getSimpleName();
     private final String NAMESPACE = "http://schemas.android.com/apk/res-auto";
 
     private RelativeLayout rl_setting_item;
@@ -30,17 +27,17 @@ public class SettingItem extends RelativeLayout {
     private String subtitle_positive_content;
     private String subtitle_negative_content;
 
-    public SettingItem(Context context) {
+    public ChangeItem(Context context) {
         this(context, null);
     }
 
-    public SettingItem(Context context, AttributeSet attrs) {
+    public ChangeItem(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SettingItem(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ChangeItem(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        View.inflate(getContext(), R.layout.item_setting, this);
+        View.inflate(getContext(), R.layout.item_change, this);
         initUI(); //寻找控件
         initData(attrs); //初始化控件
         setUIText(); //设置控件上显示的提示文字

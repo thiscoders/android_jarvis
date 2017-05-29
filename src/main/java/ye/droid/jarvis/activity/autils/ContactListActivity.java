@@ -1,7 +1,6 @@
-package ye.droid.jarvis.activity;
+package ye.droid.jarvis.activity.autils;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -10,16 +9,11 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -180,7 +174,8 @@ public class ContactListActivity extends AppCompatActivity {
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
             pb_get_contacts.setVisibility(View.INVISIBLE);
-            lv_contact_list.setAdapter(new ContactAdapter(ContactListActivity.this, arrayList));
+            ContactAdapter adapter = new ContactAdapter(ContactListActivity.this, arrayList);
+            lv_contact_list.setAdapter(adapter);
         }
 
         @Override

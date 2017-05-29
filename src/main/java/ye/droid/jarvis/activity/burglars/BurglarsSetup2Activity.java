@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ye.droid.jarvis.R;
-import ye.droid.jarvis.cvs.SettingItem;
+import ye.droid.jarvis.cvs.ChangeItem;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
@@ -24,7 +24,7 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 public class BurglarsSetup2Activity extends AppCompatActivity {
     private final String TAG = BurglarsSetup2Activity.class.getSimpleName();
-    private SettingItem st_bind_sim;
+    private ChangeItem st_bind_sim;
 
     private TextView tv_sim_number;
 
@@ -37,7 +37,7 @@ public class BurglarsSetup2Activity extends AppCompatActivity {
     }
 
     private void initUI() {
-        st_bind_sim = (SettingItem) findViewById(R.id.st_bind_sim);
+        st_bind_sim = (ChangeItem) findViewById(R.id.st_bind_sim);
         tv_sim_number = (TextView) findViewById(R.id.tv_sim_number);
     }
 

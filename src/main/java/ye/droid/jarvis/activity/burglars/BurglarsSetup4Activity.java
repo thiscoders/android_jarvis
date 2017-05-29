@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.broadcast.receiver.JDeviceAdminReceiver;
-import ye.droid.jarvis.cvs.SettingItem;
+import ye.droid.jarvis.cvs.ChangeItem;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
@@ -24,8 +24,8 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
 public class BurglarsSetup4Activity extends AppCompatActivity {
     private final String TAG = BurglarsSetup4Activity.class.getSimpleName();
 
-    private SettingItem st_open_burglars;
-    private SettingItem st_device_admin;
+    private ChangeItem st_open_burglars;
+    private ChangeItem st_device_admin;
 
     private ComponentName mDeviceAdminSample;
     private DevicePolicyManager mDevicePolicyManager;
@@ -40,8 +40,8 @@ public class BurglarsSetup4Activity extends AppCompatActivity {
     }
 
     private void initUI() {
-        st_open_burglars = (SettingItem) findViewById(R.id.st_open_burglars);
-        st_device_admin = (SettingItem) findViewById(R.id.st_device_admin);
+        st_open_burglars = (ChangeItem) findViewById(R.id.st_open_burglars);
+        st_device_admin = (ChangeItem) findViewById(R.id.st_device_admin);
     }
 
     private void initData() {

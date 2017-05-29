@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import ye.droid.jarvis.R;
-import ye.droid.jarvis.cvs.SettingItem;
+import ye.droid.jarvis.cvs.ChangeItem;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
@@ -16,8 +16,8 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
  */
 
 public class SettingActivity extends AppCompatActivity {
-    private SettingItem st_auto_update;
-    private SettingItem st_about_app;
+    private ChangeItem st_auto_update;
+    private ChangeItem st_about_app;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,8 +28,8 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-        st_auto_update = (SettingItem) findViewById(R.id.st_auto_update);
-        st_about_app = (SettingItem) findViewById(R.id.st_about_app);
+        st_auto_update = (ChangeItem) findViewById(R.id.st_auto_update);
+        st_about_app = (ChangeItem) findViewById(R.id.st_about_app);
     }
 
     private void initData() {

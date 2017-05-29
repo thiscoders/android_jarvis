@@ -33,7 +33,7 @@
             android:name=".activity.burglars.BurglarsSetup3Activity"
             android:label="@string/burglars_setup3_title" />
         <activity
-            android:name=".activity.ContactListActivity"
+            android:name=".activity.autils.ContactListActivity"
             android:label="@string/burglars_setup3_contact_list" />
         <activity
             android:name=".activity.burglars.BurglarsSetup4Activity"
@@ -56,7 +56,7 @@
         <activity
             android:name=".activity.setting.AboutActivity"
             android:label="@string/aboutapp_title" />
-        <activity android:name=".activity.TestActivity" />
+        <activity android:name=".activity.autils.TestActivity" />
 
         <!--Android N 申请访问存储空间-->
         <provider
