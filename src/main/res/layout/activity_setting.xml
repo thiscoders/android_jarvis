@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <TextView
-        style="@style/JTitleStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/setting_title" />
+    <!--
+        <TextView
+            style="@style/JTitleStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_title" />-->
 
     <ye.droid.jarvis.cvs.SettingItem
         android:id="@+id/st_auto_update"

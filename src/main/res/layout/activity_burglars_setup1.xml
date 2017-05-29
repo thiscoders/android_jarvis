@@ -7,12 +7,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
+<!--
         <TextView
             style="@style/JTitleStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/burglars_setup1_title" />
+            android:text="@string/burglars_setup1_title" />-->
 
         <TextView
             style="@style/JBurglarsSetupSubtitle"

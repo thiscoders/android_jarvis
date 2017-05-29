@@ -5,11 +5,11 @@
     android:orientation="vertical">
 
     <!--标题栏-->
-    <TextView
+   <!-- <TextView
         style="@style/JTitleStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/advance_title" />
+        android:text="@string/advance_title" />-->
 
     <TextView
         style="@style/JAdvanceToolsItem"
