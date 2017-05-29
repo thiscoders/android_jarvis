@@ -15,7 +15,7 @@
         style="@style/JAdvanceToolsItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="cpuinfo"
+        android:onClick="attributionLookup"
         android:text="@string/attribution_lookup" />
 
     <View
@@ -27,7 +27,7 @@
         style="@style/JAdvanceToolsItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="cpuinfo"
+        android:onClick="backupSms"
         android:text="@string/backup_sms" />
 
     <View
@@ -39,7 +39,7 @@
         style="@style/JAdvanceToolsItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="cpuinfo"
+        android:onClick="phonenumLookup"
         android:text="@string/phonenum_lookup" />
 
     <View
@@ -51,7 +51,7 @@
         style="@style/JAdvanceToolsItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="cpuinfo"
+        android:onClick="appLock"
         android:text="@string/app_lock" />
 
     <View
@@ -75,7 +75,7 @@
         style="@style/JAdvanceToolsItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="cpuinfo"
+        android:onClick="netSpeed"
         android:text="@string/net_speed" />
 
     <View

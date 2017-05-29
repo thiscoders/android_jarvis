@@ -33,8 +33,10 @@ import android.widget.Toast;
 import java.io.File;
 
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.activity.advancetools.AdvanceToolsActivity;
+import ye.droid.jarvis.activity.burglars.BurglarsResultActivity;
+import ye.droid.jarvis.activity.setting.SettingActivity;
 import ye.droid.jarvis.beans.UpDateBean;
-import ye.droid.jarvis.service.LocationChangeService;
 import ye.droid.jarvis.service.SmsListenerService;
 import ye.droid.jarvis.utils.AppUpdateUtils;
 import ye.droid.jarvis.utils.CommonUtils;

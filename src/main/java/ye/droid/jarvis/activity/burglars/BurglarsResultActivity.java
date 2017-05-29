@@ -1,4 +1,4 @@
-package ye.droid.jarvis.activity;
+package ye.droid.jarvis.activity.burglars;
 
 import android.content.Intent;
 import android.os.Bundle;

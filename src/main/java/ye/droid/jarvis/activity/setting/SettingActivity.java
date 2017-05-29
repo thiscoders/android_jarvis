@@ -1,11 +1,10 @@
-package ye.droid.jarvis.activity;
+package ye.droid.jarvis.activity.setting;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.cvs.SettingItem;

@@ -15,21 +15,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.BurglarsResultActivity" />
-        <activity android:name=".activity.BurglarsSetup1Activity" />
-        <activity android:name=".activity.BurglarsSetup2Activity" />
-        <activity android:name=".activity.BurglarsSetup3Activity" />
+        <activity android:name=".activity.setting.SettingActivity" />
+        <activity android:name=".activity.burglars.BurglarsResultActivity" />
+        <activity android:name=".activity.burglars.BurglarsSetup1Activity" />
+        <activity android:name=".activity.burglars.BurglarsSetup2Activity" />
+        <activity android:name=".activity.burglars.BurglarsSetup3Activity" />
         <activity android:name=".activity.ContactListActivity" />
-        <activity android:name=".activity.BurglarsSetup4Activity" />
+        <activity android:name=".activity.burglars.BurglarsSetup4Activity" />
 
         <!--配置缓存清理页面-->
         <activity android:name=".activity.CacheClearActivity" />
 
         <!--高级工具-->
-        <activity android:name=".activity.AdvanceToolsActivity"/>
+        <activity android:name=".activity.advancetools.AdvanceToolsActivity"/>
         <!--关于软件界面-->
-        <activity android:name=".activity.AboutActivity" />
+        <activity android:name=".activity.setting.AboutActivity" />
         <activity android:name=".activity.TestActivity" />
 
         <!--Android N 申请访问存储空间-->

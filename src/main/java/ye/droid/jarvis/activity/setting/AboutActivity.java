@@ -1,4 +1,4 @@
-package ye.droid.jarvis.activity;
+package ye.droid.jarvis.activity.setting;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
