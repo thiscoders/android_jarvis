@@ -24,8 +24,8 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
 public class BurglarsSetup4Activity extends AppCompatActivity {
     private final String TAG = BurglarsSetup4Activity.class.getSimpleName();
 
-    private ChangeItem st_open_burglars;
-    private ChangeItem st_device_admin;
+    private ChangeItem ct_open_burglars;
+    private ChangeItem ct_device_admin;
 
     private ComponentName mDeviceAdminSample;
     private DevicePolicyManager mDevicePolicyManager;
@@ -40,19 +40,19 @@ public class BurglarsSetup4Activity extends AppCompatActivity {
     }
 
     private void initUI() {
-        st_open_burglars = (ChangeItem) findViewById(R.id.st_open_burglars);
-        st_device_admin = (ChangeItem) findViewById(R.id.st_device_admin);
+        ct_open_burglars = (ChangeItem) findViewById(R.id.ct_open_burglars);
+        ct_device_admin = (ChangeItem) findViewById(R.id.ct_device_admin);
     }
 
     private void initData() {
         boolean isopen = SharedPreferencesUtils.getBoolean(this, ConstantValues.OPEN_SECURE_FLAG, false);
-        st_open_burglars.setCheck(isopen);
+        ct_open_burglars.setCheck(isopen);
         mDeviceAdminSample = new ComponentName(this, JDeviceAdminReceiver.class);
         mDevicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
         if (mDevicePolicyManager.isAdminActive(mDeviceAdminSample)) {
-            st_device_admin.setCheck(true);
+            ct_device_admin.setCheck(true);
         } else {
-            st_device_admin.setCheck(false);
+            ct_device_admin.setCheck(false);
         }
     }
 
@@ -95,8 +95,8 @@ public class BurglarsSetup4Activity extends AppCompatActivity {
      * @param view
      */
     public void openBurglars(View view) {
-        boolean ischeck = st_open_burglars.isCheck();
-        st_open_burglars.setCheck(!ischeck);
+        boolean ischeck = ct_open_burglars.isCheck();
+        ct_open_burglars.setCheck(!ischeck);
         if (ischeck) {
             SharedPreferencesUtils.putBoolean(this, ConstantValues.OPEN_SECURE_FLAG, false);
         } else {
@@ -125,9 +125,9 @@ public class BurglarsSetup4Activity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ConstantValues.BURGLARS4_DEVICE_ADMIN_REQUEST_CODE) {
             if (mDevicePolicyManager.isAdminActive(mDeviceAdminSample)) {
-                st_device_admin.setCheck(true);
+                ct_device_admin.setCheck(true);
             } else {
-                st_device_admin.setCheck(false);
+                ct_device_admin.setCheck(false);
             }
         }
     }

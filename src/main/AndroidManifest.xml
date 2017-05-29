@@ -10,8 +10,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".activity.HomeActivity"
-            android:label="@string/home_title"><!--将主界面设置为HOME，去掉Splash页面-->
+            android:name=".activity.HomeActivity"><!--将主界面设置为HOME，去掉Splash页面-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

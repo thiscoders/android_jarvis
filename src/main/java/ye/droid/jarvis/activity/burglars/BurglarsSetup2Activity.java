@@ -24,7 +24,7 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 public class BurglarsSetup2Activity extends AppCompatActivity {
     private final String TAG = BurglarsSetup2Activity.class.getSimpleName();
-    private ChangeItem st_bind_sim;
+    private ChangeItem ct_bind_sim;
 
     private TextView tv_sim_number;
 
@@ -37,7 +37,7 @@ public class BurglarsSetup2Activity extends AppCompatActivity {
     }
 
     private void initUI() {
-        st_bind_sim = (ChangeItem) findViewById(R.id.st_bind_sim);
+        ct_bind_sim = (ChangeItem) findViewById(R.id.ct_bind_sim);
         tv_sim_number = (TextView) findViewById(R.id.tv_sim_number);
     }
 
@@ -45,9 +45,9 @@ public class BurglarsSetup2Activity extends AppCompatActivity {
         //回显数据
         String sim_number = SharedPreferencesUtils.getString(this, ConstantValues.SIM_NUMBER, "");
         if (TextUtils.isEmpty(sim_number)) { //Sim序列号未null，SIM卡未绑定
-            st_bind_sim.setCheck(false);
+            ct_bind_sim.setCheck(false);
         } else {
-            st_bind_sim.setCheck(true);
+            ct_bind_sim.setCheck(true);
             tv_sim_number.setText("你的SIM卡序列号是：" + sim_number);
         }
     }
@@ -87,7 +87,7 @@ public class BurglarsSetup2Activity extends AppCompatActivity {
      * @param view
      */
     public void bindSIM(View view) {
-        boolean check = st_bind_sim.isCheck(); //false，未绑定
+        boolean check = ct_bind_sim.isCheck(); //false，未绑定
         if (!check) {
             //获取SIM卡序列号
             TelephonyManager manager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -95,12 +95,12 @@ public class BurglarsSetup2Activity extends AppCompatActivity {
             Toast.makeText(this, simSerialNumber, Toast.LENGTH_SHORT).show();
             //保存SIM序列号
             SharedPreferencesUtils.putString(this, ConstantValues.SIM_NUMBER, simSerialNumber);
-            st_bind_sim.setCheck(true);
+            ct_bind_sim.setCheck(true);
             tv_sim_number.setText("你的SIM卡序列号是：" + simSerialNumber);
         } else {
             //删除SIM卡序列号
             SharedPreferencesUtils.removeAttr(this, ConstantValues.SIM_NUMBER);
-            st_bind_sim.setCheck(false);
+            ct_bind_sim.setCheck(false);
             tv_sim_number.setText("");
         }
 

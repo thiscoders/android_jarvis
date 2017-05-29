@@ -35,6 +35,7 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
 public class LocationChangeService extends Service {
     private String TAG = LocationChangeService.class.getSimpleName();
 
+    //与变化之前的位置坐比较，如果经纬度变化小于某一个值就不进行短信的发送
     private LocationBean lastLocation = new LocationBean(0, 0, 0);
 
     @Nullable
@@ -53,6 +54,7 @@ public class LocationChangeService extends Service {
         final String best = locationManager.getBestProvider(criteria, true);
 
         // TODO: 2017/5/26 将位置信息保存到sdcard的日志中
+        //创建日志文件
         final File locLog = new File("/sdcard/Jarvis/Log/location.log");
         File dir = new File("/sdcard/Jarvis/Log");
         if (!dir.exists()) {
@@ -65,10 +67,10 @@ public class LocationChangeService extends Service {
                 e.printStackTrace();
             }
         }
-
+        //日志文件创建完成
         //yyyy-MM-dd HH:mm:ss E 年月日 时分秒 星期
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         //神奇的代码
         // TODO: 2017/5/26 弄懂这个注解
@@ -86,23 +88,7 @@ public class LocationChangeService extends Service {
                 locationBean.setLatitude(latitude);
                 locationBean.setAltitude(altitude);
 
-                //记录位置信息
-                BufferedWriter writer = null;
-                try {
-                    writer = new BufferedWriter(new FileWriter(locLog, true));
-                    writer.write(dateFormat.format(System.currentTimeMillis()) + "\t\t" + locationBean.toString() + "\r\n");
-                    Log.i(TAG, "location is ..." + locationBean.toString());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (writer != null) {
-                        try {
-                            writer.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
+                Log.i(TAG, "location is ..." + locationBean.toString());
 
                 //精确度大概是20m（0.0005的经纬度），否则每一次微小的运动都会发送位置短信,有任何一个返回false就发送短信
                 boolean isLongitude = (Math.abs(location.getLongitude() - lastLocation.getLongitude()) < 0.0005);
@@ -118,6 +104,24 @@ public class LocationChangeService extends Service {
 
                 String safePhone = SharedPreferencesUtils.getString(getApplicationContext(), ConstantValues.CONTACT_PHONEV2, "");//获取安全联系人的电话号码
                 Toast.makeText(getApplicationContext(), "短信发送 ..." + locationBean.toString(), Toast.LENGTH_SHORT).show();
+
+                //记录位置信息
+                BufferedWriter writer = null;
+                try {
+                    writer = new BufferedWriter(new FileWriter(locLog, true));
+                    writer.write(dateFormat.format(System.currentTimeMillis()) + "\t" + safePhone + "\t" + locationBean.toString() + "\r\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (writer != null) {
+                        try {
+                            writer.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                //位置信息记录完毕
 
                 // TODO: 2017/5/29 为了开发方便，暂时注释发短信功能，项目完成后再开启这个注释
                 //BurglarsSmsUtils.sendSms(safePhone, locationBean.toString());

@@ -16,8 +16,8 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
  */
 
 public class SettingActivity extends AppCompatActivity {
-    private ChangeItem st_auto_update;
-    private ChangeItem st_about_app;
+    private ChangeItem ct_auto_update;
+    private ChangeItem ct_about_app;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,16 +28,16 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-        st_auto_update = (ChangeItem) findViewById(R.id.st_auto_update);
-        st_about_app = (ChangeItem) findViewById(R.id.st_about_app);
+        ct_auto_update = (ChangeItem) findViewById(R.id.ct_auto_update);
+        ct_about_app = (ChangeItem) findViewById(R.id.ct_about_app);
     }
 
     private void initData() {
         //1.还原自动更新状态
         boolean isUpdate = SharedPreferencesUtils.getBoolean(this, ConstantValues.AUTO_UPDATE, true);//自动更新默认开启
-        st_auto_update.setCheck(isUpdate);
+        ct_auto_update.setCheck(isUpdate);
         //2.隐藏关于软件控件的switch
-        st_about_app.setSwitchVisible(false);
+        ct_about_app.setSwitchVisible(false);
     }
 
     /**
@@ -48,7 +48,7 @@ public class SettingActivity extends AppCompatActivity {
     public void setAutoUpdate(View view) {
         boolean isUpdate = SharedPreferencesUtils.getBoolean(this, ConstantValues.AUTO_UPDATE, true); //自动更新默认开启
         SharedPreferencesUtils.putBoolean(this, ConstantValues.AUTO_UPDATE, !isUpdate);
-        st_auto_update.setCheck(!isUpdate);
+        ct_auto_update.setCheck(!isUpdate);
     }
 
     /**

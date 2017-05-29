@@ -12,7 +12,7 @@
             android:text="@string/setting_title" />-->
 
     <ye.droid.jarvis.cvs.ChangeItem
-        android:id="@+id/st_auto_update"
+        android:id="@+id/ct_auto_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="setAutoUpdate"
@@ -21,7 +21,7 @@
         app:title_content="自动更新" />
 
     <ye.droid.jarvis.cvs.ChangeItem
-        android:id="@+id/st_about_app"
+        android:id="@+id/ct_about_app"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="showAboutInfo"

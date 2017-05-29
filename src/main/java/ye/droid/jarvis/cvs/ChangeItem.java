@@ -57,7 +57,7 @@ public class ChangeItem extends RelativeLayout {
     }
 
     private void setUIText() {
-    //    Log.i(TAG, "..." + title_content + "---" + subtitle_positive_content + "---" + subtitle_negative_content);
+        //    Log.i(TAG, "..." + title_content + "---" + subtitle_positive_content + "---" + subtitle_negative_content);
         tv_item_title.setText(title_content);
         tv_item_subtitle.setText(subtitle_positive_content);
     }

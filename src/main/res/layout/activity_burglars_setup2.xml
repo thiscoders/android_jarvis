@@ -28,7 +28,7 @@
             android:text="@string/burglars_setup2_content" />
 
         <ye.droid.jarvis.cvs.ChangeItem
-            android:id="@+id/st_bind_sim"
+            android:id="@+id/ct_bind_sim"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="bindSIM"
