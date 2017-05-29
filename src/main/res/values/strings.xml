@@ -72,6 +72,11 @@
     <!--高级工具-->
     <string name="advance_title">高级工具</string>
     <string name="attribution_lookup">归属地查询</string>
+    <string name="attribution_lookup_hint">请输入电话号码</string>
+    <string name="attribution_lookup_resule">归属地显示结果：</string>
+    <string name="attribution_lookup_btn_choise">选择</string>
+    <string name="attribution_lookup_btn_query">查询</string>
+
     <string name="backup_sms">短信备份</string>
     <string name="phonenum_lookup">常用号码查询</string>
     <string name="app_lock">程序锁</string>

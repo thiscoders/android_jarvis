@@ -28,6 +28,8 @@
 
         <!--高级工具-->
         <activity android:name=".activity.advancetools.AdvanceToolsActivity"/>
+        <activity android:name=".activity.advancetools.AttrLookupActivity"/>
+
         <!--关于软件界面-->
         <activity android:name=".activity.setting.AboutActivity" />
         <activity android:name=".activity.TestActivity" />

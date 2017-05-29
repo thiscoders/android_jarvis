@@ -1,5 +1,6 @@
 package ye.droid.jarvis.activity.advancetools;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,7 @@ public class AdvanceToolsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+        preAnim();
     }
 
     /**
@@ -31,7 +32,8 @@ public class AdvanceToolsActivity extends AppCompatActivity {
      * @param view
      */
     public void attributionLookup(View view) {
-
+        startActivity(new Intent(this, AttrLookupActivity.class));
+        nextAnim();
     }
 
     /**
@@ -79,6 +81,15 @@ public class AdvanceToolsActivity extends AppCompatActivity {
      */
     public void netSpeed(View view) {
 
+    }
+
+
+    private void nextAnim() {
+        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
+    }
+
+    private void preAnim() {
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 
 }

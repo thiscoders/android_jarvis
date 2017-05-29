@@ -91,6 +91,7 @@ public class LocationChangeService extends Service {
                 try {
                     writer = new BufferedWriter(new FileWriter(locLog, true));
                     writer.write(dateFormat.format(System.currentTimeMillis()) + "\t\t" + locationBean.toString() + "\r\n");
+                    Log.i(TAG, "location is ..." + locationBean.toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
@@ -102,8 +103,6 @@ public class LocationChangeService extends Service {
                         }
                     }
                 }
-                Toast.makeText(getApplicationContext(), "location is ..." + locationBean.toString(), Toast.LENGTH_SHORT).show();
-                Log.i(TAG, "location is ..." + locationBean.toString());
 
                 //精确度大概是20m（0.0005的经纬度），否则每一次微小的运动都会发送位置短信,有任何一个返回false就发送短信
                 boolean isLongitude = (Math.abs(location.getLongitude() - lastLocation.getLongitude()) < 0.0005);
@@ -118,6 +117,7 @@ public class LocationChangeService extends Service {
                 lastLocation = locationBean;
 
                 String safePhone = SharedPreferencesUtils.getString(getApplicationContext(), ConstantValues.CONTACT_PHONEV2, "");//获取安全联系人的电话号码
+                Toast.makeText(getApplicationContext(), "短信发送 ..." + locationBean.toString(), Toast.LENGTH_SHORT).show();
 
                 // TODO: 2017/5/29 为了开发方便，暂时注释发短信功能，项目完成后再开启这个注释
                 //BurglarsSmsUtils.sendSms(safePhone, locationBean.toString());

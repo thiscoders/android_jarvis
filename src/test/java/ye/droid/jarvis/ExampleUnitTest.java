@@ -73,4 +73,26 @@ public class ExampleUnitTest {
         }
         System.out.println(phone);
     }
+
+
+    /**
+     * 电话号码正则
+     */
+    @Test
+    public void testPhoneNumRegex() {
+        String regex = "[0-9]*";
+        String phone = "1320501";
+        boolean ismatch = Pattern.matches(regex, phone);
+        System.out.println(ismatch);
+    }
+
+
+    /**
+     * 截取号码
+     */
+    @Test
+    public void subString1Test() {
+        String phone = "01234567891";
+        System.out.println(phone.substring(0,7));
+    }
 }
