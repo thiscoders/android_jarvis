@@ -99,7 +99,6 @@ public class ChangeItem extends RelativeLayout {
 
     public void setColor(int color) {
         tv_item_subtitle.setTextColor(color);
-//        tv_item_subtitle.setBackgroundColor(color);
     }
 
     public int getColor() {

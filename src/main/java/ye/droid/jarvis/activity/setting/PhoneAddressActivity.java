@@ -16,7 +16,9 @@ import ye.droid.jarvis.cvs.ChangeItem;
 import ye.droid.jarvis.dbdao.PhoneNumAddressDao;
 import ye.droid.jarvis.service.SuspendFrameService;
 import ye.droid.jarvis.utils.ColorPickerDialog;
+import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.ServiceUtils;
+import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 /**
  * Created by ye on 2017/5/30.
@@ -65,6 +67,10 @@ public class PhoneAddressActivity extends AppCompatActivity {
         //判断服务是否运行，并且为ct_suspend_visible赋值
         boolean isRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SuspendFrameService", false);
         ct_suspend_visible.setCheck(isRunning);
+        int color = SharedPreferencesUtils.getInteger(getApplicationContext(), ConstantValues.TOAST_PHONE_ADDRESS, 0);
+        if (color != 0) {
+            ct_suspend_color.setColor(color);
+        }
     }
 
     //是否显示悬浮框
@@ -95,6 +101,7 @@ public class PhoneAddressActivity extends AppCompatActivity {
             @Override
             public void colorChanged(int color) {
                 ct_suspend_color.setColor(color);
+                SharedPreferencesUtils.putInteger(PhoneAddressActivity.this, ConstantValues.TOAST_PHONE_ADDRESS, color);
             }
         });
         colorPickerDialog.show();

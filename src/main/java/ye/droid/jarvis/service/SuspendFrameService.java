@@ -20,6 +20,8 @@ import java.util.List;
 
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.dbdao.PhoneNumAddressDao;
+import ye.droid.jarvis.utils.ConstantValues;
+import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 /**
  * Created by ye on 2017/5/30.
@@ -97,7 +99,7 @@ public class SuspendFrameService extends Service {
         Log.i(TAG, "服务关闭...");
     }
 
-
+    //自定义吐司并且显示
     private void showToast(final String incomingNumber) {
         WindowManager.LayoutParams layoutParams = mLayoutParams;
         layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -107,10 +109,16 @@ public class SuspendFrameService extends Service {
         layoutParams.format = PixelFormat.TRANSLUCENT;
         layoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
         layoutParams.setTitle("Toast");
-        layoutParams.gravity = Gravity.LEFT + Gravity.TOP;
+        //   layoutParams.gravity = Gravity.CENTER + Gravity.BOTTOM; //默认显示位置
 
         mToastView = View.inflate(this, R.layout.toast_phone_address, null);
         tv_phone_address = (TextView) mToastView.findViewById(R.id.tv_phone_address);
+
+        int color = SharedPreferencesUtils.getInteger(getApplicationContext(), ConstantValues.TOAST_PHONE_ADDRESS, 0);
+        if (color != 0) {
+            tv_phone_address.setTextColor(color);
+        }
+
 
         new Thread() {
             @Override

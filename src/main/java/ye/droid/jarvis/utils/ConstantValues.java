@@ -66,9 +66,7 @@ public class ConstantValues {
     //两个字符串相同
     public final static int STRING_MATCH = 2;
 
-    /**
-     * 自动更新APP相关
-     */
+    //自动更新APP相关
     public final static String HAVE_UPDATE = "有新的软件版本";
     public final static String NOT_UPDATE = "已经是最新版本";
     public final static String ERROR_UPDATE = "服务器飞到火星上去了";
@@ -79,8 +77,9 @@ public class ConstantValues {
     public static String SAFE_MESSAGE_WIPEDATA = "##**WIPEDATA**##";
     public static String SAFE_MESSAGE_LOCKSCREEN = "##**LOCKSCREEN**##";
 
-    /**
-     * 广播接受者相关
-     */
+    //广播接受者相关
     public static String JEXTRA_ADD_EXPLANATION = "jextra_add_explanation";
+
+    //来电归属地悬浮框的键
+    public static String TOAST_PHONE_ADDRESS = "toast_phone_address";
 }

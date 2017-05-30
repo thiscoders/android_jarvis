@@ -20,8 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="selectColor"
-        app:subtitle_negative_content="悬浮框颜色预览"
-        app:subtitle_positive_content="悬浮框颜色预览"
+        app:subtitle_negative_content="悬浮框字体预览"
+        app:subtitle_positive_content="悬浮框字体预览"
         app:title_content="悬浮框颜色" />
 
 

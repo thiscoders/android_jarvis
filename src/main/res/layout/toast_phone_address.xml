@@ -7,9 +7,14 @@
         android:id="@+id/tv_phone_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/textview_normal"
         android:drawableLeft="@drawable/incoming_call"
+        android:drawablePadding="5dp"
         android:gravity="center_vertical"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:text="@string/phone_address_title"
+        android:textColor="@color/colorWhite"
         android:textSize="18sp"
         android:textStyle="bold" />
 
