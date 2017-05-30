@@ -4,7 +4,9 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
@@ -12,6 +14,9 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
+
+import java.util.List;
 
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.dbdao.PhoneNumAddressDao;
@@ -25,10 +30,21 @@ public class SuspendFrameService extends Service {
     private TelephonyManager telephonyManager;
     private PhoneStateListener phoneStateListener;
 
+    private TextView tv_phone_address;
+    private String mAddress;
     //自定义吐司
     private WindowManager.LayoutParams mLayoutParams = new WindowManager.LayoutParams();
     private WindowManager mWindowManager;
     private View mToastView;
+
+    //此处只能通过消息机制进行UI更新
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            tv_phone_address.setText(mAddress);
+        }
+    };
 
     @Nullable
     @Override
@@ -82,7 +98,7 @@ public class SuspendFrameService extends Service {
     }
 
 
-    private void showToast(String incomingNumber) {
+    private void showToast(final String incomingNumber) {
         WindowManager.LayoutParams layoutParams = mLayoutParams;
         layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -94,6 +110,21 @@ public class SuspendFrameService extends Service {
         layoutParams.gravity = Gravity.LEFT + Gravity.TOP;
 
         mToastView = View.inflate(this, R.layout.toast_phone_address, null);
+        tv_phone_address = (TextView) mToastView.findViewById(R.id.tv_phone_address);
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                List<String> results = PhoneNumAddressDao.getAddress(incomingNumber);
+                if (results == null || results.size() == 0) {
+                    mAddress = "未知号码";
+                } else {
+                    mAddress = results.get(0);
+                }
+                mHandler.sendEmptyMessage(0);
+            }
+        }.start();
 
         mWindowManager.addView(mToastView, layoutParams);
     }
