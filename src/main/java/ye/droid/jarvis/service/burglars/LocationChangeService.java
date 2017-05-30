@@ -1,11 +1,8 @@
-package ye.droid.jarvis.service;
+package ye.droid.jarvis.service.burglars;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -13,7 +10,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -24,7 +20,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import ye.droid.jarvis.beans.LocationBean;
-import ye.droid.jarvis.utils.BurglarsSmsUtils;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 

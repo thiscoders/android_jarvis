@@ -8,7 +8,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import ye.droid.jarvis.service.SmsListenerService;
+import ye.droid.jarvis.service.burglars.SmsListenerService;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 

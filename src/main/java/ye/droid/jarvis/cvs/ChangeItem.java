@@ -105,4 +105,8 @@ public class ChangeItem extends RelativeLayout {
     public int getColor() {
         return tv_item_subtitle.getCurrentTextColor();
     }
+
+    public void setCurrentText(String content) {
+        tv_item_subtitle.setText(content);
+    }
 }

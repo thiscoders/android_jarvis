@@ -31,13 +31,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.activity.advancetools.AdvanceToolsActivity;
 import ye.droid.jarvis.activity.burglars.BurglarsResultActivity;
 import ye.droid.jarvis.activity.setting.SettingActivity;
 import ye.droid.jarvis.beans.UpDateBean;
-import ye.droid.jarvis.service.SmsListenerService;
+import ye.droid.jarvis.service.burglars.SmsListenerService;
 import ye.droid.jarvis.utils.AppUpdateUtils;
 import ye.droid.jarvis.utils.CommonUtils;
 import ye.droid.jarvis.utils.ConstantValues;
@@ -55,6 +58,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private GridView gv_home;
     private TextView tv_showinfo;
+    private String dbName = "location.db";
 
     private Handler handler;
     private int delayMillis = 3000;
@@ -73,6 +77,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         initUI();
         initData();
+        initDB(); //初始化归属地数据库
         checkAllPermission();
         boolean auto_update = SharedPreferencesUtils.getBoolean(this, ConstantValues.AUTO_UPDATE, true); //获取自动更新设置，默认自动更新
         if (auto_update) { //自动更新开启
@@ -93,7 +98,7 @@ public class HomeActivity extends AppCompatActivity {
         tv_showinfo = (TextView) findViewById(R.id.tv_showinfo);
         gv_home = (GridView) findViewById(R.id.gv_home);
         // 判断Sms卡监听状态，如果监听服务未开启就开启监听服务
-        boolean isRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SmsListenerService", false);
+        boolean isRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.SmsListenerService", false);
         if (!isRunning) {
             Intent intent = new Intent(this, SmsListenerService.class);
             startService(intent);
@@ -142,6 +147,42 @@ public class HomeActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
             }
         });
+    }
+
+    //拷贝数据库到指定的项目目录下
+    private void initDB() {
+        File dir = getFilesDir();
+        File dbFile = new File(dir, dbName);
+        if (dbFile.exists()) {
+            Log.i(TAG, "数据库文件已经存在！");
+            return;
+        }
+        InputStream dbStream = null;
+        FileOutputStream outputStream = null;
+        try {
+            dbStream = getResources().openRawResource(R.raw.location);
+
+            outputStream = new FileOutputStream(dbFile);
+
+            byte[] temp = new byte[1024];
+            int len = -1;
+            while ((len = dbStream.read(temp)) != -1) {
+                outputStream.write(temp, 0, len);
+            }
+        } catch (IOException e) {
+            Log.i(TAG, "lalala..." + e.toString());
+            e.printStackTrace();
+        } finally {
+            try {
+                if (outputStream != null)
+                    outputStream.close();
+                if (dbStream != null)
+                    dbStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Log.i(TAG, "归属地数据库拷贝完成！");
     }
 
     /**
@@ -290,7 +331,7 @@ public class HomeActivity extends AppCompatActivity {
         smsManager.sendTextMessage(SharedPreferencesUtils.getString(HomeActivity.this, ConstantValues.CONTACT_PHONEV2, ""), null, "不去！", null, null);
         Log.i(TAG, "lalala..." + SharedPreferencesUtils.getString(HomeActivity.this, ConstantValues.CONTACT_PHONEV2, ""));*/
         // TODO: 2017/5/24 位置变更测试
-      /*  boolean isRunning = ServiceUtils.serviceIsRunning(HomeActivity.this, "ye.droid.jarvis.service.LocationChangeService", false);
+      /*  boolean isRunning = ServiceUtils.serviceIsRunning(HomeActivity.this, "ye.droid.jarvis.service.burglars.LocationChangeService", false);
         //返回false代表服务没有运行，那么开启服务
         if (!isRunning) {
             Intent intent = new Intent(this, LocationChangeService.class);
@@ -309,8 +350,8 @@ public class HomeActivity extends AppCompatActivity {
      * 3. 读取联系人
      * 4. 发送短信
      * 5. 手机震动
-     * 6. 读取短信
-     *
+     * 6. 允许修改窗体
+     * 7. 读取短信
      */
     private void checkAllPermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
@@ -320,6 +361,7 @@ public class HomeActivity extends AppCompatActivity {
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.SYSTEM_ALERT_WINDOW) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{
@@ -330,6 +372,7 @@ public class HomeActivity extends AppCompatActivity {
                             Manifest.permission.READ_SMS,
                             Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.VIBRATE,
+                            Manifest.permission.SYSTEM_ALERT_WINDOW,
                             Manifest.permission.ACCESS_COARSE_LOCATION},
                     ConstantValues.HOME_ACTIVITY_REQUEST_ALL_PERMISSION_CODE);
         } else {
@@ -337,9 +380,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 检查App更新
-     */
+    //检查App更新
     private void checkAppUpdate() {
         new Thread() {
             @Override

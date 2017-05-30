@@ -10,7 +10,7 @@ import android.util.Log;
 
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.broadcast.receiver.JDeviceAdminReceiver;
-import ye.droid.jarvis.service.LocationChangeService;
+import ye.droid.jarvis.service.burglars.LocationChangeService;
 
 /**
  * 用来梳理手机防盗的4个功能
@@ -47,7 +47,7 @@ public class BurglarsSmsUtils {
      * @param context
      */
     public static void sendLocation(Context context) {
-        boolean isRunning = ServiceUtils.serviceIsRunning(context, "ye.droid.jarvis.service.LocationChangeService", false);
+        boolean isRunning = ServiceUtils.serviceIsRunning(context, "ye.droid.jarvis.service.burglars.LocationChangeService", false);
         //返回false代表服务没有运行，那么开启服务
         if (!isRunning) {
             Intent intent = new Intent(context, LocationChangeService.class);

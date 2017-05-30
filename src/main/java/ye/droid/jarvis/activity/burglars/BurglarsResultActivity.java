@@ -11,8 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ye.droid.jarvis.R;
-import ye.droid.jarvis.service.LocationChangeService;
-import ye.droid.jarvis.service.SmsListenerService;
+import ye.droid.jarvis.service.burglars.LocationChangeService;
+import ye.droid.jarvis.service.burglars.SmsListenerService;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.ServiceUtils;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
@@ -75,8 +75,8 @@ public class BurglarsResultActivity extends AppCompatActivity {
         tv_safe_status.setText("防盗保护状态：已开启");
 
         //判断对应服务的状态并且进行赋值
-        boolean smsListenerServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SmsListenerService", false);
-        boolean locationChangeServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.LocationChangeService", false);
+        boolean smsListenerServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.SmsListenerService", false);
+        boolean locationChangeServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.LocationChangeService", false);
 
         if (smsListenerServiceRunning) {
             tv_alarm_status.setText(getString(R.string.burglars_result_parameter1_negated) + "已开启");
@@ -128,7 +128,7 @@ public class BurglarsResultActivity extends AppCompatActivity {
      */
     public void openAlarm(View view) {
         //判断对应服务的状态并且进行赋值
-        boolean smsListenerServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SmsListenerService", false);
+        boolean smsListenerServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.SmsListenerService", false);
 
         if (!smsListenerServiceRunning) {
             Intent intent = new Intent(this, SmsListenerService.class);
@@ -146,7 +146,7 @@ public class BurglarsResultActivity extends AppCompatActivity {
      * @param view
      */
     public void openLocation(View view) {
-        boolean locationChangeServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.LocationChangeService", false);
+        boolean locationChangeServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.LocationChangeService", false);
         if (!locationChangeServiceRunning) {
             Intent intent = new Intent(this, LocationChangeService.class);
             startService(intent);

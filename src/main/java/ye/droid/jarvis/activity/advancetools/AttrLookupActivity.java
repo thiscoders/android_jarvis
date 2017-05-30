@@ -36,8 +36,6 @@ import ye.droid.jarvis.utils.ConstantValues;
 public class AttrLookupActivity extends AppCompatActivity {
     private final String TAG = AttrLookupActivity.class.getSimpleName();
 
-    private String dbName = "location.db";
-
     private EditText et_attr;
     private TextView tv_attr_result;
     private TextView tv_contact_attrname;
@@ -49,7 +47,6 @@ public class AttrLookupActivity extends AppCompatActivity {
 
         initUI();
         initData();
-        initDB();
     }
 
     @Override
@@ -99,44 +96,6 @@ public class AttrLookupActivity extends AppCompatActivity {
                 executeQuery(phone);
             }
         });
-    }
-
-    /**
-     * 将数据库文件拷贝到项目file目录下
-     */
-    private void initDB() {
-        File dir = getFilesDir();
-        File dbFile = new File(dir, dbName);
-        if (dbFile.exists()) {
-            Log.i(TAG, "数据库文件已经存在！");
-            return;
-        }
-        InputStream dbStream = null;
-        FileOutputStream outputStream = null;
-        try {
-            dbStream = getResources().openRawResource(R.raw.location);
-
-            outputStream = new FileOutputStream(dbFile);
-
-            byte[] temp = new byte[1024];
-            int len = -1;
-            while ((len = dbStream.read(temp)) != -1) {
-                outputStream.write(temp, 0, len);
-            }
-        } catch (IOException e) {
-            Log.i(TAG, "lalala..." + e.toString());
-            e.printStackTrace();
-        } finally {
-            try {
-                if (outputStream != null)
-                    outputStream.close();
-                if (dbStream != null)
-                    dbStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        Log.i(TAG, "归属地数据库拷贝完成！");
     }
 
 

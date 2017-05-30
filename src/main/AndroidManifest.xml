@@ -92,18 +92,18 @@
         </receiver>
 
         <!--短信监听服务-->
-        <service android:name=".service.SmsListenerService" />
+        <service android:name=".service.burglars.SmsListenerService" />
         <!--位置变化监听服务-->
-        <service android:name=".service.LocationChangeService" />
+        <service android:name=".service.burglars.LocationChangeService" />
 
-
+        <service android:name=".service.SuspendFrameService" />
     </application>
 
     <!--使用网络权限-->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /><!--读取电话状态-->
     <uses-permission android:name="android.permission.READ_CONTACTS" /><!--接受手机重启权限-->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!--短信相关-->
@@ -116,4 +116,6 @@
 
     <!--手机震动权限-->
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!--在窗体上挂载view的权限-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 </manifest>

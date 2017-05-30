@@ -50,8 +50,8 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     public void testNewFunc(View view) {
-        ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SmsListenerService", true);
-        ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.LocationChangeService", true);
+        ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.SmsListenerService", true);
+        ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.LocationChangeService", true);
     }
 
     /**
