@@ -94,7 +94,7 @@
         </LinearLayout>
 
         <Button
-            style="@style/JBurglarsSetupButtonNext"
+            style="@style/JarvisButton01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -105,7 +105,7 @@
             android:text="@string/burglars_btn_setup_cancel" />
 
         <Button
-            style="@style/JBurglarsSetupButtonNext"
+            style="@style/JarvisButton01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

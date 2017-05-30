@@ -8,12 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <!--
-                <TextView
-                    style="@style/JTitleStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/burglars_title" />-->
 
         <TextView
             android:id="@+id/tv_safe_status"
@@ -76,7 +70,7 @@
 
     <Button
         android:id="@+id/btn_reset_burglars"
-        style="@style/JBurglarsSetupButtonNext"
+        style="@style/JarvisButton01"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

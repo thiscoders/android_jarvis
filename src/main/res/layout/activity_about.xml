@@ -54,7 +54,7 @@
 
     <Button
         android:id="@+id/btn_check_version"
-        style="@style/JBurglarsSetupButtonNext"
+        style="@style/JarvisButton01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/app_github"
@@ -63,7 +63,7 @@
         android:text="@string/app_update_btn" />
 
     <Button
-        style="@style/JBurglarsSetupButtonNext"
+        style="@style/JarvisButton01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/btn_check_version"

@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>  <!--主要用于工具栏颜色-->
     <color name="colorPrimaryDark">#303F9F</color> <!--主要用于状态栏和导航栏颜色-->
-    <color name="colorAccent">#FF4081</color>   <!--主要用于强调色-->
+    <color name="colorAccent">#99CC33</color>   <!--主要用于强调色-->
     <color name="colorNavigationBar">#000000</color>    <!--导航栏颜色-->
     <color name="colorSplashText">#fff200</color>
     <color name="colorServerMessage">#ffaec9</color>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -135,8 +136,12 @@ public class AttrLookupActivity extends AppCompatActivity {
     }
 
 
-    public void eueryPhone(View view) {
+    public void queryPhone(View view) {
         String phone = et_attr.getText().toString();
+        if (TextUtils.isEmpty(phone)) {
+            Toast.makeText(this, "请输入电话号码！", Toast.LENGTH_SHORT).show();
+            return;
+        }
         executeQuery(phone);
     }
 

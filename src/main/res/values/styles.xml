@@ -48,8 +48,8 @@
         <item name="android:layout_marginLeft">10dp</item>
     </style>
 
-    <!--防盗设置页面下一步按钮-->
-    <style name="JBurglarsSetupButtonNext">
+    <!--整个App界面的Button样式01-->
+    <style name="JarvisButton01">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">15dp</item>
         <item name="android:background">@drawable/button_next_selector</item>
