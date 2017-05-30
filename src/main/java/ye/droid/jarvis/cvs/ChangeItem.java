@@ -96,4 +96,8 @@ public class ChangeItem extends RelativeLayout {
         else
             sw_item_check.setVisibility(INVISIBLE);
     }
+
+    public void setColor(int color) {
+        tv_item_subtitle.setTextColor(color);
+    }
 }

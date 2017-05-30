@@ -15,6 +15,15 @@
         app:title_content="自动更新" />
 
     <ye.droid.jarvis.cvs.ChangeItem
+        android:id="@+id/ct_phone_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="openPhoneAddress"
+        app:subtitle_negative_content="来电归属地设置"
+        app:subtitle_positive_content="来电归属地设置"
+        app:title_content="来电归属地" />
+
+    <ye.droid.jarvis.cvs.ChangeItem
         android:id="@+id/ct_about_app"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -91,6 +91,8 @@
     <string name="update_title">自动更新</string>
     <string name="update_subtitle_positive">自动更新已经开启</string>
     <string name="update_subtitle_negative">自动更新已经关闭</string>
+    <!--设置中心：来电归属地-->
+    <string name="phone_address_title">来电归属地</string>
 
     <string name="aboutapp_title">关于软件</string>
     <string name="aboutapp_subtitle">点击查看软件详细信息</string>

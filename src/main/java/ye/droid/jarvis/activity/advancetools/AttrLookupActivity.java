@@ -1,7 +1,9 @@
 package ye.droid.jarvis.activity.advancetools;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -145,6 +147,9 @@ public class AttrLookupActivity extends AppCompatActivity {
             //Toast.makeText(this, "请输入电话号码！", Toast.LENGTH_SHORT).show();
             Animation animation = AnimationUtils.loadAnimation(this, R.anim.jshake);
             et_attr.startAnimation(animation);
+            //添加手机震动
+            Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(500);//传递两个参数可以规律震动
             return;
         }
         executeQuery(phone);

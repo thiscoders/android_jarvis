@@ -308,7 +308,9 @@ public class HomeActivity extends AppCompatActivity {
      * 2. 读取电话状态
      * 3. 读取联系人
      * 4. 发送短信
-     * 5. 读取短信
+     * 5. 手机震动
+     * 6. 读取短信
+     *
      */
     private void checkAllPermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
@@ -317,6 +319,7 @@ public class HomeActivity extends AppCompatActivity {
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{
@@ -326,6 +329,7 @@ public class HomeActivity extends AppCompatActivity {
                             Manifest.permission.SEND_SMS,
                             Manifest.permission.READ_SMS,
                             Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.VIBRATE,
                             Manifest.permission.ACCESS_COARSE_LOCATION},
                     ConstantValues.HOME_ACTIVITY_REQUEST_ALL_PERMISSION_CODE);
         } else {

@@ -9,8 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:name=".activity.HomeActivity"><!--将主界面设置为HOME，去掉Splash页面-->
+        <activity android:name=".activity.HomeActivity"><!--将主界面设置为HOME，去掉Splash页面-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -55,7 +54,12 @@
         <activity
             android:name=".activity.setting.AboutActivity"
             android:label="@string/aboutapp_title" />
+        <activity
+            android:name=".activity.setting.PhoneAddressActivity"
+            android:label="@string/phone_address_title" />
+
         <activity android:name=".activity.autils.TestActivity" />
+
 
         <!--Android N 申请访问存储空间-->
         <provider
@@ -109,4 +113,7 @@
     <!--定位相关权限-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!--手机震动权限-->
+    <uses-permission android:name="android.permission.VIBRATE" />
 </manifest>
