@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -139,7 +141,10 @@ public class AttrLookupActivity extends AppCompatActivity {
     public void queryPhone(View view) {
         String phone = et_attr.getText().toString();
         if (TextUtils.isEmpty(phone)) {
-            Toast.makeText(this, "请输入电话号码！", Toast.LENGTH_SHORT).show();
+            //抖动
+            //Toast.makeText(this, "请输入电话号码！", Toast.LENGTH_SHORT).show();
+            Animation animation = AnimationUtils.loadAnimation(this, R.anim.jshake);
+            et_attr.startAnimation(animation);
             return;
         }
         executeQuery(phone);
