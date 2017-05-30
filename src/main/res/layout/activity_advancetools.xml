@@ -4,13 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--标题栏-->
-   <!-- <TextView
-        style="@style/JTitleStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/advance_title" />-->
-
     <TextView
         style="@style/JAdvanceToolsItem"
         android:layout_width="match_parent"
@@ -20,8 +13,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorAccent" />
+        android:layout_height="1.5dp"
+        android:background="@color/colorSeparator" />
 
     <TextView
         style="@style/JAdvanceToolsItem"
@@ -32,8 +25,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorAccent" />
+        android:layout_height="1.5dp"
+        android:background="@color/colorSeparator" />
 
     <TextView
         style="@style/JAdvanceToolsItem"
@@ -44,8 +37,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorAccent" />
+        android:layout_height="1.5dp"
+        android:background="@color/colorSeparator" />
 
     <TextView
         style="@style/JAdvanceToolsItem"
@@ -56,8 +49,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorAccent" />
+        android:layout_height="1.5dp"
+        android:background="@color/colorSeparator" />
 
     <TextView
         style="@style/JAdvanceToolsItem"
@@ -68,8 +61,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorAccent" />
+        android:layout_height="1.5dp"
+        android:background="@color/colorSeparator" />
 
     <TextView
         style="@style/JAdvanceToolsItem"
@@ -80,7 +73,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorAccent" />
+        android:layout_height="1.5dp"
+        android:background="@color/colorSeparator" />
 
 </LinearLayout>

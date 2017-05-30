@@ -1,11 +1,15 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>    <!--主要用于工具栏颜色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item><!--主要用于状态栏颜色-->
+        <item name="colorAccent">@color/colorAccent</item><!--主要用于强调色-->
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">
+            @color/colorNavigationBar
+        </item><!--导航栏颜色-->
+        <!--<item name="android:statusBarColor" tools:targetApi="lollipop">#ffff11</item>--> <!--状态栏颜色-->
     </style>
 
     <!--每个Activity的主Title-->

@@ -66,7 +66,7 @@ public class BurglarsSmsUtils {
         initDeviceAdmin(context);//初始化数据
         //判断是否授予设备管理器权限，是就清除数据，否就申请权限
         if (mDevicePolicyManager.isAdminActive(mDeviceAdminSample)) {
-            // TODO: 2017/5/29 模拟器不能真实清除数据，待真正需要的时候再取消这个注释
+            // TODO: 2017/5/29 模拟器不能真实清除数据，项目发布时的时候再取消这个注释
             //mDevicePolicyManager.wipeData(0);
         } else {
             Log.i(TAG, "清除数据、、、设备管理员权限未授予！");
