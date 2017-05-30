@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.cvs.ChangeItem;
+import ye.droid.jarvis.utils.ColorPickerDialog;
 
 /**
  * Created by ye on 2017/5/30.
@@ -45,17 +47,25 @@ public class PhoneAddressActivity extends AppCompatActivity {
         ct_suspend_location.setSwitchVisible(false);
     }
 
-
+    //是否显示悬浮框
     public void openSuspend(View view) {
-        
+        ct_suspend_visible.setCheck(!ct_suspend_visible.isCheck());
     }
 
+    //选择悬浮框颜色
     public void selectColor(View view) {
-        ct_suspend_color.setColor(Color.BLUE);
+        ColorPickerDialog colorPickerDialog = new ColorPickerDialog(this, ct_suspend_color.getColor(), "选择颜色", new ColorPickerDialog.OnColorChangedListener() {
+            @Override
+            public void colorChanged(int color) {
+                ct_suspend_color.setColor(color);
+            }
+        });
+        colorPickerDialog.show();
     }
 
+    //选择悬浮框位置
     public void selectLocation(View view) {
-
+        Toast.makeText(this, "悬浮框位置！", Toast.LENGTH_SHORT).show();
     }
 
 

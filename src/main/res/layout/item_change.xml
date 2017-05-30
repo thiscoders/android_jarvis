@@ -18,8 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_item_title"
+        android:layout_marginLeft="8dp"
         android:paddingBottom="5dp"
-        android:paddingLeft="8dp"
         android:paddingTop="2dp"
         android:text="@string/common_item_content"
         android:textSize="15dp" />

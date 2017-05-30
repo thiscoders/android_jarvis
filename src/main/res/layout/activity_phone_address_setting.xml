@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="openSuspend"
-        app:subtitle_negative_content="悬浮框显示"
-        app:subtitle_positive_content="悬浮框隐藏"
+        app:subtitle_negative_content="悬浮框隐藏"
+        app:subtitle_positive_content="悬浮框显示"
         app:title_content="悬浮框" />
 
 
