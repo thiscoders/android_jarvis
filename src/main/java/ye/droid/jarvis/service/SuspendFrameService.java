@@ -4,14 +4,11 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -38,15 +35,6 @@ public class SuspendFrameService extends Service {
     private WindowManager.LayoutParams mLayoutParams = new WindowManager.LayoutParams();
     private WindowManager mWindowManager;
     private View mToastView;
-
-    //此处只能通过消息机制进行UI更新
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            tv_phone_address.setText(mAddress);
-        }
-    };
 
     @Nullable
     @Override
@@ -120,19 +108,15 @@ public class SuspendFrameService extends Service {
         }
 
 
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                List<String> results = PhoneNumAddressDao.getAddress(incomingNumber);
-                if (results == null || results.size() == 0) {
-                    mAddress = "未知号码";
-                } else {
-                    mAddress = results.get(0);
-                }
-                mHandler.sendEmptyMessage(0);
-            }
-        }.start();
+        //因为是服务中，所以不必开启一个新的线程查询来电归属地
+        List<String> results = PhoneNumAddressDao.getAddress(incomingNumber);
+        if (results == null || results.size() == 0) {
+            mAddress = "未知号码";
+        } else {
+            mAddress = results.get(0);
+        }
+
+        tv_phone_address.setText(mAddress);
 
         mWindowManager.addView(mToastView, layoutParams);
     }
