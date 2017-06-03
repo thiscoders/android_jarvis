@@ -3,7 +3,6 @@ package ye.droid.jarvis.activity.burglars;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.activity.PerfectActivity;
 import ye.droid.jarvis.activity.autils.ContactListActivity;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
@@ -21,7 +21,7 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
  * Created by ye on 2017/5/11.
  */
 
-public class BurglarsSetup3Activity extends AppCompatActivity {
+public class BurglarsSetup3Activity extends PerfectActivity {
 
     private String TAG = BurglarsSetup3Activity.class.getSimpleName();
     private EditText et_phone_num;
@@ -77,7 +77,7 @@ public class BurglarsSetup3Activity extends AppCompatActivity {
         }
         Intent intent = new Intent(this, BurglarsSetup4Activity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
+        nextAnim();
         finish();
     }
 
@@ -88,7 +88,7 @@ public class BurglarsSetup3Activity extends AppCompatActivity {
     private void backPre() {
         Intent intent = new Intent(this, BurglarsSetup2Activity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+        preAnim();
         finish();
     }
 

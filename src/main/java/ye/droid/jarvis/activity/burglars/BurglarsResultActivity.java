@@ -3,7 +3,6 @@ package ye.droid.jarvis.activity.burglars;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.activity.PerfectActivity;
 import ye.droid.jarvis.service.burglars.LocationChangeService;
 import ye.droid.jarvis.service.burglars.SmsListenerService;
 import ye.droid.jarvis.utils.ConstantValues;
@@ -22,7 +22,7 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
  * Created by ye on 2017/5/11.
  */
 
-public class BurglarsResultActivity extends AppCompatActivity {
+public class BurglarsResultActivity extends PerfectActivity {
     private final String TAG = BurglarsResultActivity.class.getSimpleName();
     private TextView tv_safe_phonenum;
     private TextView tv_safe_status;
@@ -106,7 +106,7 @@ public class BurglarsResultActivity extends AppCompatActivity {
 
         startActivity(new Intent(this, BurglarsResultActivity.class));
         finish();
-        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
+        nextAnim(); //开启下一页动画
     }
 
 
@@ -114,7 +114,7 @@ public class BurglarsResultActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         //返回上一页动画
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+        preAnim();
     }
 
     /*
@@ -129,7 +129,6 @@ public class BurglarsResultActivity extends AppCompatActivity {
     public void openAlarm(View view) {
         //判断对应服务的状态并且进行赋值
         boolean smsListenerServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.SmsListenerService", false);
-
         if (!smsListenerServiceRunning) {
             Intent intent = new Intent(this, SmsListenerService.class);
             startService(intent);

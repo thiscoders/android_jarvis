@@ -1,20 +1,22 @@
-package ye.droid.jarvis.activity;
+package ye.droid.jarvis.activity.setting;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.activity.PerfectActivity;
 
 /**
- * Created by ye on 2017/5/20.
+ * 来电悬浮框位置选择
+ * Created by ye on 2017/6/4.
  */
 
-public class CacheClearActivity extends PerfectActivity {
+public class AddressLocationActivity extends PerfectActivity {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cacheclear);
+        setContentView(R.layout.activity_addresslocation);
     }
 
     @Override

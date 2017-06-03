@@ -6,11 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.activity.PerfectActivity;
 import ye.droid.jarvis.broadcast.receiver.JDeviceAdminReceiver;
 import ye.droid.jarvis.cvs.ChangeItem;
 import ye.droid.jarvis.utils.ConstantValues;
@@ -21,7 +21,7 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
  * Created by ye on 2017/5/11.
  */
 
-public class BurglarsSetup4Activity extends AppCompatActivity {
+public class BurglarsSetup4Activity extends PerfectActivity {
     private final String TAG = BurglarsSetup4Activity.class.getSimpleName();
 
     private ChangeItem ct_open_burglars;
@@ -69,7 +69,7 @@ public class BurglarsSetup4Activity extends AppCompatActivity {
         SharedPreferencesUtils.putBoolean(this, ConstantValues.BURGLARS_SET_OVER, true);
         Intent intent = new Intent(this, BurglarsResultActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
+        nextAnim();
         finish();
     }
 
@@ -80,7 +80,7 @@ public class BurglarsSetup4Activity extends AppCompatActivity {
     private void backPre() {
         Intent intent = new Intent(this, BurglarsSetup3Activity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+        preAnim();
         finish();
     }
 

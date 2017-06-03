@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,13 +14,14 @@ import android.widget.Toast;
 import java.io.File;
 
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.activity.PerfectActivity;
 import ye.droid.jarvis.beans.UpDateBean;
 import ye.droid.jarvis.utils.AppUpdateUtils;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.DialogFactory;
 import ye.droid.jarvis.utils.ServiceUtils;
 
-public class AboutActivity extends AppCompatActivity {
+public class AboutActivity extends PerfectActivity {
     private final String TAG = AboutActivity.class.getSimpleName();
 
     private TextView tv_splash_version_name;
@@ -46,7 +46,7 @@ public class AboutActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+        preAnim();
     }
 
     public void testNewFunc(View view) {

@@ -58,6 +58,10 @@
             android:name=".activity.setting.PhoneAddressActivity"
             android:label="@string/phone_address_title" />
 
+        <activity
+            android:name=".activity.setting.AddressLocationActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <activity android:name=".activity.autils.TestActivity" />
 
 

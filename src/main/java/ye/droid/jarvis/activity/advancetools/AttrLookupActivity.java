@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -17,13 +15,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.activity.PerfectActivity;
 import ye.droid.jarvis.activity.autils.ContactListActivity;
 import ye.droid.jarvis.dbdao.PhoneNumAddressDao;
 import ye.droid.jarvis.utils.ConstantValues;
@@ -33,7 +28,7 @@ import ye.droid.jarvis.utils.ConstantValues;
  * Created by ye on 2017/5/29.
  */
 
-public class AttrLookupActivity extends AppCompatActivity {
+public class AttrLookupActivity extends PerfectActivity {
     private final String TAG = AttrLookupActivity.class.getSimpleName();
 
     private EditText et_attr;
@@ -145,13 +140,5 @@ public class AttrLookupActivity extends AppCompatActivity {
     public void choiceContact(View view) {
         Intent intent = new Intent(this, ContactListActivity.class);
         startActivityForResult(intent, ConstantValues.ATTRLOOKUP_ACTIVITY_SELECT_CONTACTS_REQUEST_CODE);
-    }
-
-    private void nextAnim() {
-        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
-    }
-
-    private void preAnim() {
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 }

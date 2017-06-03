@@ -1,17 +1,15 @@
 package ye.droid.jarvis.activity.setting;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.activity.PerfectActivity;
 import ye.droid.jarvis.cvs.ChangeItem;
 import ye.droid.jarvis.dbdao.PhoneNumAddressDao;
 import ye.droid.jarvis.service.SuspendFrameService;
@@ -24,7 +22,7 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
  * Created by ye on 2017/5/30.
  */
 
-public class PhoneAddressActivity extends AppCompatActivity {
+public class PhoneAddressActivity extends PerfectActivity {
     private String TAG = PhoneNumAddressDao.class.getSimpleName();
     private ChangeItem ct_suspend_visible;
     private ChangeItem ct_suspend_color;
@@ -109,15 +107,9 @@ public class PhoneAddressActivity extends AppCompatActivity {
 
     //选择悬浮框位置
     public void selectLocation(View view) {
-        Toast.makeText(this, "悬浮框位置！", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(PhoneAddressActivity.this, AddressLocationActivity.class);
+        startActivity(intent);
+        nextAnim();
     }
 
-
-    private void nextAnim() {
-        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
-    }
-
-    private void preAnim() {
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
-    }
 }

@@ -3,16 +3,16 @@ package ye.droid.jarvis.activity.advancetools;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.activity.PerfectActivity;
 
 /**
  * Created by ye on 2017/5/29.
  */
 
-public class AdvanceToolsActivity extends AppCompatActivity {
+public class AdvanceToolsActivity extends PerfectActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,15 +81,6 @@ public class AdvanceToolsActivity extends AppCompatActivity {
      */
     public void netSpeed(View view) {
 
-    }
-
-
-    private void nextAnim() {
-        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
-    }
-
-    private void preAnim() {
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 
 }

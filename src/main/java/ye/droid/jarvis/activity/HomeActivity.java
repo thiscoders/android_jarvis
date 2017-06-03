@@ -53,7 +53,7 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
  * Created by ye on 2017/5/7.
  */
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends PerfectActivity {
     private final String TAG = HomeActivity.class.getSimpleName();
 
     private GridView gv_home;
@@ -120,7 +120,7 @@ public class HomeActivity extends AppCompatActivity {
                         // showPwdDialog();
                         // TODO: 2017/5/11 为了开发方便，暂时取消输入密码的步骤
                         startActivity(new Intent(HomeActivity.this, BurglarsResultActivity.class));
-                        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
+                        nextAnim();
                         return;
                     case 1:
                         break;
@@ -144,7 +144,7 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(funcIntent);
                         break;
                 }
-                overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
+                nextAnim();//开启下一页动画
             }
         });
     }
@@ -249,7 +249,7 @@ public class HomeActivity extends AppCompatActivity {
                             SharedPreferencesUtils.putString(HomeActivity.this, ConstantValues.STORE_PWD, MD5Utils.encodeMD5(second));
                             Intent intent = new Intent(HomeActivity.this, BurglarsResultActivity.class);
                             startActivity(intent);
-                            overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
+                            nextAnim();//开启下一页动画
                             dialog.dismiss();
                             break;
                     }
@@ -290,7 +290,7 @@ public class HomeActivity extends AppCompatActivity {
                         case ConstantValues.STRING_MATCH:
                             Intent intent = new Intent(HomeActivity.this, BurglarsResultActivity.class);
                             startActivity(intent);
-                            overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
+                            nextAnim();//开启下一页动画
                             dialog.dismiss();
                             break;
                     }

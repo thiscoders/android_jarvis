@@ -3,10 +3,10 @@ package ye.droid.jarvis.activity.setting;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import ye.droid.jarvis.R;
+import ye.droid.jarvis.activity.PerfectActivity;
 import ye.droid.jarvis.cvs.ChangeItem;
 import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
@@ -15,7 +15,7 @@ import ye.droid.jarvis.utils.SharedPreferencesUtils;
  * Created by ye on 2017/5/9.
  */
 
-public class SettingActivity extends AppCompatActivity {
+public class SettingActivity extends PerfectActivity {
     private ChangeItem ct_auto_update;
     private ChangeItem ct_about_app;
     private ChangeItem ct_phone_address;
@@ -65,20 +65,12 @@ public class SettingActivity extends AppCompatActivity {
     public void showAboutInfo(View view) {
         Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);//开启下一页动画
+        nextAnim();//开启下一页动画
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         preAnim();
-    }
-
-    private void nextAnim() {
-        overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
-    }
-
-    private void preAnim() {
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 }
