@@ -55,6 +55,19 @@
         <item name="android:background">@drawable/button_next_selector</item>
     </style>
 
+    <style name="JarvisAddressLoaction">
+        <!-- 让条目不响应点击事件
+         android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false
+        -->
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:background">@drawable/button_location</item>
+    </style>
+
     <!--高级工具条目-->
     <style name="JAdvanceToolsItem">
         <item name="android:drawableLeft">@drawable/advance_tools_item_icon</item>

@@ -58,9 +58,10 @@
             android:name=".activity.setting.PhoneAddressActivity"
             android:label="@string/phone_address_title" />
 
+        <!--选择归属地悬浮框显示位置的窗口，透明窗口-->
         <activity
             android:name=".activity.setting.AddressLocationActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity android:name=".activity.autils.TestActivity" />
 

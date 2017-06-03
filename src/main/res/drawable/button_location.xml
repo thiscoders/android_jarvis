@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!--完成自定义按钮属性，圆角且自动改变背景-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="@color/colorSplashText" />
+            <corners android:radius="8dp" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/colorButtonStroke" />
+        </shape>
+    </item>
+</layer-list>

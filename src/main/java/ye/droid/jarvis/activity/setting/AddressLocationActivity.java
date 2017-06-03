@@ -1,17 +1,18 @@
 package ye.droid.jarvis.activity.setting;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import ye.droid.jarvis.R;
-import ye.droid.jarvis.activity.PerfectActivity;
 
 /**
  * 来电悬浮框位置选择
+ * 
  * Created by ye on 2017/6/4.
  */
-
-public class AddressLocationActivity extends PerfectActivity {
+// TODO: 2017/6/4 为了半透明窗体效果，暂时继承Activity
+public class AddressLocationActivity extends Activity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,6 +23,6 @@ public class AddressLocationActivity extends PerfectActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        preAnim();
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
     }
 }

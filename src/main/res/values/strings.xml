@@ -93,6 +93,7 @@
     <string name="update_subtitle_negative">自动更新已经关闭</string>
     <!--设置中心：来电归属地-->
     <string name="phone_address_title">来电归属地</string>
+    <string name="phone_address_location">选中提示框拖动到任意位置</string>
 
     <string name="aboutapp_title">关于软件</string>
     <string name="aboutapp_subtitle">点击查看软件详细信息</string>
