@@ -24,6 +24,7 @@ import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 /**
+ * 位置变化监听
  * Created by ye on 2017/5/26.
  */
 

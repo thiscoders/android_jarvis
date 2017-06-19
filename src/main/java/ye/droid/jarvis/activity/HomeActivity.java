@@ -58,6 +58,7 @@ public class HomeActivity extends PerfectActivity {
 
     private GridView gv_home;
     private TextView tv_showinfo;
+    private TextView tv_service;
     private String dbName = "location.db";
 
     private Handler handler;
@@ -79,6 +80,7 @@ public class HomeActivity extends PerfectActivity {
         initData();
         initDB(); //初始化归属地数据库
         checkAllPermission();
+        checkService();
         boolean auto_update = SharedPreferencesUtils.getBoolean(this, ConstantValues.AUTO_UPDATE, true); //获取自动更新设置，默认自动更新
         if (auto_update) { //自动更新开启
             tv_showinfo.setText("正在检测更新...");
@@ -97,6 +99,7 @@ public class HomeActivity extends PerfectActivity {
     private void initUI() {
         tv_showinfo = (TextView) findViewById(R.id.tv_showinfo);
         gv_home = (GridView) findViewById(R.id.gv_home);
+        tv_service = (TextView) findViewById(R.id.tv_service);
         // 判断Sms卡监听状态，如果监听服务未开启就开启监听服务
         boolean isRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.SmsListenerService", false);
         if (!isRunning) {
@@ -149,7 +152,29 @@ public class HomeActivity extends PerfectActivity {
         });
     }
 
-    //拷贝数据库到指定的项目目录下
+    private void checkService() {
+        String res = "";
+        boolean smsListenerServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.SmsListenerService", false);
+        if (smsListenerServiceRunning) {
+            res += "短信监听运行中...\r\n";
+        }
+        boolean locationChangeServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.LocationChangeService", false);
+        if (locationChangeServiceRunning) {
+            res += "位置监听运行中...\r\n";
+        }
+        boolean phoneAddressChangeServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SuspendFrameService", false);
+        if (phoneAddressChangeServiceRunning) {
+            res += "来电归属地悬浮框运行中...\r\n";
+        }
+        tv_service.setText(res);
+        resetServiceInfo();
+    }
+
+    public void callCheckService(View view) {
+        checkService();
+    }
+
+    //拷贝归属地数据库到指定的项目目录下
     private void initDB() {
         File dir = getFilesDir();
         File dbFile = new File(dir, dbName);
@@ -482,6 +507,15 @@ public class HomeActivity extends PerfectActivity {
             @Override
             public void run() {
                 tv_showinfo.setText(getString(R.string.home_odd_egg));
+            }
+        }, delayMillis);
+    }
+
+    private void resetServiceInfo(){
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                tv_service.setText("-_-\r\n");
             }
         }, delayMillis);
     }

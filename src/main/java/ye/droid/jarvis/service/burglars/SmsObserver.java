@@ -15,6 +15,7 @@ import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 /**
+ * 短信数据库观察者对象
  * Created by ye on 2017/5/23.
  */
 
@@ -46,7 +47,7 @@ public class SmsObserver extends ContentObserver {
         super.onChange(selfChange);
         String uri_string = uri.toString();
         Log.i(TAG, uri_string);
-        // 第一次回调 不是我们想要的 直接返回
+        // 第一次回调 不是想要的 直接返回
         if (uri.toString().equals("content://sms/raw")) {
             return;
         }

@@ -3,12 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-   <!-- <TextView
-        style="@style/JTitleStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/aboutapp_title" />-->
-
     <ImageView
         android:id="@+id/iv_about_icon"
         android:layout_width="200dp"
@@ -28,6 +22,7 @@
         android:textSize="35dp"
         android:textStyle="bold" />
 
+
     <TextView
         android:id="@+id/tv_about_version_name"
         android:layout_width="wrap_content"
@@ -35,40 +30,16 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:paddingBottom="10dp"
+        android:paddingTop="3dp"
         android:text="@string/splash_version"
         android:textSize="15dp" />
 
     <TextView
-        android:id="@+id/app_github"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_service2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/tv_about_version_name"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:onClick="openGithub"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        android:text="@string/app_github_address"
-        android:textSize="16dp"
-        android:textStyle="bold" />
+        android:layout_centerHorizontal="true" />
 
-    <Button
-        android:id="@+id/btn_check_version"
-        style="@style/JarvisButton01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/app_github"
-        android:layout_centerHorizontal="true"
-        android:onClick="checkUpDate"
-        android:text="@string/app_update_btn" />
 
-    <Button
-        style="@style/JarvisButton01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/btn_check_version"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:onClick="testNewFunc"
-        android:text="@string/app_test_new_btn" />
 </RelativeLayout>

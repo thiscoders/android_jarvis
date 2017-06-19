@@ -8,7 +8,6 @@ import ye.droid.jarvis.R;
 
 /**
  * 来电悬浮框位置选择
- * 
  * Created by ye on 2017/6/4.
  */
 // TODO: 2017/6/4 为了半透明窗体效果，暂时继承Activity

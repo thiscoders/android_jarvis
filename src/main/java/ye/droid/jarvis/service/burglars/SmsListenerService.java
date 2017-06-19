@@ -7,10 +7,11 @@ import android.net.Uri;
 import android.os.IBinder;
 import android.os.Process;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
- * 开启短信监听
+ * 开启短信监听服务
  * Created by ye on 2017/5/23.
  */
 
@@ -31,7 +32,7 @@ public class SmsListenerService extends Service {
         ContentResolver resolver = getContentResolver();
         smsObserver = new SmsObserver(this, resolver, new SmsHandler(this));
         resolver.registerContentObserver(Uri.parse("content://sms"), true, smsObserver);
-        Toast.makeText(getApplicationContext(), "短信监听服务已经启动！", Toast.LENGTH_SHORT).show();
+        Log.i(TAG,"短信监听服务已经启动！");
     }
 
     @Override
@@ -39,7 +40,7 @@ public class SmsListenerService extends Service {
         super.onDestroy();
         this.getContentResolver().unregisterContentObserver(smsObserver);
         Process.killProcess(Process.myPid());
-        Toast.makeText(getApplicationContext(), "短信监听服务已经关闭！", Toast.LENGTH_SHORT).show();
+        Log.i(TAG,"短信监听服务已经关闭！");
     }
 
 }

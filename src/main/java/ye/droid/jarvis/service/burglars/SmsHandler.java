@@ -12,6 +12,7 @@ import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 /**
+ * 接收到对应短信之后的逻辑处理
  * Created by ye on 2017/5/23.
  */
 

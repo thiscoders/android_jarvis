@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.FileProvider;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +28,14 @@ public class AboutActivity extends PerfectActivity {
     private final String TAG = AboutActivity.class.getSimpleName();
 
     private TextView tv_splash_version_name;
+    private TextView tv_service2;
+
+    private final int MENU_CHECK_UPDATE = 0;
+    private final int MENU_CHECK_SERVICE = 1;
+    private final int MENU_OPEN_SOURCE = 2;
+
+    private Handler handler;
+    private int delayMillis = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +48,13 @@ public class AboutActivity extends PerfectActivity {
 
     private void initUI() {
         tv_splash_version_name = (TextView) findViewById(R.id.tv_about_version_name);
+        tv_service2 = (TextView) findViewById(R.id.tv_service2);
     }
 
     private void initData() {
+        handler = new Handler();
         tv_splash_version_name.setText("当前版本：" + AppUpdateUtils.getVersionName(this));
+        tv_service2.setText("-_-\r\n");
     }
 
     @Override
@@ -49,17 +63,57 @@ public class AboutActivity extends PerfectActivity {
         preAnim();
     }
 
-    public void testNewFunc(View view) {
-        ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.SmsListenerService", true);
-        ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.LocationChangeService", true);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0, MENU_CHECK_UPDATE, 0, "检查更新");
+        menu.add(1, MENU_CHECK_SERVICE, 1, "检查服务");
+        menu.add(2, MENU_OPEN_SOURCE, 2, "打开源码");
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_CHECK_UPDATE:
+                checkAppUpdate();
+                break;
+            case MENU_CHECK_SERVICE:
+                checkService2();
+                break;
+            case MENU_OPEN_SOURCE:
+                openGithub();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void checkService2() {
+        String res = "";
+        boolean smsListenerServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.SmsListenerService", false);
+        if (smsListenerServiceRunning) {
+            res += "短信监听运行中...\r\n";
+        }
+        boolean locationChangeServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.LocationChangeService", false);
+        if (locationChangeServiceRunning) {
+            res += "位置监听运行中...\r\n";
+        }
+        boolean phoneAddressChangeServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.SuspendFrameService", false);
+        if (phoneAddressChangeServiceRunning) {
+            res += "来电归属地悬浮框运行中...\r\n";
+        }
+        tv_service2.setText(res);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                tv_service2.setText("-_-\r\n");
+            }
+        }, delayMillis);
     }
 
     /**
      * 浏览器中查看代码
-     *
-     * @param view
      */
-    public void openGithub(View view) {
+    public void openGithub() {
         //意图
         Intent intent = new Intent();
         //意图的行为，隐式意图
