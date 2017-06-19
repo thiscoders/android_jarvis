@@ -80,7 +80,7 @@ public class PhoneAddressActivity extends PerfectActivity {
             //开启服务前检查是否允许在别的应用上面出现，重点
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (!Settings.canDrawOverlays(getApplicationContext())) {
-                    Toast.makeText(PhoneAddressActivity.this, "请允许请用在其他应用上层显示！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PhoneAddressActivity.this, "请允许Jarvis请用在其他应用上层显示！", Toast.LENGTH_SHORT).show();
                     Intent overlay = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
                     startActivity(overlay);
                     return;
