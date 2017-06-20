@@ -5,8 +5,8 @@
     android:background="#88A39480">
     <!--#88A39480  前面的88代表透明度-->
 
-    <Button
-        style="@style/JarvisAddressLoaction"
+    <TextView
+        style="@style/JarvisAddressLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -20,16 +20,16 @@
         android:drawableLeft="@drawable/incoming_call"
         android:drawablePadding="5dp"
         android:gravity="center_vertical"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:text="@string/phone_address_title"
-        android:textColor="@android:color/holo_blue_light"
+        android:textColor="@color/colorPhoneAddressSuspend"
         android:textSize="18sp"
         android:textStyle="bold" />
 
 
-    <Button
-        style="@style/JarvisAddressLoaction"
+    <TextView
+        style="@style/JarvisAddressLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

@@ -17,6 +17,10 @@
     <color name="colorButtonPressed">#99CC33</color>
     <color name="colorAdvToolsButtonPressed">#CCFF99</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorPhoneAddressSuspend">#ffaec9</color> <!--悬浮框文字颜色-->
+    <color name="colorPhoneAddressSuspendBack">#AACCFF99</color><!--悬浮框背景-->
+    <color name="colorPhoneAddressLoaction">#3f48cc</color><!--悬浮框提示文字颜色-->
+    <color name="colorPhoneAddressLoactionBack">#99d9ea</color><!--悬浮框提示背景颜色-->
     <color name="colorButtonStroke">#CCFF99</color>
     <color name="colorBurglarsResultFuncBrief">#66c8f2</color>
 </resources>

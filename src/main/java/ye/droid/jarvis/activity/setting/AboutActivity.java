@@ -24,6 +24,9 @@ import ye.droid.jarvis.utils.ConstantValues;
 import ye.droid.jarvis.utils.DialogFactory;
 import ye.droid.jarvis.utils.ServiceUtils;
 
+/**
+ * 关于软件界面
+ */
 public class AboutActivity extends PerfectActivity {
     private final String TAG = AboutActivity.class.getSimpleName();
 

@@ -54,14 +54,15 @@
         <activity
             android:name=".activity.setting.AboutActivity"
             android:label="@string/aboutapp_title" />
+        <!--来电归属地设置-->
         <activity
             android:name=".activity.setting.PhoneAddressActivity"
             android:label="@string/phone_address_title" />
 
         <!--选择归属地悬浮框显示位置的窗口，透明窗口-->
         <activity
-            android:name=".activity.setting.AddressLocationActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:name=".activity.setting.SuspendLocationActivity"
+            android:theme="@style/JTranslucentWindows" />
 
         <activity android:name=".activity.autils.TestActivity" />
 
@@ -83,6 +84,7 @@
             </intent-filter>
         </receiver>
 
+        <!--设备管理器-->
         <receiver
             android:name=".broadcast.receiver.JDeviceAdminReceiver"
             android:description="@string/sample_device_admin_description"

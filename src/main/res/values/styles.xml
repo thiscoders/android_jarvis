@@ -55,16 +55,16 @@
         <item name="android:background">@drawable/button_next_selector</item>
     </style>
 
-    <style name="JarvisAddressLoaction">
-        <!-- 让条目不响应点击事件
-         android:clickable="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false
-        -->
+    <!---->
+    <style name="JarvisAddressLocation">
         <item name="android:clickable">false</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
         <item name="android:focusable">false</item>
         <item name="android:focusableInTouchMode">false</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@color/colorPhoneAddressLoaction</item>
         <item name="android:background">@drawable/button_location</item>
     </style>
 
@@ -79,4 +79,12 @@
         <item name="android:paddingBottom">13dp</item>
         <item name="android:gravity">center_vertical</item>
     </style>
+
+
+    <!--半透明窗口样式-->
+    <style name="JTranslucentWindows" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
 </resources>

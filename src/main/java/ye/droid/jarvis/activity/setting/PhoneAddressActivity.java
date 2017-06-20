@@ -19,6 +19,7 @@ import ye.droid.jarvis.utils.ServiceUtils;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 /**
+ * 来电归属地显示设置
  * Created by ye on 2017/5/30.
  */
 
@@ -69,6 +70,10 @@ public class PhoneAddressActivity extends PerfectActivity {
         if (color != 0) {
             ct_suspend_color.setColor(color);
         }
+
+        //判断服务是否运行
+        Boolean phoneSuspend = SharedPreferencesUtils.getBoolean(getApplicationContext(), ConstantValues.PHONE_ADDRESS_SUSPEND, false);
+        ct_suspend_visible.setCheck(phoneSuspend);
     }
 
     //是否显示悬浮框
@@ -87,8 +92,10 @@ public class PhoneAddressActivity extends PerfectActivity {
                 }
             }
             startService(intent); //开启服务
+            SharedPreferencesUtils.putBoolean(getApplicationContext(), ConstantValues.PHONE_ADDRESS_SUSPEND, true);//保存标记
         } else {
             stopService(intent); //停止服务
+            SharedPreferencesUtils.putBoolean(getApplicationContext(), ConstantValues.PHONE_ADDRESS_SUSPEND, false);//保存标记
         }
         ct_suspend_visible.setCheck(!ischeck); //设置状态
     }
@@ -107,7 +114,7 @@ public class PhoneAddressActivity extends PerfectActivity {
 
     //选择悬浮框位置
     public void selectLocation(View view) {
-        Intent intent = new Intent(PhoneAddressActivity.this, AddressLocationActivity.class);
+        Intent intent = new Intent(PhoneAddressActivity.this, SuspendLocationActivity.class);
         startActivity(intent);
         nextAnim();
     }

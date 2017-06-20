@@ -7,6 +7,7 @@ import ye.droid.jarvis.R;
 
 /**
  * SharedPreferences工具类，方便的使用SharedPreferences获取各种数据
+ * 目前包含boolean，string，int类型
  * Created by ye on 2017/5/9.
  */
 

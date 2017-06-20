@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 /**
+ * 测试文件存储
  * Created by ye on 2017/5/26.
  */
 
@@ -37,7 +38,5 @@ public class FileStoreTest {
         writer.write("=======================================================================");
         writer.flush();
         writer.close();
-
     }
-
 }

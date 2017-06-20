@@ -40,6 +40,7 @@ import ye.droid.jarvis.activity.advancetools.AdvanceToolsActivity;
 import ye.droid.jarvis.activity.burglars.BurglarsResultActivity;
 import ye.droid.jarvis.activity.setting.SettingActivity;
 import ye.droid.jarvis.beans.UpDateBean;
+import ye.droid.jarvis.service.SuspendFrameService;
 import ye.droid.jarvis.service.burglars.SmsListenerService;
 import ye.droid.jarvis.utils.AppUpdateUtils;
 import ye.droid.jarvis.utils.CommonUtils;
@@ -88,26 +89,11 @@ public class HomeActivity extends PerfectActivity {
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ConstantValues.CANCEL_INSTALL_UPDATE) {
-            Toast.makeText(this, "取消安装新版本！", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     private void initUI() {
         tv_showinfo = (TextView) findViewById(R.id.tv_showinfo);
         gv_home = (GridView) findViewById(R.id.gv_home);
         tv_service = (TextView) findViewById(R.id.tv_service);
-        // 判断Sms卡监听状态，如果监听服务未开启就开启监听服务
-        boolean isRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.SmsListenerService", false);
-        if (!isRunning) {
-            Intent intent = new Intent(this, SmsListenerService.class);
-            startService(intent);
-        } else {
-            Log.i(TAG, "短信监听已经在运行中了！");
-        }
     }
 
     private void initData() {
@@ -120,10 +106,10 @@ public class HomeActivity extends PerfectActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        // showPwdDialog();
+                        showPwdDialog();
                         // TODO: 2017/5/11 为了开发方便，暂时取消输入密码的步骤
-                        startActivity(new Intent(HomeActivity.this, BurglarsResultActivity.class));
-                        nextAnim();
+                        //startActivity(new Intent(HomeActivity.this, BurglarsResultActivity.class));
+                        //nextAnim();
                         return;
                     case 1:
                         break;
@@ -150,6 +136,20 @@ public class HomeActivity extends PerfectActivity {
                 nextAnim();//开启下一页动画
             }
         });
+
+        Boolean phoneSuspend = SharedPreferencesUtils.getBoolean(getApplicationContext(), ConstantValues.PHONE_ADDRESS_SUSPEND, false);
+        if (phoneSuspend) {
+            Intent intent = new Intent(this, SuspendFrameService.class);
+            startService(intent);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ConstantValues.CANCEL_INSTALL_UPDATE) {
+            Toast.makeText(this, "取消安装新版本！", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void checkService() {
@@ -511,7 +511,7 @@ public class HomeActivity extends PerfectActivity {
         }, delayMillis);
     }
 
-    private void resetServiceInfo(){
+    private void resetServiceInfo() {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

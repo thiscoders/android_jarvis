@@ -120,7 +120,7 @@ public class BurglarsResultActivity extends PerfectActivity {
      * @param view
      */
     public void openSmsListenerService(View view) {
-        //判断对应服务的状态并且进行赋值
+        //判断短信监听服务的状态并且进行赋值
         boolean smsListenerServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.SmsListenerService", false);
         if (!smsListenerServiceRunning) {
             Intent intent = new Intent(this, SmsListenerService.class);
@@ -137,6 +137,7 @@ public class BurglarsResultActivity extends PerfectActivity {
      * @param view
      */
     public void openLocationListenerService(View view) {
+        //位置改变发送位置信息服务的运行状态
         boolean locationChangeServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.LocationChangeService", false);
         if (!locationChangeServiceRunning) {
             Intent intent = new Intent(this, LocationChangeService.class);

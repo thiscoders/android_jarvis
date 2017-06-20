@@ -2,8 +2,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            <solid android:color="@color/colorBurglarsTitle" />
-            <corners android:radius="3dp" />
+            <solid android:color="@color/colorPhoneAddressSuspendBack" />
+            <corners android:radius="5dp" />
         </shape>
     </item>
 </layer-list>
