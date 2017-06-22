@@ -23,6 +23,7 @@ public class RebootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        //检测是否是手机重启广播
         if (intent.getAction().equals(ACTION)) {
             //获取TelephonyManager
             TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
@@ -36,14 +37,16 @@ public class RebootReceiver extends BroadcastReceiver {
                 String phone = SharedPreferencesUtils.getString(context, ConstantValues.CONTACT_PHONEV2, "");
                 //发送短信
                 smsManager.sendTextMessage(phone, null, "The sim card of your phone is changed! new sim serial number is " + dontSimNum, null, null);
+            }else {
+                Toast.makeText(context, "手机重启完成！Sim卡未变更！", Toast.LENGTH_SHORT).show();
+                return;
             }
             //开启短信监听
             Intent smsListener = new Intent(context, SmsListenerService.class);
             context.startService(smsListener);
-
             Toast.makeText(context, "手机重启完成！检测到Sim卡变更，安全短信监听已经开启！", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, "手机重启完成！Sim卡安全！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "这个广播不是手机重启广播！", Toast.LENGTH_SHORT).show();
         }
     }
 }
