@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -37,9 +38,6 @@ public class SuspendFrameService extends Service {
     private WindowManager.LayoutParams mLayoutParams = new WindowManager.LayoutParams();
     private WindowManager mWindowManager;
     private View mToastView;
-
-    private int screenWidth;
-    private int screenHeight;
 
     @Nullable
     @Override
@@ -94,8 +92,9 @@ public class SuspendFrameService extends Service {
 
     //自定义吐司并且显示
     private void showToast(final String incomingNumber) {
-        screenWidth = (int) DisplayUtils.getDisInfo(SuspendFrameService.this, DisplayUtils.WIDTHPIXELS);
-        screenHeight = (int) DisplayUtils.getDisInfo(SuspendFrameService.this, DisplayUtils.HEIGHTPIXELS);
+        //获取保存坐标
+        int locationX = SharedPreferencesUtils.getInteger(SuspendFrameService.this, ConstantValues.SUSPEND_LOACTION_X, 0);
+        int locationY = SharedPreferencesUtils.getInteger(SuspendFrameService.this, ConstantValues.SUSPEND_LOACTION_Y, 0);
 
         WindowManager.LayoutParams layoutParams = mLayoutParams;
         layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -105,6 +104,10 @@ public class SuspendFrameService extends Service {
         layoutParams.format = PixelFormat.TRANSLUCENT;
         layoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
         layoutParams.setTitle("Toast");
+        //修改坐标
+        layoutParams.x = locationX;
+        layoutParams.y = locationY;
+        Toast.makeText(SuspendFrameService.this, locationX + "..." + locationY, Toast.LENGTH_LONG).show();
         //   layoutParams.gravity = Gravity.CENTER + Gravity.BOTTOM; //默认显示位置
 
         mToastView = View.inflate(this, R.layout.toast_phone_address, null);

@@ -106,10 +106,10 @@ public class SuspendLocationActivity extends PerfectActivity {
                         moveX = (int) event.getRawX();
                         moveY = (int) event.getRawY();
 
-                        Log.i(TAG, "move is ..." + moveX + "..." + moveY);
                         //计算移动距离
                         disX = moveX - startX;
                         disY = moveY - startY;
+
                         //计算新的坐标点
                         left = tv_location_drag.getLeft() + disX;
                         top = tv_location_drag.getTop() + disY;
@@ -155,7 +155,7 @@ public class SuspendLocationActivity extends PerfectActivity {
                         //将位置信息持久化， 存储控件左上角的坐标值
                         SharedPreferencesUtils.putInteger(SuspendLocationActivity.this, ConstantValues.SUSPEND_LOACTION_X, tv_location_drag.getLeft());
                         SharedPreferencesUtils.putInteger(SuspendLocationActivity.this, ConstantValues.SUSPEND_LOACTION_Y, tv_location_drag.getTop());
-
+                        Log.i(TAG, "store..." + tv_location_drag.getLeft() + "..." + tv_location_drag.getTop());
                         break;
                 }
                 //返回false则不响应事件
