@@ -18,9 +18,11 @@ import java.util.List;
 import ye.droid.jarvis.R;
 import ye.droid.jarvis.dbdao.PhoneNumAddressDao;
 import ye.droid.jarvis.utils.ConstantValues;
+import ye.droid.jarvis.utils.DisplayUtils;
 import ye.droid.jarvis.utils.SharedPreferencesUtils;
 
 /**
+ * 显示悬浮框
  * Created by ye on 2017/5/30.
  */
 
@@ -35,6 +37,9 @@ public class SuspendFrameService extends Service {
     private WindowManager.LayoutParams mLayoutParams = new WindowManager.LayoutParams();
     private WindowManager mWindowManager;
     private View mToastView;
+
+    private int screenWidth;
+    private int screenHeight;
 
     @Nullable
     @Override
@@ -89,6 +94,9 @@ public class SuspendFrameService extends Service {
 
     //自定义吐司并且显示
     private void showToast(final String incomingNumber) {
+        screenWidth = (int) DisplayUtils.getDisInfo(SuspendFrameService.this, DisplayUtils.WIDTHPIXELS);
+        screenHeight = (int) DisplayUtils.getDisInfo(SuspendFrameService.this, DisplayUtils.HEIGHTPIXELS);
+
         WindowManager.LayoutParams layoutParams = mLayoutParams;
         layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -106,7 +114,6 @@ public class SuspendFrameService extends Service {
         if (color != 0) {
             tv_phone_address.setTextColor(color);
         }
-
 
         //因为是服务中，所以不必开启一个新的线程查询来电归属地
         List<String> results = PhoneNumAddressDao.getAddress(incomingNumber);

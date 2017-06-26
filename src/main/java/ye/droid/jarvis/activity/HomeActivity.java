@@ -10,12 +10,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,7 +41,6 @@ import ye.droid.jarvis.activity.burglars.BurglarsResultActivity;
 import ye.droid.jarvis.activity.setting.SettingActivity;
 import ye.droid.jarvis.beans.UpDateBean;
 import ye.droid.jarvis.service.SuspendFrameService;
-import ye.droid.jarvis.service.burglars.SmsListenerService;
 import ye.droid.jarvis.utils.AppUpdateUtils;
 import ye.droid.jarvis.utils.CommonUtils;
 import ye.droid.jarvis.utils.ConstantValues;
@@ -64,7 +63,8 @@ public class HomeActivity extends PerfectActivity {
 
     private Handler handler;
     private int delayMillis = 3000;
-
+    //点击事件次数
+    private long[] mHits = new long[2];
     private String[] mMenuItems = new String[]{"手机防盗", "通信卫士", "软件管理",
             "进程管理", "流量统计", "手机杀毒",
             "缓存清理", "高级工具", "设置中心"};
@@ -72,6 +72,7 @@ public class HomeActivity extends PerfectActivity {
             R.drawable.home_against_burglars, R.drawable.home_comm_guard, R.drawable.home_soft_manager,
             R.drawable.home_thread_manager, R.drawable.home_flow_statistic, R.drawable.home_anti_virus,
             R.drawable.home_cache_clean, R.drawable.home_advance_tool, R.drawable.home_setting};
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -152,6 +153,17 @@ public class HomeActivity extends PerfectActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
+        mHits[mHits.length - 1] = SystemClock.uptimeMillis();
+        if (mHits[mHits.length - 1] - mHits[0] < 500) {
+            super.onBackPressed();
+        } else {
+            Toast.makeText(HomeActivity.this, "双击返回键退出！", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void checkService() {
         String res = "";
         boolean smsListenerServiceRunning = ServiceUtils.serviceIsRunning(this, "ye.droid.jarvis.service.burglars.SmsListenerService", false);
@@ -210,9 +222,7 @@ public class HomeActivity extends PerfectActivity {
         Log.i(TAG, "归属地数据库拷贝完成！");
     }
 
-    /**
-     * 点击手机防盗弹出对话框
-     */
+    //点击手机防盗弹出对话框
     private void showPwdDialog() {
         String pwd = SharedPreferencesUtils.getString(HomeActivity.this, ConstantValues.STORE_PWD, "");
         if (TextUtils.isEmpty(pwd)) {
@@ -324,11 +334,7 @@ public class HomeActivity extends PerfectActivity {
         }
     }
 
-    /**
-     * 显示彩蛋
-     *
-     * @param view
-     */
+    //显示彩蛋
     public void showInfo(View view) {
         tv_showinfo.setText("我只是一个彩蛋！！！");
         resetInfo();

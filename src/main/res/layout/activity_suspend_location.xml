@@ -6,6 +6,7 @@
     <!--#88A39480  前面的88代表透明度-->
 
     <TextView
+        android:id="@+id/tv_location_top"
         style="@style/JarvisAddressLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,6 +14,7 @@
         android:text="@string/phone_address_location" />
 
     <TextView
+        android:id="@+id/tv_location_drag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -20,6 +22,7 @@
         android:drawableLeft="@drawable/incoming_call"
         android:drawablePadding="5dp"
         android:gravity="center_vertical"
+        android:onClick="resetLocation"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:text="@string/phone_address_title"
@@ -29,6 +32,7 @@
 
 
     <TextView
+        android:id="@+id/tv_location_bottom"
         style="@style/JarvisAddressLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

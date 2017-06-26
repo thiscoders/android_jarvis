@@ -83,4 +83,8 @@ public class ConstantValues {
     //来电归属地悬浮框的键
     public static String TOAST_PHONE_ADDRESS = "toast_phone_address";
     public static String PHONE_ADDRESS_SUSPEND = "phone_address_suspend";
+    public static String SUSPEND_LOACTION_X = "suspend_loaction_x";
+    public static String SUSPEND_LOACTION_Y = "suspend_loaction_y";
+
+
 }
