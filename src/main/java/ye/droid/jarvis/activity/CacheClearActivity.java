@@ -10,7 +10,7 @@ import ye.droid.jarvis.R;
  * Created by ye on 2017/5/20.
  */
 
-public class CacheClearActivity extends AppCompatActivity {
+public class CacheClearActivity extends PerfectActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +20,6 @@ public class CacheClearActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+        preAnim();
     }
 }

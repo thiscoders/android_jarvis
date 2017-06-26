@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 /**
+ * 设备管理员广播接受者
  * Created by ye on 2017/5/28.
  */
 

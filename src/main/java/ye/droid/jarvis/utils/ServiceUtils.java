@@ -18,7 +18,7 @@ public class ServiceUtils {
     /**
      * @param context   上下文
      * @param className 服务名
-     * @param debug     是否开启debug
+     * @param debug     是否开启debug,开启debug就会弹出toast
      * @return
      */
     public static boolean serviceIsRunning(Context context, String className, boolean debug) {

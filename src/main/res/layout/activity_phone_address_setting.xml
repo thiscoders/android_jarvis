@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ye.droid.jarvis.cvs.ChangeItem
+        android:id="@+id/ct_suspend_visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="openSuspend"
+        app:subtitle_negative_content="悬浮框隐藏"
+        app:subtitle_positive_content="悬浮框显示"
+        app:title_content="悬浮框" />
+
+
+    <ye.droid.jarvis.cvs.ChangeItem
+        android:id="@+id/ct_suspend_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="selectColor"
+        app:subtitle_negative_content="悬浮框字体预览"
+        app:subtitle_positive_content="悬浮框字体预览"
+        app:title_content="悬浮框颜色" />
+
+
+    <ye.droid.jarvis.cvs.ChangeItem
+        android:id="@+id/ct_suspend_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="selectLocation"
+        app:subtitle_negative_content="悬浮框位置设置"
+        app:subtitle_positive_content="悬浮框位置设置"
+        app:title_content="悬浮框位置" />
+
+</LinearLayout>

@@ -14,6 +14,7 @@ import java.io.File;
 import ye.droid.jarvis.beans.UpDateBean;
 
 /**
+ * App更新工具包
  * Created by ye on 2017/5/22.
  */
 

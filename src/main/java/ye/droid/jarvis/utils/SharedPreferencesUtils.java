@@ -7,6 +7,7 @@ import ye.droid.jarvis.R;
 
 /**
  * SharedPreferences工具类，方便的使用SharedPreferences获取各种数据
+ * 目前包含boolean，string，int类型
  * Created by ye on 2017/5/9.
  */
 
@@ -72,9 +73,38 @@ public class SharedPreferencesUtils {
 
 
     /**
+     * 保存int到共享参数
+     *
+     * @param context 上下文对象
+     * @param key     键
+     * @param value   值
+     * @return 保存成功标记
+     */
+    public static boolean putInteger(Context context, String key, int value) {
+        if (sharedPreferences == null)
+            sharedPreferences = context.getSharedPreferences(context.getString(R.string.SharedPreferences_File1), Context.MODE_PRIVATE);
+        return sharedPreferences.edit().putInt(key, value).commit();
+    }
+
+    /**
+     * 从共享参数中获取int值
+     *
+     * @param context  上下文对象
+     * @param key      键
+     * @param defValue 默认返回值
+     * @return 所获取的结果值
+     */
+    public static int getInteger(Context context, String key, int defValue) {
+        if (sharedPreferences == null)
+            sharedPreferences = context.getSharedPreferences(context.getString(R.string.SharedPreferences_File1), Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(key, defValue);
+    }
+
+    /**
      * 移除节点
-     * @param context   上下文对象
-     * @param key   键
+     *
+     * @param context 上下文对象
+     * @param key     键
      */
     public static void removeAttr(Context context, String key) {
         if (sharedPreferences == null)

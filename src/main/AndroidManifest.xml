@@ -15,17 +15,57 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.BurglarsResultActivity" />
-        <activity android:name=".activity.BurglarsSetup1Activity" />
-        <activity android:name=".activity.BurglarsSetup2Activity" />
-        <activity android:name=".activity.BurglarsSetup3Activity" />
-        <activity android:name=".activity.ContactListActivity" />
-        <activity android:name=".activity.BurglarsSetup4Activity" />
-        <activity android:name=".activity.AboutActivity" /> <!--关于软件界面-->
+        <activity
+            android:name=".activity.setting.SettingActivity"
+            android:label="@string/setting_title" />
+        <activity
+            android:name=".activity.burglars.BurglarsResultActivity"
+            android:label="@string/burglars_title" />
+        <activity
+            android:name=".activity.burglars.BurglarsSetup1Activity"
+            android:label="@string/burglars_setup1_title" />
+        <activity
+            android:name=".activity.burglars.BurglarsSetup2Activity"
+            android:label="@string/burglars_setup2_title" />
+        <activity
+            android:name=".activity.burglars.BurglarsSetup3Activity"
+            android:label="@string/burglars_setup3_title" />
+        <activity
+            android:name=".activity.autils.ContactListActivity"
+            android:label="@string/burglars_setup3_contact_list" />
+        <activity
+            android:name=".activity.burglars.BurglarsSetup4Activity"
+            android:label="@string/burglars_setup4_title" />
+
         <!--配置缓存清理页面-->
-        <activity android:name=".activity.CacheClearActivity" />
-        <activity android:name=".activity.TestActivity" />
+        <activity
+            android:name=".activity.CacheClearActivity"
+            android:label="@string/cache_title" />
+
+        <!--高级工具-->
+        <activity
+            android:name=".activity.advancetools.AdvanceToolsActivity"
+            android:label="@string/advance_title" />
+        <activity
+            android:name=".activity.advancetools.AttrLookupActivity"
+            android:label="@string/attribution_lookup" />
+
+        <!--关于软件界面-->
+        <activity
+            android:name=".activity.setting.AboutActivity"
+            android:label="@string/aboutapp_title" />
+        <!--来电归属地设置-->
+        <activity
+            android:name=".activity.setting.PhoneAddressActivity"
+            android:label="@string/phone_address_title" />
+
+        <!--选择归属地悬浮框显示位置的窗口，透明窗口-->
+        <activity
+            android:name=".activity.setting.SuspendLocationActivity"
+            android:theme="@style/JTranslucentWindows" />
+
+        <activity android:name=".activity.autils.TestActivity" />
+
 
         <!--Android N 申请访问存储空间-->
         <provider
@@ -44,12 +84,14 @@
             </intent-filter>
         </receiver>
 
+        <!--设备管理器-->
         <receiver
             android:name=".broadcast.receiver.JDeviceAdminReceiver"
             android:description="@string/sample_device_admin_description"
             android:label="@string/sample_device_admin"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
-            <meta-data android:name="android.app.device_admin"
+            <meta-data
+                android:name="android.app.device_admin"
                 android:resource="@xml/device_admin_sample" />
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
@@ -57,18 +99,18 @@
         </receiver>
 
         <!--短信监听服务-->
-        <service android:name=".service.SmsListenerService" />
+        <service android:name=".service.burglars.SmsListenerService" />
         <!--位置变化监听服务-->
-        <service android:name=".service.LocationChangeService" />
+        <service android:name=".service.burglars.LocationChangeService" />
 
-
+        <service android:name=".service.SuspendFrameService" />
     </application>
 
     <!--使用网络权限-->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /><!--读取电话状态-->
     <uses-permission android:name="android.permission.READ_CONTACTS" /><!--接受手机重启权限-->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!--短信相关-->
@@ -78,4 +120,9 @@
     <!--定位相关权限-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!--手机震动权限-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!--在窗体上挂载view的权限-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 </manifest>

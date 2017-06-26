@@ -5,14 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        style="@style/JTitleStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/setting_title" />
-
-    <ye.droid.jarvis.cvs.SettingItem
-        android:id="@+id/st_auto_update"
+    <ye.droid.jarvis.cvs.ChangeItem
+        android:id="@+id/ct_auto_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="setAutoUpdate"
@@ -20,8 +14,17 @@
         app:subtitle_positive_content="自动更新已开启"
         app:title_content="自动更新" />
 
-    <ye.droid.jarvis.cvs.SettingItem
-        android:id="@+id/st_about_app"
+    <ye.droid.jarvis.cvs.ChangeItem
+        android:id="@+id/ct_phone_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="openPhoneAddress"
+        app:subtitle_negative_content="来电归属地设置"
+        app:subtitle_positive_content="来电归属地设置"
+        app:title_content="来电归属地" />
+
+    <ye.droid.jarvis.cvs.ChangeItem
+        android:id="@+id/ct_about_app"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="showAboutInfo"

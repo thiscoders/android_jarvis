@@ -9,11 +9,11 @@
         android:orientation="vertical">
 
         <!--标题栏-->
-        <TextView
-            style="@style/JTitleStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/burglars_setup3_title" />
+        <!-- <TextView
+             style="@style/JTitleStyle"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="@string/burglars_setup3_title" />-->
 
         <!--副标题-->
         <TextView
@@ -32,11 +32,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:hint="@string/burglars_setup3_et_hint_contact" />
+            android:hint="@string/burglars_setup3_et_hint_contact"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_select_contact"
-            style="@style/JBurglarsSetupButtonNext"
+            style="@style/JarvisButton01"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -50,7 +51,7 @@
 
         <Button
             android:id="@+id/btn_reset_contact"
-            style="@style/JBurglarsSetupButtonNext"
+            style="@style/JarvisButton01"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -109,7 +110,7 @@
         </LinearLayout>
 
         <Button
-            style="@style/JBurglarsSetupButtonNext"
+            style="@style/JarvisButton01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -120,7 +121,7 @@
             android:text="@string/burglars_btn_setup_before" />
 
         <Button
-            style="@style/JBurglarsSetupButtonNext"
+            style="@style/JarvisButton01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

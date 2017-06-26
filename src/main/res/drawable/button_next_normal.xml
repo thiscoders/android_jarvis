@@ -4,9 +4,9 @@
     <item>
         <shape>
             <solid android:color="@color/colorButtonNormal" />
-            <corners android:radius="8dp" />
+            <corners android:radius="6dp" />
             <stroke
-                android:width="2dp"
+                android:width="0dp"
                 android:color="@color/colorButtonStroke" />
         </shape>
     </item>

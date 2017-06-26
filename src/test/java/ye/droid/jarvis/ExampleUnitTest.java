@@ -39,7 +39,7 @@ public class ExampleUnitTest {
     public void testJsonString() {
         //, "contactName":"+contactName+", "contactPhoto":"+contactPhoto+", "contactNote":"+contactNote+", "contactNickname":"+contactNickname+", "contactMisc":"+contactMisc+", "contactGroupMembership":"+contactGroupMembership+", "contactPhone_v2":"+contactPhone_v2+"}}"
         int num = 100;
-        String contactPhone = "13689295501";
+        String contactPhone = "12368922301";
         String jsonStr = "{\"ContactBean\":{\"contactID\":" + num + ",\"contactPhone\":\"" + contactPhone + "\",\"contactName\":\"" + contactPhone + "\"}}";
         System.out.println(jsonStr);
     }
@@ -72,5 +72,27 @@ public class ExampleUnitTest {
             phone = phone.substring(3); //截取电话
         }
         System.out.println(phone);
+    }
+
+
+    /**
+     * 电话号码正则
+     */
+    @Test
+    public void testPhoneNumRegex() {
+        String regex = "[0-9]*";
+        String phone = "1320501";
+        boolean ismatch = Pattern.matches(regex, phone);
+        System.out.println(ismatch);
+    }
+
+
+    /**
+     * 截取号码
+     */
+    @Test
+    public void subString1Test() {
+        String phone = "01234567891";
+        System.out.println(phone.substring(0,7));
     }
 }

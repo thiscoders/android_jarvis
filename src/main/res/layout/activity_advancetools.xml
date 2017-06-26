@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/JAdvanceToolsItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="attributionLookup"
+        android:text="@string/attribution_lookup" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@color/colorSeparator" />
+
+    <TextView
+        style="@style/JAdvanceToolsItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="backupSms"
+        android:text="@string/backup_sms" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@color/colorSeparator" />
+
+    <TextView
+        style="@style/JAdvanceToolsItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="phonenumLookup"
+        android:text="@string/phonenum_lookup" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@color/colorSeparator" />
+
+    <TextView
+        style="@style/JAdvanceToolsItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="appLock"
+        android:text="@string/app_lock" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@color/colorSeparator" />
+
+    <TextView
+        style="@style/JAdvanceToolsItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="cpuinfo"
+        android:text="@string/cpu_info" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@color/colorSeparator" />
+
+    <TextView
+        style="@style/JAdvanceToolsItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="netSpeed"
+        android:text="@string/net_speed" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@color/colorSeparator" />
+
+</LinearLayout>

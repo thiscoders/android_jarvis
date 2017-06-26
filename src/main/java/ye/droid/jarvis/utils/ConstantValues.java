@@ -48,6 +48,8 @@ public class ConstantValues {
     public final static int BURGLARSSETUP3_ACTIVITY_SELECT_CONTACTS_REQUEST_CODE = 100;
     //CONTACTLIST_ACTIVITY返回BURGLARSSETUP3_ACTIVITY的意图结果码
     public final static int CONTACTLIST_ACTIVITY_SELECT_CONTACTS_RESULT_CODE = 101;
+    //归属地查询界面打开本地联系人
+    public final static int ATTRLOOKUP_ACTIVITY_SELECT_CONTACTS_REQUEST_CODE = 102;
     //CONTACTLIST_ACTIVITY返回BURGLARSSETUP3_ACTIVITY的联系人姓名KEY
     public final static String CONTACTLIST_ACTIVITY_CONTACTS_NAME_FLAG = "contactlist_activity_select_contacts_name_result_flag";
     //CONTACTLIST_ACTIVITY返回BURGLARSSETUP3_ACTIVITY的联系人手机号码KEY
@@ -64,9 +66,7 @@ public class ConstantValues {
     //两个字符串相同
     public final static int STRING_MATCH = 2;
 
-    /**
-     * 自动更新APP相关
-     */
+    //自动更新APP相关
     public final static String HAVE_UPDATE = "有新的软件版本";
     public final static String NOT_UPDATE = "已经是最新版本";
     public final static String ERROR_UPDATE = "服务器飞到火星上去了";
@@ -77,8 +77,10 @@ public class ConstantValues {
     public static String SAFE_MESSAGE_WIPEDATA = "##**WIPEDATA**##";
     public static String SAFE_MESSAGE_LOCKSCREEN = "##**LOCKSCREEN**##";
 
-    /**
-     * 广播接受者相关
-     */
+    //广播接受者相关
     public static String JEXTRA_ADD_EXPLANATION = "jextra_add_explanation";
+
+    //来电归属地悬浮框的键
+    public static String TOAST_PHONE_ADDRESS = "toast_phone_address";
+    public static String PHONE_ADDRESS_SUSPEND = "phone_address_suspend";
 }

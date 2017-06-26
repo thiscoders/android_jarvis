@@ -10,12 +10,6 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/JTitleStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/burglars_title" />
-
-        <TextView
             android:id="@+id/tv_safe_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,11 +70,12 @@
 
     <Button
         android:id="@+id/btn_reset_burglars"
-        style="@style/JBurglarsSetupButtonNext"
-        android:layout_width="wrap_content"
+        style="@style/JarvisButton01"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
         android:onClick="resetBurglars"
         android:text="@string/burglars_result_reset_burglars" />
 
@@ -104,35 +99,19 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_alarm_status"
+            android:id="@+id/tv_sms_listener_status"
             style="@style/JBurglarsServiceStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="openAlarm"
-            android:text="@string/burglars_result_parameter1_negated" />
+            android:onClick="openSmsListenerService"
+            android:text="@string/burglars_result_sim_lintener_status" />
 
         <TextView
-            android:id="@+id/tv_location_status"
+            android:id="@+id/tv_location_listener_status"
             style="@style/JBurglarsServiceStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="openLocation"
-            android:text="@string/burglars_result_parameter2_negated" />
-
-        <TextView
-            android:id="@+id/tv_wipedata_status"
-            style="@style/JBurglarsServiceStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="openWipedata"
-            android:text="@string/burglars_result_parameter3_negated" />
-
-        <TextView
-            android:id="@+id/tv_lockscreen_status"
-            style="@style/JBurglarsServiceStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="openLockScreen"
-            android:text="@string/burglars_result_parameter4_negated" />
-    </LinearLayout>
+            android:onClick="openLocationListenerService"
+            android:text="@string/burglars_result_location_lintener_status" />
+</LinearLayout>
 </RelativeLayout>

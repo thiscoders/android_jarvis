@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#22b14c</color>
+    <color name="colorPrimary">#3F51B5</color>  <!--主要用于工具栏颜色-->
+    <color name="colorPrimaryDark">#303F9F</color> <!--主要用于状态栏和导航栏颜色-->
+    <color name="colorAccent">#99CC33</color>   <!--主要用于强调色-->
+    <color name="colorNavigationBar">#000000</color>    <!--导航栏颜色-->
     <color name="colorSplashText">#fff200</color>
     <color name="colorServerMessage">#ffaec9</color>
     <color name="colorTitle">#00a2e8</color>
     <color name="colorSplashBack">#00a2e8</color>
     <color name="colorCommon">#000000</color>
-    <color name="colorSetting">#00a2e8</color>
+    <color name="colorSetting">#3F51B5</color>
+    <color name="colorSeparator">#66c8f2</color>    <!--条目之间的分隔符-->
     <color name="colorDialog">#a349a4</color>
     <color name="colorBurglarsTitle">#c8bfe7</color>
-    <color name="colorButtonNormal">#0099FF</color>
-    <color name="colorButtonPressed">#99CCFF</color>
-    <color name="colorTransparent">#FFFFFF</color>
+    <color name="colorButtonNormal">#3399FF</color>
+    <color name="colorButtonPressed">#99CC33</color>
+    <color name="colorAdvToolsButtonPressed">#CCFF99</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorPhoneAddressSuspend">#ffaec9</color> <!--悬浮框文字颜色-->
+    <color name="colorPhoneAddressSuspendBack">#AACCFF99</color><!--悬浮框背景-->
+    <color name="colorPhoneAddressLoaction">#3f48cc</color><!--悬浮框提示文字颜色-->
+    <color name="colorPhoneAddressLoactionBack">#99d9ea</color><!--悬浮框提示背景颜色-->
     <color name="colorButtonStroke">#CCFF99</color>
     <color name="colorBurglarsResultFuncBrief">#66c8f2</color>
 </resources>
